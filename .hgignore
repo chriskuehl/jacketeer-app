@@ -1,3 +1,4 @@
 app/cordova/console.log
 app/build/*
 app/Jacketeer.xcodeproj/project.xcworkspace/xcuserdata/*
+app/Jacketeer.xcodeproj/project.xcworkspace/xcuserdata/
