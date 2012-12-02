@@ -1,8 +1,30 @@
 body {
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
 }
 
-html, body {
-	padding: 0px;
-	margin: 0px;
+#titleBar {
+	background-image: url("assets/titleBar.png");
+	
+	position: relative;
+	
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	
+	height: 87px;
+}
+
+#titleBarText {
+	position: absolute;
+	top: 24px;
+	left: 0px;
+	right: 0px;
+	
+	color: #656872;
+	
+	text-align: center;
+	text-shadow: 0px 2px 0px rgba(255, 255, 255, 0.55);
+	
+	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
+	font-size: 38px;
 }
