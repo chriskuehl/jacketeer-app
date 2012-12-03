@@ -325,6 +325,17 @@ var screenIntro = {
 		});
 		loginButton.html("&raquo;");
 		
+		// login by enter on input fields
+		$("input[name='inputPassword'], input[name='inputUser']").keypress(function(e) {
+			if (e.which == 13) {
+				loginButton.click();
+				$(this).blur(); // hide the iPad keyboard
+				
+				e.preventDefault();
+				return false;
+			}
+		});
+		
 		// username tip at bottom
 		var tipText = $("<p />");
 		tipText.appendTo(page);
