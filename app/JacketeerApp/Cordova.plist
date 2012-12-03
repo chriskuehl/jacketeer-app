@@ -23,7 +23,9 @@
 	<key>BackupWebStorage</key>
 	<true/>
 	<key>ExternalHosts</key>
-	<array/>
+	<array>
+		<string>jacketeer.org</string>
+	</array>
 	<key>Plugins</key>
 	<dict>
 		<key>Device</key>

@@ -2,6 +2,10 @@ body {
 	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
 }
 
+em {
+	font-style: italic;
+}
+
 #titleBar {
 	background-image: url("assets/titleBar.png");
 	
