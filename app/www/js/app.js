@@ -67,6 +67,7 @@ function setScreen(screen) {
 	
 	// create a container div for the new screen
 	var container = $("<div />");
+	container.data("conf", screen);
 	container.appendTo(ui.screenContainer);
 	container.addClass("screen");
 	container.attr({
@@ -78,7 +79,69 @@ function setScreen(screen) {
 	
 	// render the screen
 	screen.setup(container);
+	
+	// is a screen already being displayed?
+	if (ui.screen != null) {
+		// attempt to intelligently switch screens
+		if (ui.screen.data("conf") && ui.screen.data("conf").parent == screen.id) { // go "back"
+			// the old (current) screen is a child of the new screen, so the old screen should
+			// slide out right while the new one (the parent) slides in from the left
+			container.css("left", "-" + (ui.screenContainer.width()) + "px");
+			
+			container.animate({
+				left: "0px"
+			}, 500, "swing", function() {
+			
+			});
+			
+			ui.screen.animate({
+				left: (ui.screenContainer.width() * 2) + "px"
+			}, 500, "swing", function() {
+				$(this).remove();
+			});
+		} else { // go forward to a new screen
+			// the new screen is probably a child of the current one (even if not explicitly defined)
+			// so the old (current) screen should slide out left, while the new one slides in from the right
+			container.css("left", (ui.screenContainer.width()) + "px");
+			
+			container.animate({
+				left: "0px"
+			}, 500, "swing", function() {
+			
+			});
+			
+			ui.screen.animate({
+				left: "-" + (ui.screenContainer.width()) + "px"
+			}, 500, "swing", function() {
+				$(this).remove();
+			});
+		} 
+	}
+	
+	// update current screen
+	ui.screen = container;
 }
+
+var screenPortal = {
+	id: "portal",
+	title: "Jacketeer 2013",
+	parent: "intro",
+	
+	setup: function(container) {
+		container.css({
+			backgroundColor: "rgb(255, 0, 0)"
+		});
+		
+		container.append($("><input type=\"button\" />").click(function() {
+			setScreen(screenIntro);
+		}).css({
+			fontSize: "50px",
+			padding: "50px",
+			width: "400px",
+			height: "400px"
+		}).val("BACK"));
+	}
+};
 
 var screenIntro = {
 	id: "intro",
@@ -226,6 +289,8 @@ var screenIntro = {
 			color: "rgba(0, 0, 0, 0.25)"
 		});
 		loginButton.click(function() {
+			return setScreen(screenPortal);
+			
 			var loadingCover = $("<div />");
 			loadingCover.appendTo(container);
 			loadingCover.css({
@@ -291,9 +356,6 @@ var screenIntro = {
 				marginTop: "40px"
 			});
 			cancelButton.val("Cancel");
-			cancelButton.click(function() {
-				loadingCover.fadeOut(200);
-			});
 			
 			loadingCover.fadeIn(500);
 			
@@ -304,17 +366,34 @@ var screenIntro = {
 				cache: false
 			});
 			
+			cancelButton.click(function() {
+				loadingCover.fadeOut(200);
+				req.aborted = true;
+				req.abort();
+			});
+			
 			req.done(function(content) {
 				if (content.success) {
-					navigator.notification.alert("First Name: " + content.firstName + "\nLast Name: " + content.lastName + "\nEmail: " + content.email, null, "Successful Login");
+					localSession.loginDetails = {
+						user: inputUser.val(),
+						firstName: content.firstName,
+						lastName: content.lastName,
+						email: content.email
+					};
+					
+					// load the portal
+					setScreen(screenPortal);
 				} else {
 					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk for assistance.", null, "Unsuccessful Login");
+					loadingCover.stop(true).hide();
 				}
-				
-				loadingCover.stop(true).hide();
 			});
 			
 			req.fail(function() {
+				if (req.aborted) {
+					return;
+				}
+				
 				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later.", function(response) {
 					if (response == 1) {
 						loginButton.click();
