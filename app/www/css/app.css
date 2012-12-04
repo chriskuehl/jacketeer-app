@@ -33,6 +33,54 @@ em {
 	font-size: 38px;
 }
 
+#titleBarButton {
+	position: absolute;
+	right: 1px;
+	top: -3px;
+	
+	display: block;
+	
+	padding: 17px;
+	
+	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
+	font-size: 24px;
+	
+	display: none;
+}
+
+.titleBarLeft, .titleBarRight {
+	width: 11px;
+	height: 61px;
+	
+	float: left;
+}
+
+.titleBarMiddle {
+	height: 43px;
+	background-image: url("assets/titleButtonMid.png");
+	background-repeat: repeat-x;
+	
+	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
+	font-size: 24px;
+	text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
+	
+	color: white;
+	
+	padding-top: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	
+	float: left;
+}
+
+.titleBarLeft {
+	background-image: url("assets/titleButtonLeft.png");
+}
+
+.titleBarRight {
+	background-image: url("assets/titleButtonRight.png");
+}
+
 #screenContainerParent {
 	position: absolute;
 	

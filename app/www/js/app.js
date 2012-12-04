@@ -38,6 +38,29 @@ function initInterface() {
 	});
 	updateTitle();
 	
+	// title bar button
+	ui.titleButton = $("<a />");
+	ui.titleButton.appendTo(ui.titleBar);
+	ui.titleButton.attr({
+		id: "titleBarButton"
+	});
+	
+	ui.titleButtonLeft = $("<div />");
+	ui.titleButtonLeft.addClass("titleBarLeft");
+	ui.titleButtonLeft.appendTo(ui.titleButton);
+	
+	ui.titleButtonText = $("<div />");
+	ui.titleButtonText.attr({
+		id: "titleBarButtonText"
+	});
+	ui.titleButtonText.addClass("titleBarMiddle");
+	ui.titleButtonText.appendTo(ui.titleButton);
+	ui.titleButtonText.text("Cancel");
+	
+	ui.titleButtonRight = $("<div />");
+	ui.titleButtonRight.addClass("titleBarRight");
+	ui.titleButtonRight.appendTo(ui.titleButton);
+	
 	// create screen container
 	ui.screenContainerParent = $("<div />");
 	ui.screenContainerParent.appendTo(container);
@@ -80,6 +103,17 @@ function setScreen(screen) {
 	
 	// general changes
 	updateTitle(screen.title);
+	
+	if (screen.titleButton) {
+		ui.titleButton.fadeIn(500);
+		ui.titleButtonText.text(screen.titleButton.text);
+		ui.titleButton.unbind("click");
+		ui.titleButton.click(function() {
+			screen.titleButton.event();
+		});
+	} else {
+		ui.titleButton.fadeOut(500);
+	}
 	
 	// render the screen
 	screen.setup(container);
@@ -126,6 +160,18 @@ var screenPortal = {
 	id: "portal",
 	title: "Jacketeer 2013",
 	parent: "intro",
+	
+	titleButton: {
+		text: "Sign Out",
+		event: function() {
+			navigator.notification.alert("Are you sure you want to sign out?", function(response) {
+				if (response == 1) {
+					delete localStorage.loginDetails;
+					setScreen(screenIntro);
+				}
+			}, "Sign Out", "Sign Out,Cancel");
+		}
+	},
 	
 	setup: function(container) {
 		container.css({
