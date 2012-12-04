@@ -12,7 +12,11 @@ function initialize() {
 	initInterface();
 	
 	// load the first screen
-	setScreen(screenIntro);
+	if (localStorage.loginDetails) {
+		setScreen(screenPortal);
+	} else {
+		setScreen(screenIntro);
+	}
 }
 
 // create the general interface elements
@@ -90,9 +94,7 @@ function setScreen(screen) {
 			
 			container.animate({
 				left: "0px"
-			}, 500, "swing", function() {
-			
-			});
+			}, 500, "swing", null);
 			
 			ui.screen.animate({
 				left: (ui.screenContainer.width() * 2) + "px"
@@ -106,9 +108,7 @@ function setScreen(screen) {
 			
 			container.animate({
 				left: "0px"
-			}, 500, "swing", function() {
-			
-			});
+			}, 500, "swing", null);
 			
 			ui.screen.animate({
 				left: "-" + (ui.screenContainer.width()) + "px"
@@ -129,17 +129,145 @@ var screenPortal = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgb(255, 0, 0)"
+			backgroundColor: "rgba(255, 255, 0, 0.15)"
 		});
 		
-		container.append($("><input type=\"button\" />").click(function() {
-			setScreen(screenIntro);
-		}).css({
-			fontSize: "50px",
-			padding: "50px",
-			width: "400px",
-			height: "400px"
-		}).val("BACK"));
+		var introText = $("<p />");
+		introText.appendTo(container);
+		introText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			lineHeight: "1.6em",
+			margin: "50px",
+			color: "rgba(0, 0, 0, 0.7)"
+		});
+		introText.html("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ante id libero pretium scelerisque at id sem. Mauris sodales viverra lacus. Ut euismod augue nec magna ullamcorper tincidunt. Fusce fringilla pellentesque nunc quis vulputate.");
+		
+		// sections to complete
+		var sections = [
+			{
+				id: "name",
+				title: "Preferred Name",
+				description: "The name you want to be used next to identify you in the yearbook.",
+				complete: true
+			},
+			
+			{
+				id: "signature",
+				title: "Personal Signature",
+				description: "Your personal, hand-written signature, done from your iPad.",
+				complete: true
+			},
+			
+			{
+				id: "quote",
+				title: "Featured Quote",
+				description: "An inspiring, witty, or memorable quote of your choice.",
+				complete: false
+			}
+		];
+		var total = 0;
+		
+		for (var sectionIndex in sections) {
+			var section = sections[sectionIndex];
+			
+			if (section.complete) {
+				total ++;
+			}
+			
+			var sectionButton = $("<a />");
+			sectionButton.appendTo(container);
+			sectionButton.css({
+				display: "block",
+				margin: "60px",
+				padding: "70px",
+				paddingLeft: "200px",
+				backgroundColor: "rgba(0, 0, 0, 0.05)",
+				backgroundImage: "url('css/assets/" + (section.complete ? "accept" : "alert") + ".png')",
+				backgroundPosition: "50px 50%",
+				backgroundRepeat: "no-repeat",
+				borderRadius: "40px",
+				marginBottom: "30px !important",
+				position: "relative"
+			});
+			
+			sectionButton.data("section", section);
+			sectionButton.click(function() {
+				alert($(this).data("section").title);
+			});
+			
+			var header = $("<h1 />");
+			header.appendTo(sectionButton);
+			header.css({
+				fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+				fontSize: "48px",
+				color: "rgba(0, 0, 0, 0.7)"
+			});
+			header.text(section.title);
+			
+			var description = $("<h2 />");
+			description.appendTo(sectionButton);
+			description.css({
+				fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\"",
+				fontSize: "36px",
+				color: "rgba(0, 0, 0, 0.7)",
+				marginTop: "15px"
+			});
+			description.text(section.description);
+			
+			var status = $("<h3 />");
+			status.appendTo(sectionButton);
+			status.css({
+				fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+				fontSize: "36px",
+				color: "rgba(0, 0, 0, 0.7)",
+				position: "absolute",
+				right: "150px",
+				top: "50%",
+				marginTop: "-14px"
+			});
+			status.text(section.complete ? "COMPLETE" : "INCOMPLETE");
+			
+			var arrow = $("<h4 />");
+			arrow.appendTo(sectionButton);
+			arrow.css({
+				fontFamily: "\"Helvetica Neue Light\", \"HelveticaNeue-Light\"",
+				fontSize: "70px",
+				color: "rgba(0, 0, 0, 0.2)",
+				position: "absolute",
+				right: "50px",
+				top: "50%",
+				marginTop: "-35px"
+			});
+			arrow.text(">");
+		}
+		
+		var calculatedPercent = Math.floor((total / sections.length) * 100);
+		
+		var progressText = $("<p />");
+		progressText.appendTo(container);
+		progressText.css({
+			textAlign: "center",
+			fontSize: "48px",
+			lineHeight: "1.6em",
+			margin: "80px",
+			marginBottom: "0px",
+			color: "rgba(0, 0, 0, 0.6)",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
+		});
+		progressText.html("CURRENT PROGRESS: " + calculatedPercent + "%");
+		
+		var helpText = $("<p />");
+		helpText.appendTo(container);
+		helpText.css({
+			textAlign: "center",
+			fontSize: "30px",
+			lineHeight: "1.6em",
+			color: "rgba(0, 0, 0, 0.6)",
+			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
+		});
+		helpText.html("If you need help with this app, stop by the iPad Help Desk or Mr. Ruff's room.");
+		
 	}
 };
 
@@ -289,8 +417,6 @@ var screenIntro = {
 			color: "rgba(0, 0, 0, 0.25)"
 		});
 		loginButton.click(function() {
-			return setScreen(screenPortal);
-			
 			var loadingCover = $("<div />");
 			loadingCover.appendTo(container);
 			loadingCover.css({
@@ -374,7 +500,7 @@ var screenIntro = {
 			
 			req.done(function(content) {
 				if (content.success) {
-					localSession.loginDetails = {
+					localStorage.loginDetails = {
 						user: inputUser.val(),
 						firstName: content.firstName,
 						lastName: content.lastName,
