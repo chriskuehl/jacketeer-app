@@ -1,7 +1,7 @@
 function drawPoint(ctx,x,y,r,color){
     ctx.save();  
     ctx.beginPath();
-    ctx.lineWidth=1;
+    //ctx.lineWidth=1;
     ctx.fillStyle=hexToCanvasColor(color,1);
     ctx.arc(x,y,r,0.0,2*Math.PI,false);
     ctx.closePath();
@@ -36,7 +36,7 @@ function drawControlLine(ctx,x,y,px,py){
     //  Only for demo purposes: show the control line and control points.
     ctx.save();    
     ctx.beginPath();
-    ctx.lineWidth=1;
+    //ctx.lineWidth=1;
     ctx.strokeStyle="rgba(0,0,0,0.3)";
     ctx.moveTo(x,y);
     ctx.lineTo(px,py);
@@ -47,7 +47,7 @@ function drawControlLine(ctx,x,y,px,py){
 }
 function drawSpline(ctx,pts,t,closed){
     showDetails=false;
-    ctx.lineWidth=4;
+    //ctx.lineWidth=4;
     ctx.save();
     var cp=[];   // array of control points, as x0,y0,x1,y1,...
     var n=pts.length;

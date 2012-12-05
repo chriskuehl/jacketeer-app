@@ -162,6 +162,8 @@ var screenSignature = {
 	parent: "portal",
 	
 	setup: function(container) {
+		sigPaths = [];
+		
 		var intro = $("<p />");
 		intro.appendTo(container);
 		intro.css({
@@ -189,8 +191,10 @@ var screenSignature = {
 		canvas.css({
 			backgroundColor: "solid rgba(255, 0, 0, 0.2)"
 		});
+		canvas.data("paths", []);
 		
 		var ctx = canvas[0].getContext("2d");
+		ctx.lineWidth = 8;
 		
 		// iPad touch events
 		canvas[0].addEventListener("touchstart", function(e) {
@@ -212,7 +216,7 @@ var screenSignature = {
 			// test if it's time for another point
 			var cur = currentTime();
 			
-			if (cur - penData.lastEvent < 50) {
+			if (cur - penData.lastEvent < 20 && penData.points.length > 10) {
 				return;
 			}
 			
@@ -227,14 +231,33 @@ var screenSignature = {
 			}
 			
 			// draw the last point
-			addPenPosition(ctx, canvas, e);
+			try {
+				addPenPosition(ctx, canvas, e);
+			} catch (err) {}
 			
 			// end the drawing
+			sigPaths.push(penData.points);
 			penData = null;
 		}, false);
+		
+		// clear button
+		var clearButton = $("<input type=\"button\" />");
+		clearButton.appendTo(container);
+		clearButton.css({
+			width: "700px",
+			height: "150px",
+			margin: "50px"
+		});
+		clearButton.val("START OVER");
+		clearButton.click(function() {
+			penData = null;
+			sigPaths = [];
+			ctx.clearRect(0, 0, canvas.width(), canvas.height());
+		});
 	}
 };
 
+var sigPaths = null;
 var penData = null;
 
 function currentTime() {
@@ -248,10 +271,20 @@ function addPenPosition(ctx, canvas, e) {
 	penData.points.push(pos[1]);
 
 	penData.lastEvent = currentTime();
-
-	ctx.fillRect(pos[0], pos[1], 3, 3);
 	
-	drawSpline(ctx, penData.points, 0.5, false);
+	// clear canvas
+	ctx.clearRect(0, 0, canvas.width(), canvas.height());
+	
+	// draw the current path
+	var coeff = 0.3;
+	drawSpline(ctx, penData.points, coeff, false);
+	
+	// draw the rest of the paths
+	if (sigPaths.length > 0) {
+		for (var i = 0; i < sigPaths.length; i ++) {
+			drawSpline(ctx, sigPaths[i], coeff, false);
+		}
+	}
 }
 
 function getPenPosition(canvas, e) {
