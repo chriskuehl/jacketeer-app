@@ -112,3 +112,24 @@ em {
 	-webkit-backface-visibility: hidden;
 	-webkit-perspective: 1000;*/
 }
+
+.signatureButton {
+	background-color: rgba(255, 0, 0, 0.3);
+	
+	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
+	font-size: 34px;
+	
+	text-align: center;
+	
+	display: block;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	
+	padding: 105px 20px;
+	
+	border: solid 8px rgba(100, 100, 100, 0.9);
+}
+
+.disabled {
+	opacity: 0.2;
+}

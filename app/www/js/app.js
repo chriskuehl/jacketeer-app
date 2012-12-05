@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (localStorage.loginDetails) {
-		setScreen(screenSignature);
+		setScreen(screenPortal);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -162,24 +162,106 @@ var screenSignature = {
 	parent: "portal",
 	
 	setup: function(container) {
+		container.css({
+			backgroundColor: "rgba(255, 255, 0, 0.15)"
+		});
+		
 		sigPaths = [];
 		
 		var intro = $("<p />");
 		intro.appendTo(container);
 		intro.css({
-			margin: "50px",
-			fontSize: "44px"
+			margin: "100px",
+			fontSize: "44px",
+			textAlign: "center"
 		});
 		intro.text("Lorem ipsum dolor sit amet blah blah blah");
 		
-		var canvasHolder = $("<div />");
-		canvasHolder.appendTo(container);
-		canvasHolder.css({
-			width: "1600px",
-			height: "600px",
-			border: "solid 10px #888",
+		var artHolder = $("<div />");
+		artHolder.appendTo(container);
+		artHolder.css({
+			width: "1800px",
+			height: "800px",
 			marginLeft: "auto",
 			marginRight: "auto"
+		});
+		
+		var canvasHolder = $("<div />");
+		canvasHolder.appendTo(artHolder);
+		canvasHolder.css({
+			width: "1500px",
+			height: "800px",
+			border: "solid 10px #888",
+			float: "left"
+		});
+		
+		var buttonHolder = $("<div />");
+		buttonHolder.appendTo(artHolder);
+		buttonHolder.css({
+			float: "right",
+			width: "240px",
+			height: "820px"
+		});
+		
+		var undoButton = $("<a />");
+		undoButton.appendTo(buttonHolder);
+		undoButton.text("Undo");
+		undoButton.addClass("signatureButton");
+		undoButton.addClass("disabled");
+		undoButton.attr({
+			id: "signatureUndoButton"
+		});
+		
+		undoButton.click(function() {
+			if ($(this).hasClass("disabled")) {
+				return;
+			}
+			
+			sigPaths.remove(sigPaths.length - 1);
+			redrawCanvas(canvas, ctx);
+			
+			if (sigPaths.length <= 0) {
+				undoButton.addClass("disabled");
+				clearButton.addClass("disabled");
+			}
+		});
+		
+		var clearButton = $("<a />");
+		clearButton.appendTo(buttonHolder);
+		clearButton.text("Clear");
+		clearButton.addClass("signatureButton");
+		clearButton.addClass("disabled");
+		clearButton.attr({
+			id: "signatureClearButton"
+		});
+		
+		clearButton.click(function() {
+			if ($(this).hasClass("disabled")) {
+				return;
+			}
+			
+			penData = null;
+			sigPaths = [];
+			redrawCanvas(canvas, ctx);
+			
+			undoButton.addClass("disabled");
+			clearButton.addClass("disabled");
+		});
+				
+		var doneButton = $("<a />");
+		doneButton.appendTo(buttonHolder);
+		doneButton.text("Done");
+		doneButton.addClass("signatureButton");
+		doneButton.attr({
+			id: "signatureDoneButton"
+		});
+		
+		doneButton.click(function() {
+			if ($(this).hasClass("disabled")) {
+				return;
+			}
+			
+			setScreen(screenPortal);
 		});
 		
 		var canvas = $("<canvas />");
@@ -189,7 +271,7 @@ var screenSignature = {
 			height: canvasHolder.innerHeight()
 		});
 		canvas.css({
-			backgroundColor: "solid rgba(255, 0, 0, 0.2)"
+			backgroundColor: "solid rgba(255, 255, 0, 0.2)"
 		});
 		canvas.data("paths", []);
 		
@@ -238,22 +320,11 @@ var screenSignature = {
 			// end the drawing
 			sigPaths.push(penData.points);
 			penData = null;
+			
+			// change button statuses
+			clearButton.removeClass("disabled");
+			undoButton.removeClass("disabled");
 		}, false);
-		
-		// clear button
-		var clearButton = $("<input type=\"button\" />");
-		clearButton.appendTo(container);
-		clearButton.css({
-			width: "700px",
-			height: "150px",
-			margin: "50px"
-		});
-		clearButton.val("START OVER");
-		clearButton.click(function() {
-			penData = null;
-			sigPaths = [];
-			ctx.clearRect(0, 0, canvas.width(), canvas.height());
-		});
 	}
 };
 
@@ -272,12 +343,19 @@ function addPenPosition(ctx, canvas, e) {
 
 	penData.lastEvent = currentTime();
 	
+	redrawCanvas(canvas, ctx);
+}
+
+function redrawCanvas(canvas, ctx) {
+	var coeff = 0.3;
+	
 	// clear canvas
 	ctx.clearRect(0, 0, canvas.width(), canvas.height());
 	
-	// draw the current path
-	var coeff = 0.3;
-	drawSpline(ctx, penData.points, coeff, false);
+	// draw the current path	
+	if (penData) {
+		drawSpline(ctx, penData.points, coeff, false);
+	}
 	
 	// draw the rest of the paths
 	if (sigPaths.length > 0) {
@@ -331,14 +409,14 @@ var screenPortal = {
 				id: "name",
 				title: "Preferred Name",
 				description: "The name you want to be used next to identify you in the yearbook.",
-				complete: true
+				complete: false
 			},
 			
 			{
 				id: "signature",
 				title: "Personal Signature",
 				description: "Your personal, hand-written signature, done from your iPad.",
-				complete: true
+				complete: false
 			},
 			
 			{
@@ -350,8 +428,8 @@ var screenPortal = {
 		];
 		var total = 0;
 		
-		for (var sectionIndex in sections) {
-			var section = sections[sectionIndex];
+		for (var i = 0; i < sections.length; i ++) {
+			var section = sections[i];
 			
 			if (section.complete) {
 				total ++;
@@ -376,6 +454,10 @@ var screenPortal = {
 			sectionButton.data("section", section);
 			sectionButton.click(function() {
 				var selectedSection = $(this).data("section");
+				
+				if (selectedSection.id == "signature") {
+					setScreen(screenSignature);
+				}
 			});
 			
 			var header = $("<h1 />");
