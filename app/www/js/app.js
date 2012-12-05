@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (localStorage.loginDetails) {
-		setScreen(screenPortal);
+		setScreen(screenSignature);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -156,6 +156,109 @@ function setScreen(screen) {
 	ui.screen = container;
 }
 
+var screenSignature = {
+	id: "signature",
+	title: "Senior Signature",
+	parent: "portal",
+	
+	setup: function(container) {
+		var intro = $("<p />");
+		intro.appendTo(container);
+		intro.css({
+			margin: "50px",
+			fontSize: "44px"
+		});
+		intro.text("Lorem ipsum dolor sit amet blah blah blah");
+		
+		var canvasHolder = $("<div />");
+		canvasHolder.appendTo(container);
+		canvasHolder.css({
+			width: "1600px",
+			height: "600px",
+			border: "solid 10px #888",
+			marginLeft: "auto",
+			marginRight: "auto"
+		});
+		
+		var canvas = $("<canvas />");
+		canvas.appendTo(canvasHolder);
+		canvas.attr({
+			width: canvasHolder.innerWidth(),
+			height: canvasHolder.innerHeight()
+		});
+		canvas.css({
+			backgroundColor: "solid rgba(255, 0, 0, 0.2)"
+		});
+		
+		var ctx = canvas[0].getContext("2d");
+		
+		// iPad touch events
+		canvas[0].addEventListener("touchstart", function(e) {
+			penData = {
+				points: [],
+				lastEvent: 0
+			};
+			
+			// draw the first point
+			addPenPosition(ctx, canvas, e);
+		}, false);
+		
+		canvas[0].addEventListener("touchmove", function(e) {
+			// are we drawing?
+			if (penData == null) {
+				return;
+			}
+			
+			// test if it's time for another point
+			var cur = currentTime();
+			
+			if (cur - penData.lastEvent < 50) {
+				return;
+			}
+			
+			// draw the point
+			addPenPosition(ctx, canvas, e);
+		}, false);
+		
+		canvas[0].addEventListener("touchend", function(e) {
+			// are we drawing?
+			if (penData == null) {
+				return;
+			}
+			
+			// draw the last point
+			addPenPosition(ctx, canvas, e);
+			
+			// end the drawing
+			penData = null;
+		}, false);
+	}
+};
+
+var penData = null;
+
+function currentTime() {
+	return (new Date()).getTime();
+}
+
+function addPenPosition(ctx, canvas, e) {
+	var pos = getPenPosition(canvas, e);
+
+	penData.points.push(pos[0]);
+	penData.points.push(pos[1]);
+
+	penData.lastEvent = currentTime();
+
+	ctx.fillRect(pos[0], pos[1], 3, 3);
+	
+	drawSpline(ctx, penData.points, 0.5, false);
+}
+
+function getPenPosition(canvas, e) {
+	var ep = canvas.offset();
+	return [e.targetTouches[0].pageX - ep.left, e.targetTouches[0].pageY - ep.top];
+}
+
 var screenPortal = {
 	id: "portal",
 	title: "Jacketeer 2013",
@@ -239,7 +342,7 @@ var screenPortal = {
 			
 			sectionButton.data("section", section);
 			sectionButton.click(function() {
-				alert($(this).data("section").title);
+				var selectedSection = $(this).data("section");
 			});
 			
 			var header = $("<h1 />");
