@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (localStorage.loginDetails) {
-		setScreen(screenSignature);
+		setScreen(screenPortal);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -311,7 +311,7 @@ var screenPortal = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 255, 0, 0.15)"
+			backgroundColor: "rgba(255, 204, 0, 0.1)"
 		});
 		
 		var introText = $("<p />");
@@ -330,7 +330,7 @@ var screenPortal = {
 			{
 				id: "name",
 				title: "Preferred Name",
-				description: "The name you want to be used next to identify you in the yearbook.",
+				description: "The name you want to be used to identify you in the yearbook.",
 				complete: true
 			},
 			
@@ -363,8 +363,8 @@ var screenPortal = {
 				display: "block",
 				margin: "60px",
 				padding: "70px",
-				paddingLeft: "200px",
-				backgroundColor: "rgba(0, 0, 0, 0.05)",
+				paddingLeft: "225px",
+				backgroundColor: "rgba(70, 70, 0, 0.1)",
 				backgroundImage: "url('css/assets/" + (section.complete ? "accept" : "alert") + ".png')",
 				backgroundPosition: "50px 50%",
 				backgroundRepeat: "no-repeat",
@@ -459,13 +459,14 @@ var screenIntro = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 255, 0, 0.15)"
+			//backgroundColor: "rgba(255, 255, 0, 0.15)"
+            backgroundColor: "rgba(255, 250, 90, 0.45)",
 		});
 		
 		var page = $("<div />");
 		page.appendTo(container);
 		page.css({
-			backgroundColor: "rgba(255, 255, 255, 0.7)",
+			backgroundColor: "rgba(255, 255, 255, 0.99)",
 			
 			borderRadius: "15px",
 			padding: "80px",
@@ -507,7 +508,8 @@ var screenIntro = {
 		tableHolder.css({
 			padding: "50px",
 			borderRadius: "30px",
-			backgroundColor: "rgba(120, 120, 0, 0.1)",
+			//backgroundColor: "rgba(255, 249, 90, 0.8)",
+            backgroundColor: "rgba(255, 255, 90, 0.3)",
 			marginTop: "30px",
 			position: "relative"
 		});
@@ -591,12 +593,12 @@ var screenIntro = {
 			bottom: "30px",
 			width: "250px",
 			borderRadius: "20px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)",
+			backgroundColor: "rgba(255, 255, 255, 0)",
 			fontSize: "96px",
 			paddingTop: "50px",
 			textAlign: "center",
 			textDecoration: "none",
-			color: "rgba(0, 0, 0, 0.25)"
+			color: "rgba(0, 0, 0, 0.5)"
 		});
 		loginButton.click(function() {
 			var loadingCover = $("<div />");
@@ -625,7 +627,7 @@ var screenIntro = {
 				marginLeft: "-230px",
 				marginTop: "-150px",
 				
-				backgroundColor: "rgba(255, 255, 255, 0.8)",
+				backgroundColor: "rgba(255, 255, 255, 1)",
 				borderRadius: "20px",
 				boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 				
