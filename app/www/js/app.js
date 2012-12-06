@@ -12,7 +12,7 @@ function initialize() {
 	initInterface();
 	
 	// load the first screen
-	if (localStorage.loginDetails) {
+	if (getLoginDetails()) {
 		setScreen(screenPortal);
 	} else {
 		setScreen(screenIntro);
@@ -379,15 +379,18 @@ var screenPortal = {
 		text: "Sign Out",
 		event: function() {
 			navigator.notification.alert("Are you sure you want to sign out?", function(response) {
-				if (response == 1) {
-					delete localStorage.loginDetails;
+				if (response == 2) {
+					localStorage.removeItem("loginDetails");
 					setScreen(screenIntro);
 				}
-			}, "Sign Out", "Sign Out,Cancel");
+			}, "Sign Out", "Cancel,Sign Out");
 		}
 	},
 	
 	setup: function(container) {
+		var loginDetails = getLoginDetails();
+		updateTitle(loginDetails ? loginDetails.firstName + " " + loginDetails.lastName : "UNKNOWN");
+		
 		container.css({
 			backgroundColor: "rgba(255, 204, 0, 0.1)"
 		});
@@ -766,12 +769,14 @@ var screenIntro = {
 			
 			req.done(function(content) {
 				if (content.success) {
-					localStorage.loginDetails = {
+					var map = {
 						user: inputUser.val(),
 						firstName: content.firstName,
 						lastName: content.lastName,
 						email: content.email
 					};
+
+					localStorage.loginDetails = JSON.stringify(map);
 					
 					// load the portal
 					setScreen(screenPortal);
@@ -819,3 +824,13 @@ var screenIntro = {
 		});
 	}
 };
+
+function getLoginDetails() {
+	var loginDetails = localStorage["loginDetails"];
+	
+	if (! loginDetails) {
+		return null;
+	}
+	
+	return JSON.parse(loginDetails);
+}
