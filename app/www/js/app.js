@@ -533,7 +533,7 @@ var screenPortal = {
 			color: "rgba(0, 0, 0, 0.6)",
 			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
 		});
-		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk or Mr. Ruff's room.</span>");
+		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
 		
 	}
 };
@@ -780,7 +780,7 @@ var screenIntro = {
 					// load the portal
 					setScreen(screenPortal);
 				} else {
-					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk for assistance.", null, "Unsuccessful Login");
+					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk (room 117) for assistance.", null, "Unsuccessful Login");
 					loadingCover.stop(true).hide();
 				}
 			});
