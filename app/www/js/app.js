@@ -163,7 +163,7 @@ var screenSignature = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 255, 0, 0.15)"
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
 		});
 		
 		sigPaths = [];
@@ -191,7 +191,7 @@ var screenSignature = {
 		canvasHolder.css({
 			width: "1500px",
 			height: "800px",
-			border: "solid 10px #888",
+			border: "solid 10px gray",
 			float: "left"
 		});
 		
@@ -271,7 +271,7 @@ var screenSignature = {
 			height: canvasHolder.innerHeight()
 		});
 		canvas.css({
-			backgroundColor: "solid rgba(255, 255, 0, 0.2)"
+			backgroundColor: "solid rgba(255, 255, 255, 1)"
 		});
 		canvas.data("paths", []);
 		
@@ -541,7 +541,6 @@ var screenIntro = {
 	
 	setup: function(container) {
 		container.css({
-			//backgroundColor: "rgba(255, 255, 0, 0.15)"
             backgroundColor: "rgba(255, 210, 0, 0.1)",
 		});
 		
@@ -591,7 +590,7 @@ var screenIntro = {
 			padding: "50px",
 			borderRadius: "20px",
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
-            backgroundColor: "rgba(210, 200, 40, 0.15)",
+            backgroundColor: "rgba(240, 236, 207, 1)",
 			marginTop: "30px",
 			position: "relative"
 		});
