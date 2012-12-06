@@ -69,7 +69,7 @@
 		1F766FE013BBADB100FB74C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = ../../../phonegap/lib/ios/CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
+		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = ../../../../dev/phonegap/lib/ios/CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
 		301BF5B4109A6A2B0062928A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		301BF5B6109A6A2B0062928A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -447,6 +447,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -457,6 +458,7 @@
 				INFOPLIST_FILE = "JacketeerApp/Jacketeer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = Jacketeer;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -467,6 +469,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JacketeerApp/Jacketeer-Prefix.pch";
@@ -475,6 +478,7 @@
 				INFOPLIST_FILE = "JacketeerApp/Jacketeer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = Jacketeer;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -483,10 +487,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 307D28A1123043350040C0FA /* CordovaBuildSettings.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -499,6 +500,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					CoreFoundation,
@@ -522,10 +524,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 307D28A1123043350040C0FA /* CordovaBuildSettings.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -538,6 +537,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					CoreFoundation,
