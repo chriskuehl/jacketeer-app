@@ -163,7 +163,7 @@ var screenSignature = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 255, 0, 0.15)"
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
 		});
 		
 		sigPaths = [];
@@ -191,7 +191,7 @@ var screenSignature = {
 		canvasHolder.css({
 			width: "1500px",
 			height: "800px",
-			border: "solid 10px #888",
+			border: "solid 10px gray",
 			float: "left"
 		});
 		
@@ -271,7 +271,7 @@ var screenSignature = {
 			height: canvasHolder.innerHeight()
 		});
 		canvas.css({
-			backgroundColor: "solid rgba(255, 255, 0, 0.2)"
+			backgroundColor: "solid rgba(255, 255, 255, 1)"
 		});
 		canvas.data("paths", []);
 		
@@ -392,7 +392,7 @@ var screenPortal = {
 		updateTitle(loginDetails ? loginDetails.firstName + " " + loginDetails.lastName : "UNKNOWN");
 		
 		container.css({
-			backgroundColor: "rgba(255, 204, 0, 0.1)"
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
 		});
 		
 		var introText = $("<p />");
@@ -445,11 +445,11 @@ var screenPortal = {
 				margin: "60px",
 				padding: "70px",
 				paddingLeft: "225px",
-				backgroundColor: "rgba(70, 70, 0, 0.1)",
+				backgroundColor: "rgba(100, 100, 0, 0.1)",
 				backgroundImage: "url('css/assets/" + (section.complete ? "accept" : "alert") + ".png')",
 				backgroundPosition: "50px 50%",
 				backgroundRepeat: "no-repeat",
-				borderRadius: "40px",
+				borderRadius: "15px",
 				marginBottom: "30px !important",
 				position: "relative"
 			});
@@ -500,11 +500,11 @@ var screenPortal = {
 			arrow.css({
 				fontFamily: "\"Helvetica Neue Light\", \"HelveticaNeue-Light\"",
 				fontSize: "70px",
-				color: "rgba(0, 0, 0, 0.2)",
+				color: "rgba(0, 0, 0, 0.4)",
 				position: "absolute",
 				right: "50px",
 				top: "50%",
-				marginTop: "-35px"
+				marginTop: "-40px"
 			});
 			arrow.text(">");
 		}
@@ -519,10 +519,10 @@ var screenPortal = {
 			lineHeight: "1.6em",
 			margin: "80px",
 			marginBottom: "0px",
-			color: "rgba(0, 0, 0, 0.6)",
+			color: "rgba(0, 0, 0, 0.4)",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
 		});
-		progressText.html("CURRENT PROGRESS: " + calculatedPercent + "%");
+		progressText.html("Current Progress: <span style=\"color: rgba(0, 0, 0, 0.6);\">" + calculatedPercent + "%</span>");
 		
 		var helpText = $("<p />");
 		helpText.appendTo(container);
@@ -533,7 +533,7 @@ var screenPortal = {
 			color: "rgba(0, 0, 0, 0.6)",
 			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
 		});
-		helpText.html("If you need help with this app, stop by the iPad Help Desk or Mr. Ruff's room.");
+		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk or Mr. Ruff's room.</span>");
 		
 	}
 };
@@ -544,8 +544,7 @@ var screenIntro = {
 	
 	setup: function(container) {
 		container.css({
-			//backgroundColor: "rgba(255, 255, 0, 0.15)"
-            backgroundColor: "rgba(255, 250, 90, 0.45)",
+            backgroundColor: "rgba(255, 210, 0, 0.1)",
 		});
 		
 		var page = $("<div />");
@@ -592,9 +591,9 @@ var screenIntro = {
 		tableHolder.appendTo(page);
 		tableHolder.css({
 			padding: "50px",
-			borderRadius: "30px",
+			borderRadius: "20px",
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
-            backgroundColor: "rgba(255, 255, 90, 0.3)",
+            backgroundColor: "rgba(240, 236, 207, 1)",
 			marginTop: "30px",
 			position: "relative"
 		});
