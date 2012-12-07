@@ -416,6 +416,24 @@ var screenQuote = {
 		});
 		introText.html("Tap the area below to edit your quote. Keep it appropriate&ndash;otherwise, it's a personal statement, and we'll draw a frowny face next to your portrait. Be creative and remember to give credit to the person who originally said it, unless that was you. If your quote is in a language other than English, consider including a translation.");
 		
+		// text field
+		var textAreaHolder = $("<div />");
+		textAreaHolder.appendTo(container);
+		textAreaHolder.css({
+			textAlign: "center"
+		});
+		
+		var textArea = $("<textarea />");
+		textArea.appendTo(textAreaHolder);
+		textArea.css({
+			width: "1600px",
+			height: "400px",
+			fontSize: "44px",
+			padding: "10px"
+		});
+		textArea.attr({
+			placeholder: "Test test test"
+		});
 	}
 };
 
