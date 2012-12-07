@@ -46,7 +46,8 @@ function drawSpline(ctx, points, tension, closed){
     	
     	var controlPointA = controlPoints[(i * 2) - 1]; // previous control point
     	var controlPointB = controlPoints[i * 2]; // current control point
-    
+    	
+    	ctx.lineWidth = Math.sin(i / 5) * 10 + 4;
         ctx.strokeStyle = "black";
         ctx.beginPath();
         ctx.moveTo(pointB[0], pointB[1]);
