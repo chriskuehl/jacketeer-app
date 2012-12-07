@@ -40,7 +40,8 @@ function drawSpline(ctx, points, tension, closed){
     }
     
     // draw the curve
-    var oldPenSize = 10;
+    var oldPenSize = 15;
+    
     for (var i = 1; i < points.length - 2; i ++) {
     	var pointB = points[i]; // current point
     	var pointC = points[i + 1]; // next point
@@ -68,19 +69,35 @@ function drawSpline(ctx, points, tension, closed){
     }
     
     //  use a simple quadratic (as opposed to a bezier curve) for the first and last curves
-    /* ctx.strokeStyle= "black";
-    ctx.beginPath();
-    ctx.moveTo(pts[0],pts[1]);
-    ctx.quadraticCurveTo(cp[0],cp[1],pts[2],pts[3]);
-    ctx.stroke();
-    ctx.closePath();
-    
-    ctx.strokeStyle="black";
-    ctx.beginPath();
-    ctx.moveTo(pts[n-2],pts[n-1]);
-    ctx.quadraticCurveTo(cp[2*n-10],cp[2*n-9],pts[n-4],pts[n-3]);
-    ctx.stroke();
-    ctx.closePath(); */
+    // TODO: clean this up
+    try {
+	    var startPoint = points[0];
+	    var secondPoint = points[1];
+	    var secondSecondEndPoint = points[points.length - 3];
+	    var secondEndPoint = points[points.length - 2];
+	    var endPoint = points[points.length - 1];
+	    
+	    ctx.lineWidth = 15;
+	    ctx.strokeStyle= "black";
+	    ctx.beginPath();
+	    ctx.moveTo(startPoint[0], startPoint[1]);
+	    ctx.quadraticCurveTo(controlPoints[0][0][0], controlPoints[0][0][1], secondPoint[0], secondPoint[1]);
+	    ctx.stroke();
+	    ctx.closePath();
+	    
+	    var n = points.length;
+	    /*
+	    ctx.lineWidth = 10;
+	    ctx.strokeStyle="black";
+	    ctx.beginPath();
+	    ctx.moveTo(endPoint[0], endPoint[1]); // second-second-last element x/y
+	    ctx.quadraticCurveTo(secondSecondEndPoint[0], secondSecondEndPoint[1], secondEndPoint[0], secondEndPoint[1]); //pts[n-4],pts[n-3]);
+	    ctx.stroke();
+	    ctx.closePath();
+	    */
+    } catch (ex) {
+	    
+    }
     
     // cleanup
     ctx.restore();

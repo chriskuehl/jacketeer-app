@@ -298,7 +298,7 @@ var screenSignature = {
 			// test if it's time for another point
 			var cur = currentTime();
 			
-			if (cur - penData.lastEvent < 20) {
+			if (cur - penData.lastEvent < 5) {
 				return;
 			}
 			
@@ -356,7 +356,7 @@ function dist(p1, p2) {
 }
 
 function redrawCanvas(canvas, ctx) {
-	var tension = 0.3;
+	var tension = 0.6;
 	
 	// clear canvas
 	ctx.clearRect(0, 0, canvas.width(), canvas.height());
