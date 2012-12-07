@@ -337,11 +337,22 @@ function currentTime() {
 
 function addPenPosition(ctx, canvas, e) {
 	var pos = getPenPosition(canvas, e);
-
+	var velocity = 0;
+	
+	if (penData.points.length > 0) {
+		var lastPoint = penData.points[penData.points.length - 1];
+		velocity = dist(pos, lastPoint);
+	}
+	
+	pos.push(velocity);
 	penData.points.push(pos);
 	penData.lastEvent = currentTime();
 	
 	redrawCanvas(canvas, ctx);
+}
+
+function dist(p1, p2) {
+	return ((p1[0] - p1[0]) ^ 2 + (p1[1] - p2[1]) ^ 2) ^ 0.5;
 }
 
 function redrawCanvas(canvas, ctx) {
