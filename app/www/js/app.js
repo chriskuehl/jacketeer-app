@@ -427,12 +427,13 @@ var screenQuote = {
 		textArea.appendTo(textAreaHolder);
 		textArea.css({
 			width: "1600px",
-			height: "400px",
+			height: "300px",
 			fontSize: "44px",
-			padding: "10px"
+			padding: "20px",
+			lineHeight: "1.6em"
 		});
 		textArea.attr({
-			placeholder: ""
+			placeholder: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisi tortor, ac posuere massa. Etiam suscipit dolor at mi tincidunt dignissim. In hac habitasse platea dictumst.\" —Dan Ruff"
 		});
 	}
 };
