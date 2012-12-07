@@ -565,7 +565,9 @@ var screenPortal = {
 			sectionButton.click(function() {
 				var selectedSection = $(this).data("section");
 				
-				if (selectedSection.id == "signature") {
+				if (selectedSection.id == "name") {
+					setScreen(screenName);
+				} else if (selectedSection.id == "signature") {
 					setScreen(screenSignature);
 				}
 			});
