@@ -223,6 +223,7 @@ var screenSignature = {
 			if (sigPaths.length <= 0) {
 				undoButton.addClass("disabled");
 				clearButton.addClass("disabled");
+				doneButton.text("Cancel");
 			}
 		});
 		
@@ -246,11 +247,12 @@ var screenSignature = {
 			
 			undoButton.addClass("disabled");
 			clearButton.addClass("disabled");
+			doneButton.text("Cancel");
 		});
 				
 		var doneButton = $("<a />");
 		doneButton.appendTo(buttonHolder);
-		doneButton.text("Done");
+		doneButton.text("Cancel");
 		doneButton.addClass("signatureButton");
 		doneButton.attr({
 			id: "signatureDoneButton"
@@ -331,6 +333,7 @@ var screenSignature = {
 			// change button statuses
 			clearButton.removeClass("disabled");
 			undoButton.removeClass("disabled");
+			doneButton.text("Done");
 		}, false);
 	}
 };
