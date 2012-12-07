@@ -347,20 +347,20 @@ function addPenPosition(ctx, canvas, e) {
 }
 
 function redrawCanvas(canvas, ctx) {
-	var coeff = 0.3;
+	var tension = 0.3;
 	
 	// clear canvas
 	ctx.clearRect(0, 0, canvas.width(), canvas.height());
 	
 	// draw the current path	
 	if (penData) {
-		drawSpline(ctx, penData.points, coeff, false);
+		drawSpline(ctx, penData.points, tension, false);
 	}
 	
 	// draw the rest of the paths
 	if (sigPaths.length > 0) {
 		for (var i = 0; i < sigPaths.length; i ++) {
-			drawSpline(ctx, sigPaths[i], coeff, false);
+			drawSpline(ctx, sigPaths[i], tension, false);
 		}
 	}
 }
