@@ -422,7 +422,6 @@ var screenName = {
 		var nameHolder = $("<div />");
 		nameHolder.appendTo(container);
 		nameHolder.css({
-			backgroundColor: "rgba(255, 0, 0, 0.2)",
 			marginLeft: "auto",
 			marginRight: "auto",
 			width: "1800px"
@@ -474,6 +473,150 @@ var screenName = {
 				return false;
 			}
 		});
+		
+		// tips holder
+		var tipsHolder = $("<div />");
+		tipsHolder.appendTo(container);
+		tipsHolder.css({
+			marginLeft: "130px",
+			marginTop: "70px",
+			width: "900px",
+			float: "left"
+		});
+		
+		// tips header
+		var tipsHeader = $("<h2 />");
+		tipsHeader.appendTo(tipsHolder);
+		tipsHeader.css({
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "36px"
+		});
+		tipsHeader.text("Name Instructions:");
+		
+		// tips list
+		var tipsList = $("<ul />");
+		tipsList.appendTo(tipsHolder);
+		tipsList.css({
+			//listStyle: "disc outside none",
+			marginTop: "10px"
+		});
+		
+		var tips = [
+			"You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
+			"Do <strong>not</strong> include your middle name, unless you go by two first names.",
+			"Enter your name exactly as you want it to appear in the book, including spelling, spaces, punctuation, and capitalization.",
+			"You don't have to use your legal first name, but you must use your legal last name."
+		];
+		
+		for (var i = 0; i < tips.length; i ++) {
+			var tip = tips[i];
+			
+			var li = $("<li />");
+			li.appendTo(tipsList);
+			li.css({
+				fontSize: "36px",
+				//textIndent: "60px",
+				//marginLeft: "80px",
+				lineHeight: "1.4em",
+				marginBottom: "30px"
+			});
+			li.html(tip);
+		}
+		
+		// demo holder
+		var demoHolder = $("<div />");
+		demoHolder.appendTo(container);
+		demoHolder.css({
+			marginRight: "130px",
+			marginTop: "70px",
+			width: "800px",
+			float: "right"
+		});
+		
+		var demoHeader = $("<h2 />");
+		demoHeader.appendTo(demoHolder);
+		demoHeader.css({
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "48px",
+			color: "rgba(0, 0, 0, 0.3)"
+		});
+		demoHeader.text("EXAMPLE");
+		
+		var demoBox = $("<div />");
+		demoBox.appendTo(demoHolder);
+		demoBox.css({
+			border: "solid 6px rgba(0, 0, 0, 0.4)",
+			width: "748px",
+			padding: "20px",
+			marginTop: "20px",
+			backgroundColor: "rgb(100, 100, 100)"
+		});
+		
+		var demoPortrait = $("<div />");
+		demoPortrait.appendTo(demoBox);
+		demoPortrait.css({
+			float: "left",
+			border: "solid 4px rgba(0, 0, 0, 0.5)",
+			width: "300px",
+			height: "400px",
+			backgroundColor: "rgb(200, 200, 200)",
+			backgroundImage: "url(css/assets/executive.png)",
+			backgroundRepeat: "none",
+			backgroundPosition: "50% 0%"
+		});
+		
+		var demoInfo = $("<div />");
+		demoInfo.appendTo(demoBox);
+		demoInfo.css({
+			float: "right",
+			width: "400px"
+		});
+		
+		var demoName = $("<h3 />");
+		demoName.appendTo(demoInfo);
+		demoName.css({
+			color: "white",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "56px",
+			textTransform: "uppercase"
+		});
+		demoName.text(name);
+		
+		var demoQuote = $("<p />");
+		demoQuote.appendTo(demoInfo);
+		demoQuote.css({
+			color: "white",
+			fontSize: "28px",
+			marginTop: "20px",
+			lineSpacing: "1.5em"
+		});
+		demoQuote.html("\"This is an example quote which will be replaced by your real quote in the book.\"<br />&ndash;John Doe");
+		
+		var demoSignature = $("<img />");
+		demoSignature.appendTo(demoInfo);
+		demoSignature.attr({
+			src: "css/assets/jdoe.png",
+			width: "292",
+			height: "57"
+		});
+		demoSignature.css({
+			marginTop: "40px"
+		});
+		
+		// end demo box
+		var clear = $("<div />");
+		clear.appendTo(demoBox);
+		clear.css("clear", "both");
+		
+		// reminder/disclaimer about example
+		var exampleReminder = $("<p />");
+		exampleReminder.appendTo(demoHolder);
+		exampleReminder.css({
+			marginTop: "7px",
+			fontSize: "22px",
+			lineHeight: "1.4em"
+		});
+		exampleReminder.html("This example is only to help you visualize layout. The picture, quote, and signature are placeholders. Don't worry about your name fitting on the lines&ndash;they are not the actual size as they will be in the book. We will make sure your name fits!");
 	}
 };
 
