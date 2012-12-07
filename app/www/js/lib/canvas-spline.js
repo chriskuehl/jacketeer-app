@@ -19,7 +19,7 @@ function getControlPoints(x0,y0,x1,y1,x2,y2,t){
     var p2x=x1-fb*(x0-x2);
     var p2y=y1-fb*(y0-y2);  
     
-    return [p1x,p1y,p2x,p2y]
+    return [[p1x, p1y], [p2x, p2y]]
 }
 
 
@@ -27,7 +27,7 @@ function drawSpline(ctx, points, tension, closed){
 	// preparations/initializations
     ctx.save();
     
-    var cp = []; // array of control points, as x0,y0,x1,y1,...
+    var controlPoints = []; // array of control points, as x0,y0,x1,y1,...
 
     // draw an open curve, not connected at the ends
     for (var i = 0; i < points.length - 2; i ++){
@@ -36,18 +36,21 @@ function drawSpline(ctx, points, tension, closed){
     	var pointC = points[i + 1]; // next point
     	var pointD = points[i + 2]; // next-next point
     	
-        cp = cp.concat(getControlPoints(pointB[0], pointB[1], pointC[0], pointC[1], pointD[0], pointD[1], tension));
+        controlPoints = controlPoints.concat(getControlPoints(pointB[0], pointB[1], pointC[0], pointC[1], pointD[0], pointD[1], tension));
     }
     
     for (var i = 1; i < points.length - 2; i ++) {
     	var pointB = points[i]; // current point
     	var pointC = points[i + 1]; // next point
-
+    	
+    	var controlPointA = controlPoints[i * 2 - 1]; // previous control point
+    	var controlPointB = controlPoints[i * 2]; // current control point
+    	var controlPointC = controlPoints[i * 2 + 1]; // next control point
     
         ctx.strokeStyle = "black";
         ctx.beginPath();
         ctx.moveTo(pointB[0], pointB[1]);
-        ctx.bezierCurveTo(cp[i * 4 - 2], cp[i * 4 - 1], cp[i * 4], cp[i * 4 + 1], pointC[0], pointC[1]);
+        ctx.bezierCurveTo(controlPointA[0], controlPointA[1], controlPointB[0], controlPointB[1], pointC[0], pointC[1]);
         ctx.stroke();
         ctx.closePath();
     }
