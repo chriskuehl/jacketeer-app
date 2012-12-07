@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (getLoginDetails()) {
-		setScreen(screenName);
+		setScreen(screenQuote);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -379,6 +379,33 @@ function getPenPosition(canvas, e) {
 	var ep = canvas.offset();
 	return [e.targetTouches[0].pageX - ep.left, e.targetTouches[0].pageY - ep.top];
 }
+
+var screenQuote = {
+	id: "quote",
+	title: "Featured Quote",
+	parent: "portal",
+	
+	titleButton: {
+		text: "Cancel",
+		event: function() {
+			// TODO: have they already completed their quote?
+			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Return to Portal", "Stay Here,Go Back");
+		}
+	},
+	
+	setup: function(container) {
+		container.css({
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
+		});
+		
+		// TODO: have we already recorded their quote? if so, let's use that
+		
+	}
+};
 
 var screenName = {
 	id: "name",
