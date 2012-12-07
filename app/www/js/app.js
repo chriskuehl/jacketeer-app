@@ -385,6 +385,18 @@ var screenName = {
 	title: "Preferred Name",
 	parent: "portal",
 	
+	titleButton: {
+		text: "Cancel",
+		event: function() {
+			// TODO: have they already completed their name?
+			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Return to Portal", "Stay Here,Go Back");
+		}
+	},
+	
 	setup: function(container) {
 		container.css({
 			backgroundColor: "rgba(255, 210, 0, 0.1)"
@@ -442,7 +454,14 @@ var screenName = {
 		submit.val("Confirm");
 		
 		submit.click(function() {
-			
+			// TODO: validate the name they've entered
+			if (false) {
+				// TODO: have they already completed a name? if so, this should keep their old one (and indicate in the message)
+				navigator.notification.alert("That doesn't look like a valid name. Make sure to use only first and last name. See the tips below for more details.", null, "Invalid Name", "Oops!");
+			} else {
+				// TODO: upload name to the server, replace old one if it exists
+				setScreen(screenPortal);
+			}
 		});
 		
 		// submit by enter on input field
