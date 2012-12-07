@@ -21,24 +21,12 @@
 		<div id="container"></div>
 
 		<script src="js/lib/cordova-2.1.0.js"></script>
+		<script src="js/lib/array-remove.js"></script>
 		<script src="js/lib/jquery-1.8.3.min.js"></script>
 		<script src="js/lib/jquery-ui-1.9.0.min.js"></script>
 		<script src="js/lib/jquery-animate-enhanced.min.js"></script>
 		<script src="js/lib/canvas-spline.js"></script>
 		<script src="js/lib/fastclick-20121202.js"></script>
-		<script>
-			// Array Remove - By John Resig (MIT Licensed)
-			Array.prototype.remove = function(from, to) {
-			  var rest = this.slice((to || from) + 1 || this.length);
-			  this.length = from < 0 ? this.length + from : from;
-			  return this.push.apply(this, rest);
-			};
-
-			// set up FastClick for all links in the app
-			window.addEventListener('load', function() {
-				new FastClick(document.body);
-			}, false);
-		</script>
 		<script src="js/app.js"></script>
 	</body>
 </html>
