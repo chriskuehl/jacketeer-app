@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (getLoginDetails()) {
-		setScreen(screenPortal);
+		setScreen(screenName);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -379,6 +379,84 @@ function getPenPosition(canvas, e) {
 	var ep = canvas.offset();
 	return [e.targetTouches[0].pageX - ep.left, e.targetTouches[0].pageY - ep.top];
 }
+
+var screenName = {
+	id: "name",
+	title: "Preferred Name",
+	parent: "portal",
+	
+	setup: function(container) {
+		container.css({
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
+		});
+		
+		var loginDetails = getLoginDetails();
+		// TODO: have we already recorded their name? if so, let's use that instead
+		var name = loginDetails ? (loginDetails.firstName + " " + loginDetails.lastName) : "John Doe";
+		
+		// intro
+		var introText = $("<p />");
+		introText.appendTo(container);
+		introText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			lineHeight: "1.6em",
+			margin: "50px",
+			color: "rgba(0, 0, 0, 0.7)"
+		});
+		introText.html("Please enter your name exactly as you want it to appear in the yearbook next to your senior portrait.");
+		
+		// name holder
+		var nameHolder = $("<div />");
+		nameHolder.appendTo(container);
+		nameHolder.css({
+			backgroundColor: "rgba(255, 0, 0, 0.2)",
+			marginLeft: "auto",
+			marginRight: "auto",
+			width: "1800px"
+		});
+		
+		// name
+		var inputName = $("<input type=\"text\" />");
+		inputName.appendTo(nameHolder);
+		inputName.attr({
+			name: "inputName",
+			placeHolder: "John Doe",
+			autoCorrect: "off"
+		});
+		inputName.css({
+			fontSize: "72px",
+			padding: "10px",
+			width: "1350px",
+			marginRight: "10px",
+			padding: "20px"
+		});
+		inputName.val(name);
+		
+		// submit
+		var submit = $("<input type=\"button\" />");
+		submit.appendTo(nameHolder);
+		submit.css({
+			fontSize: "68px"
+		});
+		submit.val("Confirm");
+		
+		submit.click(function() {
+			
+		});
+		
+		// submit by enter on input field
+		inputName.keypress(function(e) {
+			if (e.which == 13) {
+				submit.click();
+				$(this).blur(); // hide the iPad keyboard
+				
+				e.preventDefault();
+				return false;
+			}
+		});
+	}
+};
 
 var screenPortal = {
 	id: "portal",
