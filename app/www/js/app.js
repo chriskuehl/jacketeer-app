@@ -404,6 +404,18 @@ var screenQuote = {
 		
 		// TODO: have we already recorded their quote? if so, let's use that
 		
+		// intro text
+		var introText = $("<p />");
+		introText.appendTo(container);
+		introText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			lineHeight: "1.6em",
+			margin: "50px",
+			color: "rgba(0, 0, 0, 0.7)"
+		});
+		introText.html("Tap the area below to edit your quote. Keep it appropriate&ndash;otherwise, it's a personal statement, and we'll draw a frowny face next to your portrait. Be creative and remember to give credit to the person who originally said it, unless that was you. If your quote is in a language other than English, consider including a translation.");
+		
 	}
 };
 
