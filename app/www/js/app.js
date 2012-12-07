@@ -432,7 +432,7 @@ var screenQuote = {
 			padding: "10px"
 		});
 		textArea.attr({
-			placeholder: "Test test test"
+			placeholder: ""
 		});
 	}
 };
@@ -769,6 +769,8 @@ var screenPortal = {
 					setScreen(screenName);
 				} else if (selectedSection.id == "signature") {
 					setScreen(screenSignature);
+				} else if (selectedSection.id == "quote") {
+					setScreen(screenQuote);
 				}
 			});
 			
