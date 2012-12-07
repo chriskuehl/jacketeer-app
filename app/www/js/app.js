@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (getLoginDetails()) {
-		setScreen(screenPortal);
+		setScreen(screenQuote);
 	} else {
 		setScreen(screenIntro);
 	}
@@ -223,6 +223,7 @@ var screenSignature = {
 			if (sigPaths.length <= 0) {
 				undoButton.addClass("disabled");
 				clearButton.addClass("disabled");
+				doneButton.text("Cancel");
 			}
 		});
 		
@@ -246,22 +247,30 @@ var screenSignature = {
 			
 			undoButton.addClass("disabled");
 			clearButton.addClass("disabled");
+			doneButton.text("Cancel");
 		});
 				
 		var doneButton = $("<a />");
 		doneButton.appendTo(buttonHolder);
-		doneButton.text("Done");
+		doneButton.text("Cancel");
 		doneButton.addClass("signatureButton");
 		doneButton.attr({
 			id: "signatureDoneButton"
 		});
 		
 		doneButton.click(function() {
-			if ($(this).hasClass("disabled")) {
-				return;
+			// is there anything on the screen?
+			if (sigPaths.length <= 0) {
+				// TODO: have they already completed a signature? if so, this should keep their old one (and indicate in the message)
+				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back?", function(response) {
+					if (response == 2) {
+						setScreen(screenPortal);
+					}
+				}, "Signature Incomplete", "Cancel,Go Back");
+			} else {
+				// TODO: upload signature to the server iff they like it better than the old one (ask them which they prefer if they've already done it)
+				setScreen(screenPortal);
 			}
-			
-			setScreen(screenPortal);
 		});
 		
 		var canvas = $("<canvas />");
@@ -324,6 +333,7 @@ var screenSignature = {
 			// change button statuses
 			clearButton.removeClass("disabled");
 			undoButton.removeClass("disabled");
+			doneButton.text("Done");
 		}, false);
 	}
 };
@@ -369,6 +379,303 @@ function getPenPosition(canvas, e) {
 	var ep = canvas.offset();
 	return [e.targetTouches[0].pageX - ep.left, e.targetTouches[0].pageY - ep.top];
 }
+
+var screenQuote = {
+	id: "quote",
+	title: "Featured Quote",
+	parent: "portal",
+	
+	titleButton: {
+		text: "Cancel",
+		event: function() {
+			// TODO: have they already completed their quote?
+			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Return to Portal", "Stay Here,Go Back");
+		}
+	},
+	
+	setup: function(container) {
+		container.css({
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
+		});
+		
+		// TODO: have we already recorded their quote? if so, let's use that
+		
+		// intro text
+		var introText = $("<p />");
+		introText.appendTo(container);
+		introText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			lineHeight: "1.6em",
+			margin: "50px",
+			color: "rgba(0, 0, 0, 0.7)"
+		});
+		introText.html("Tap the area below to edit your quote. Keep it appropriate&ndash;otherwise, it's a personal statement, and we'll draw a frowny face next to your portrait. Be creative and remember to give credit to the person who originally said it, unless that was you. If your quote is in a language other than English, consider including a translation.");
+		
+		// text field
+		var textAreaHolder = $("<div />");
+		textAreaHolder.appendTo(container);
+		textAreaHolder.css({
+			textAlign: "center"
+		});
+		
+		var textArea = $("<textarea />");
+		textArea.appendTo(textAreaHolder);
+		textArea.css({
+			width: "1600px",
+			height: "400px",
+			fontSize: "44px",
+			padding: "10px"
+		});
+		textArea.attr({
+			placeholder: "Test test test"
+		});
+	}
+};
+
+var screenName = {
+	id: "name",
+	title: "Preferred Name",
+	parent: "portal",
+	
+	titleButton: {
+		text: "Cancel",
+		event: function() {
+			// TODO: have they already completed their name?
+			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Return to Portal", "Stay Here,Go Back");
+		}
+	},
+	
+	setup: function(container) {
+		container.css({
+			backgroundColor: "rgba(255, 210, 0, 0.1)"
+		});
+		
+		var loginDetails = getLoginDetails();
+		// TODO: have we already recorded their name? if so, let's use that instead
+		var name = loginDetails ? (loginDetails.firstName + " " + loginDetails.lastName) : "John Doe";
+		
+		// intro
+		var introText = $("<p />");
+		introText.appendTo(container);
+		introText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			lineHeight: "1.6em",
+			margin: "50px",
+			color: "rgba(0, 0, 0, 0.7)"
+		});
+		introText.html("Please enter your name exactly as you want it to appear in the yearbook next to your senior portrait.");
+		
+		// name holder
+		var nameHolder = $("<div />");
+		nameHolder.appendTo(container);
+		nameHolder.css({
+			marginLeft: "auto",
+			marginRight: "auto",
+			width: "1800px"
+		});
+		
+		// name
+		var inputName = $("<input type=\"text\" />");
+		inputName.appendTo(nameHolder);
+		inputName.attr({
+			name: "inputName",
+			placeHolder: "John Doe",
+			autoCorrect: "off"
+		});
+		inputName.css({
+			fontSize: "72px",
+			padding: "10px",
+			width: "1350px",
+			marginRight: "10px",
+			padding: "20px"
+		});
+		inputName.val(name);
+		
+		// submit
+		var submit = $("<input type=\"button\" />");
+		submit.appendTo(nameHolder);
+		submit.css({
+			fontSize: "68px"
+		});
+		submit.val("Confirm");
+		
+		submit.click(function() {
+			// TODO: validate the name they've entered
+			if (false) {
+				// TODO: have they already completed a name? if so, this should keep their old one (and indicate in the message)
+				navigator.notification.alert("That doesn't look like a valid name. Make sure to use only first and last name. See the tips below for more details.", null, "Invalid Name", "Oops!");
+			} else {
+				// TODO: upload name to the server, replace old one if it exists
+				setScreen(screenPortal);
+			}
+		});
+		
+		// submit by enter on input field
+		inputName.keypress(function(e) {
+			if (e.which == 13) {
+				submit.click();
+				$(this).blur(); // hide the iPad keyboard
+				
+				e.preventDefault();
+				return false;
+			}
+		});
+		
+		// tips holder
+		var tipsHolder = $("<div />");
+		tipsHolder.appendTo(container);
+		tipsHolder.css({
+			marginLeft: "130px",
+			marginTop: "70px",
+			width: "900px",
+			float: "left"
+		});
+		
+		// tips header
+		var tipsHeader = $("<h2 />");
+		tipsHeader.appendTo(tipsHolder);
+		tipsHeader.css({
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "36px"
+		});
+		tipsHeader.text("Name Instructions:");
+		
+		// tips list
+		var tipsList = $("<ul />");
+		tipsList.appendTo(tipsHolder);
+		tipsList.css({
+			//listStyle: "disc outside none",
+			marginTop: "10px"
+		});
+		
+		var tips = [
+			"You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
+			"Do <strong>not</strong> include your middle name, unless you go by two first names.",
+			"Enter your name exactly as you want it to appear in the book, including spelling, spaces, punctuation, and capitalization.",
+			"You don't have to use your legal first name, but you must use your legal last name."
+		];
+		
+		for (var i = 0; i < tips.length; i ++) {
+			var tip = tips[i];
+			
+			var li = $("<li />");
+			li.appendTo(tipsList);
+			li.css({
+				fontSize: "36px",
+				//textIndent: "60px",
+				//marginLeft: "80px",
+				lineHeight: "1.4em",
+				marginBottom: "30px"
+			});
+			li.html(tip);
+		}
+		
+		// demo holder
+		var demoHolder = $("<div />");
+		demoHolder.appendTo(container);
+		demoHolder.css({
+			marginRight: "130px",
+			marginTop: "70px",
+			width: "800px",
+			float: "right"
+		});
+		
+		var demoHeader = $("<h2 />");
+		demoHeader.appendTo(demoHolder);
+		demoHeader.css({
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "48px",
+			color: "rgba(0, 0, 0, 0.3)"
+		});
+		demoHeader.text("EXAMPLE");
+		
+		var demoBox = $("<div />");
+		demoBox.appendTo(demoHolder);
+		demoBox.css({
+			border: "solid 6px rgba(0, 0, 0, 0.4)",
+			width: "748px",
+			padding: "20px",
+			marginTop: "20px",
+			backgroundColor: "rgb(100, 100, 100)"
+		});
+		
+		var demoPortrait = $("<div />");
+		demoPortrait.appendTo(demoBox);
+		demoPortrait.css({
+			float: "left",
+			border: "solid 4px rgba(0, 0, 0, 0.5)",
+			width: "300px",
+			height: "400px",
+			backgroundColor: "rgb(200, 200, 200)",
+			backgroundImage: "url(css/assets/executive.png)",
+			backgroundRepeat: "none",
+			backgroundPosition: "50% 0%"
+		});
+		
+		var demoInfo = $("<div />");
+		demoInfo.appendTo(demoBox);
+		demoInfo.css({
+			float: "right",
+			width: "400px"
+		});
+		
+		var demoName = $("<h3 />");
+		demoName.appendTo(demoInfo);
+		demoName.css({
+			color: "white",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			fontSize: "56px",
+			textTransform: "uppercase"
+		});
+		demoName.text(name);
+		
+		var demoQuote = $("<p />");
+		demoQuote.appendTo(demoInfo);
+		demoQuote.css({
+			color: "white",
+			fontSize: "28px",
+			marginTop: "20px",
+			lineSpacing: "1.5em"
+		});
+		demoQuote.html("\"This is an example quote which will be replaced by your real quote in the book.\"<br />&ndash;John Doe");
+		
+		var demoSignature = $("<img />");
+		demoSignature.appendTo(demoInfo);
+		demoSignature.attr({
+			src: "css/assets/jdoe.png",
+			width: "292",
+			height: "57"
+		});
+		demoSignature.css({
+			marginTop: "40px"
+		});
+		
+		// end demo box
+		var clear = $("<div />");
+		clear.appendTo(demoBox);
+		clear.css("clear", "both");
+		
+		// reminder/disclaimer about example
+		var exampleReminder = $("<p />");
+		exampleReminder.appendTo(demoHolder);
+		exampleReminder.css({
+			marginTop: "7px",
+			fontSize: "22px",
+			lineHeight: "1.4em"
+		});
+		exampleReminder.html("This example is only to help you visualize layout. The picture, quote, and signature are placeholders. Don't worry about your name fitting on the lines&ndash;they are not the actual size as they will be in the book. We will make sure your name fits!");
+	}
+};
 
 var screenPortal = {
 	id: "portal",
@@ -458,7 +765,9 @@ var screenPortal = {
 			sectionButton.click(function() {
 				var selectedSection = $(this).data("section");
 				
-				if (selectedSection.id == "signature") {
+				if (selectedSection.id == "name") {
+					setScreen(screenName);
+				} else if (selectedSection.id == "signature") {
 					setScreen(screenSignature);
 				}
 			});
