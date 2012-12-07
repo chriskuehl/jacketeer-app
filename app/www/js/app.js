@@ -298,7 +298,7 @@ var screenSignature = {
 			// test if it's time for another point
 			var cur = currentTime();
 			
-			if (cur - penData.lastEvent < 20 && penData.points.length > 10) {
+			if (cur - penData.lastEvent < 20) {
 				return;
 			}
 			
@@ -338,9 +338,7 @@ function currentTime() {
 function addPenPosition(ctx, canvas, e) {
 	var pos = getPenPosition(canvas, e);
 
-	penData.points.push(pos[0]);
-	penData.points.push(pos[1]);
-
+	penData.points.push(pos);
 	penData.lastEvent = currentTime();
 	
 	redrawCanvas(canvas, ctx);

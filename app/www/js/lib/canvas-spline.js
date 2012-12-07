@@ -23,26 +23,37 @@ function getControlPoints(x0,y0,x1,y1,x2,y2,t){
 }
 
 
-function drawSpline(ctx,pts,t,closed){
-    //ctx.lineWidth=4;
+function drawSpline(ctx, points, tension, closed){
+	// preparations/initializations
     ctx.save();
-    var cp=[];   // array of control points, as x0,y0,x1,y1,...
-    var n=pts.length;
+    
+    var cp = []; // array of control points, as x0,y0,x1,y1,...
 
-    // Draw an open curve, not connected at the ends
-    for(var i=0;i<n-4;i+=2){
-        cp=cp.concat(getControlPoints(pts[i],pts[i+1],pts[i+2],pts[i+3],pts[i+4],pts[i+5],t));
-    }    
-    for(var i=2;i<pts.length-5;i+=2){
-        ctx.strokeStyle= "black";     
+    // draw an open curve, not connected at the ends
+    for (var i = 0; i < points.length - 2; i ++){
+    	// var pointA = points[i - 1]; // previous point
+    	var pointB = points[i]; // current point
+    	var pointC = points[i + 1]; // next point
+    	var pointD = points[i + 2]; // next-next point
+    	
+        cp = cp.concat(getControlPoints(pointB[0], pointB[1], pointC[0], pointC[1], pointD[0], pointD[1], tension));
+    }
+    
+    for (var i = 1; i < points.length - 2; i ++) {
+    	var pointB = points[i]; // current point
+    	var pointC = points[i + 1]; // next point
+
+    
+        ctx.strokeStyle = "black";
         ctx.beginPath();
-        ctx.moveTo(pts[i],pts[i+1]);
-        ctx.bezierCurveTo(cp[2*i-2],cp[2*i-1],cp[2*i],cp[2*i+1],pts[i+2],pts[i+3]);
+        ctx.moveTo(pointB[0], pointB[1]);
+        ctx.bezierCurveTo(cp[i * 4 - 2], cp[i * 4 - 1], cp[i * 4], cp[i * 4 + 1], pointC[0], pointC[1]);
         ctx.stroke();
         ctx.closePath();
     }
-    //  For open curves the first and last arcs are simple quadratics.
-    ctx.strokeStyle= "black";
+    
+    //  use a simple quadratic (as opposed to a bezier curve) for the first and last curves
+    /* ctx.strokeStyle= "black";
     ctx.beginPath();
     ctx.moveTo(pts[0],pts[1]);
     ctx.quadraticCurveTo(cp[0],cp[1],pts[2],pts[3]);
@@ -54,8 +65,8 @@ function drawSpline(ctx,pts,t,closed){
     ctx.moveTo(pts[n-2],pts[n-1]);
     ctx.quadraticCurveTo(cp[2*n-10],cp[2*n-9],pts[n-4],pts[n-3]);
     ctx.stroke();
-    ctx.closePath();
+    ctx.closePath(); */
     
-    
+    // cleanup
     ctx.restore();
 }
