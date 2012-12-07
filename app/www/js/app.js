@@ -257,11 +257,18 @@ var screenSignature = {
 		});
 		
 		doneButton.click(function() {
-			if ($(this).hasClass("disabled")) {
-				return;
+			// is there anything on the screen?
+			if (sigPaths.length <= 0) {
+				// TODO: have they already completed a signature? if so, this should keep their old one (and indicate in the message)
+				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back?", function(response) {
+					if (response == 2) {
+						setScreen(screenPortal);
+					}
+				}, "Signature Incomplete", "Cancel,Go Back");
+			} else {
+				// TODO: upload signature to the server iff they like it better than the old one (ask them which they prefer if they've already done it)
+				setScreen(screenPortal);
 			}
-			
-			setScreen(screenPortal);
 		});
 		
 		var canvas = $("<canvas />");
