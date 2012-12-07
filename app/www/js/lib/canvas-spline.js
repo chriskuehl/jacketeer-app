@@ -29,7 +29,7 @@ function drawSpline(ctx, points, tension, closed){
     
     var controlPoints = []; // array of control points, as x0,y0,x1,y1,...
 
-    // draw an open curve, not connected at the ends
+    // calculate the control points necessary for the curve
     for (var i = 0; i < points.length - 2; i ++){
     	// var pointA = points[i - 1]; // previous point
     	var pointB = points[i]; // current point
@@ -39,13 +39,13 @@ function drawSpline(ctx, points, tension, closed){
         controlPoints = controlPoints.concat(getControlPoints(pointB[0], pointB[1], pointC[0], pointC[1], pointD[0], pointD[1], tension));
     }
     
+    // draw the curve
     for (var i = 1; i < points.length - 2; i ++) {
     	var pointB = points[i]; // current point
     	var pointC = points[i + 1]; // next point
     	
-    	var controlPointA = controlPoints[i * 2 - 1]; // previous control point
+    	var controlPointA = controlPoints[(i * 2) - 1]; // previous control point
     	var controlPointB = controlPoints[i * 2]; // current control point
-    	var controlPointC = controlPoints[i * 2 + 1]; // next control point
     
         ctx.strokeStyle = "black";
         ctx.beginPath();
