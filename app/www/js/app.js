@@ -322,7 +322,7 @@ var screenSignature = {
 			sigPaths.push(penData.points);
 			penData = null;
 			
-			redrawCanvas(canvas, ctx, true);
+			redrawCanvas(canvas, ctx);
 			
 			// change button statuses
 			clearButton.removeClass("disabled");
@@ -358,7 +358,7 @@ function dist(p1, p2) {
 	return ((p1[0] - p1[0]) ^ 2 + (p1[1] - p2[1]) ^ 2) ^ 0.5;
 }
 
-function redrawCanvas(canvas, ctx, blur) {
+function redrawCanvas(canvas, ctx) {
 	var tension = 0.2;
 	
 	// clear canvas
@@ -375,12 +375,6 @@ function redrawCanvas(canvas, ctx, blur) {
 			drawSpline(ctx, sigPaths[i], tension, false);
 		}
 	}
-	
-	// blur the canvas slightly
-	if (blur) {
-		stackBlurCanvasRGBA(canvas.attr("id"), 0, 0, canvas.width(), canvas.height(), 1);
-	}
-	//blurCanvas(canvas, ctx, 3);
 }
 
 function getPenPosition(canvas, e) {
