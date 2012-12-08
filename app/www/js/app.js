@@ -156,6 +156,9 @@ function setScreen(screen) {
 	ui.screen = container;
 }
 
+var globalTension = 0.35;
+var globalInterval = 25;
+
 var screenSignature = {
 	id: "signature",
 	title: "Senior Signature",
@@ -277,7 +280,45 @@ var screenSignature = {
 		canvas.data("paths", []);
 		
 		var ctx = canvas[0].getContext("2d");
-		ctx.lineWidth = 8;
+		
+		var tensionRange = $("<input type=\"range\" />");
+		tensionRange.appendTo(container);
+		tensionRange.css({
+			width: "500px",
+			height: "100px",
+			marginTop: "50px"
+		});
+		tensionRange.attr({
+			min: 0,
+			max: 1,
+			step: 0.01
+		});
+		tensionRange.val(globalTension);
+		tensionRange.change(function() {
+			globalTension = $(this).val();
+			intro.text("tension=" + globalTension + "; interval=" + globalInterval);
+			
+			redrawCanvas(canvas, ctx);
+		});
+		
+		var intervalRange = $("<input type=\"range\" />");
+		intervalRange.appendTo(container);
+		intervalRange.css({
+			width: "500px",
+			height: "100px",
+			marginTop: "50px"
+		});
+		intervalRange.attr({
+			min: 0,
+			max: 1000,
+			step: 1
+		});
+		intervalRange.val(globalInterval);
+		intervalRange.change(function() {
+			globalInterval = $(this).val();
+			intro.text("tension=" + globalTension + "; interval=" + globalInterval);
+			redrawCanvas(canvas, ctx);
+		});
 		
 		// iPad touch events
 		canvas[0].addEventListener("touchstart", function(e) {
@@ -298,13 +339,10 @@ var screenSignature = {
 			
 			// test if it's time for another point
 			var cur = currentTime();
-			
-			if (cur - penData.lastEvent < 5) {
-				return;
-			}
+			var ignore = cur - penData.lastEvent < globalInterval;
 			
 			// draw the point
-			addPenPosition(ctx, canvas, e);
+			addPenPosition(ctx, canvas, e, ignore);
 		}, false);
 		
 		canvas[0].addEventListener("touchend", function(e) {
@@ -317,6 +355,13 @@ var screenSignature = {
 			try {
 				addPenPosition(ctx, canvas, e);
 			} catch (err) {}
+			
+			// remove any points to ignore
+			for (var i = penData.points.length - 1; i >= 0; i --) {
+				if (penData.points[i][3]) {
+					penData.points.remove(i);
+				}
+			}
 			
 			// end the drawing
 			sigPaths.push(penData.points);
@@ -338,7 +383,11 @@ function currentTime() {
 	return (new Date()).getTime();
 }
 
-function addPenPosition(ctx, canvas, e) {
+function addPenPosition(ctx, canvas, e, ignore) {
+	if (ignore === undefined) {
+		ignore = false;
+	}
+	
 	var pos = getPenPosition(canvas, e);
 	var velocity = 0;
 	
@@ -348,8 +397,12 @@ function addPenPosition(ctx, canvas, e) {
 	}
 	
 	pos.push(velocity);
+	pos.push(ignore);
 	penData.points.push(pos);
-	penData.lastEvent = currentTime();
+	
+	if (! ignore) {
+		penData.lastEvent = currentTime();
+	}
 	
 	redrawCanvas(canvas, ctx);
 }
@@ -359,20 +412,18 @@ function dist(p1, p2) {
 }
 
 function redrawCanvas(canvas, ctx) {
-	var tension = 0.2;
-	
 	// clear canvas
 	ctx.clearRect(0, 0, canvas.width(), canvas.height());
 	
 	// draw the current path	
 	if (penData) {
-		drawSpline(ctx, penData.points, tension, false);
+		drawSpline(ctx, penData.points, globalTension, false);
 	}
 	
 	// draw the rest of the paths
 	if (sigPaths.length > 0) {
 		for (var i = 0; i < sigPaths.length; i ++) {
-			drawSpline(ctx, sigPaths[i], tension, false);
+			drawSpline(ctx, sigPaths[i], globalTension, false);
 		}
 	}
 }
