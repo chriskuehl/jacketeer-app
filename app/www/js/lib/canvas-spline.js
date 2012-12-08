@@ -59,7 +59,7 @@ function drawSpline(ctx, points, tension, closed){
     	
     	oldPenSize = penSize;
     	
-    	ctx.lineWidth = penSize;
+    	ctx.lineWidth = 15; //penSize;
         ctx.strokeStyle = "black";
         ctx.beginPath();
         ctx.moveTo(pointB[0], pointB[1]);

@@ -356,7 +356,7 @@ function dist(p1, p2) {
 }
 
 function redrawCanvas(canvas, ctx) {
-	var tension = 0.6;
+	var tension = 0.2;
 	
 	// clear canvas
 	ctx.clearRect(0, 0, canvas.width(), canvas.height());
