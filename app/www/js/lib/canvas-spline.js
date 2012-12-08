@@ -51,7 +51,7 @@ function drawSpline(ctx, points, tension, closed){
     	var controlPointB = controlPoints[i][0]; // current control point
     	var controlPointBB = controlPoints[i];
     	
-    	var velocity = Math.max(controlPointAA[2], controlPointBB[2]);
+    	var velocity = pointB[2]; //Math.max(controlPointAA[2], controlPointBB[2]);
     	var penSize = 1 / velocity;
     	
     	penSize = Math.min(10, Math.max(penSize, 5));
@@ -59,7 +59,7 @@ function drawSpline(ctx, points, tension, closed){
     	
     	oldPenSize = penSize;
     	
-    	ctx.lineWidth = 15; //penSize;
+    	ctx.lineWidth = penSize;
         ctx.strokeStyle = "black";
         ctx.beginPath();
         ctx.moveTo(pointB[0], pointB[1]);

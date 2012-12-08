@@ -158,6 +158,7 @@ function setScreen(screen) {
 
 var globalTension = 0.35;
 var globalInterval = 25;
+var sigIntro = null;
 
 var screenSignature = {
 	id: "signature",
@@ -172,6 +173,7 @@ var screenSignature = {
 		sigPaths = [];
 		
 		var intro = $("<p />");
+		sigIntro = intro;
 		intro.appendTo(container);
 		intro.css({
 			margin: "100px",
@@ -366,6 +368,7 @@ var screenSignature = {
 			// end the drawing
 			sigPaths.push(penData.points);
 			penData = null;
+			lastPointIndex = (- 1);
 			
 			redrawCanvas(canvas, ctx);
 			
@@ -383,6 +386,8 @@ function currentTime() {
 	return (new Date()).getTime();
 }
 
+var lastPointIndex = (- 1);
+
 function addPenPosition(ctx, canvas, e, ignore) {
 	if (ignore === undefined) {
 		ignore = false;
@@ -393,7 +398,8 @@ function addPenPosition(ctx, canvas, e, ignore) {
 	
 	if (penData.points.length > 0) {
 		var lastPoint = penData.points[penData.points.length - 1];
-		velocity = dist(pos, lastPoint);
+		velocity = dist(pos, penData.points[lastPointIndex]);
+		sigIntro.text(velocity);
 	}
 	
 	pos.push(velocity);
@@ -401,6 +407,7 @@ function addPenPosition(ctx, canvas, e, ignore) {
 	penData.points.push(pos);
 	
 	if (! ignore) {
+		lastPointIndex = penData.points.length - 1;
 		penData.lastEvent = currentTime();
 	}
 	
@@ -408,7 +415,7 @@ function addPenPosition(ctx, canvas, e, ignore) {
 }
 
 function dist(p1, p2) {
-	return ((p1[0] - p2[0]) ^ 2 + (p1[1] - p2[1]) ^ 2) ^ 0.5;
+	return Math.sqrt(Math.pow(p1[0] - p2[0], 2) + Math.pow(p1[1] - p2[1],  2));
 }
 
 function redrawCanvas(canvas, ctx) {
