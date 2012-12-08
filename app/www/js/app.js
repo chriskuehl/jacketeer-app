@@ -268,7 +268,8 @@ var screenSignature = {
 		canvas.appendTo(canvasHolder);
 		canvas.attr({
 			width: canvasHolder.innerWidth(),
-			height: canvasHolder.innerHeight()
+			height: canvasHolder.innerHeight(),
+			id: "handwritingCanvas"
 		});
 		canvas.css({
 			backgroundColor: "solid rgba(255, 255, 255, 1)"
@@ -321,6 +322,8 @@ var screenSignature = {
 			sigPaths.push(penData.points);
 			penData = null;
 			
+			redrawCanvas(canvas, ctx, true);
+			
 			// change button statuses
 			clearButton.removeClass("disabled");
 			undoButton.removeClass("disabled");
@@ -355,7 +358,7 @@ function dist(p1, p2) {
 	return ((p1[0] - p1[0]) ^ 2 + (p1[1] - p2[1]) ^ 2) ^ 0.5;
 }
 
-function redrawCanvas(canvas, ctx) {
+function redrawCanvas(canvas, ctx, blur) {
 	var tension = 0.2;
 	
 	// clear canvas
@@ -372,6 +375,12 @@ function redrawCanvas(canvas, ctx) {
 			drawSpline(ctx, sigPaths[i], tension, false);
 		}
 	}
+	
+	// blur the canvas slightly
+	if (blur) {
+		stackBlurCanvasRGBA(canvas.attr("id"), 0, 0, canvas.width(), canvas.height(), 1);
+	}
+	//blurCanvas(canvas, ctx, 3);
 }
 
 function getPenPosition(canvas, e) {
