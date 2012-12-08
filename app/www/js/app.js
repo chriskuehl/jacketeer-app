@@ -399,7 +399,6 @@ function addPenPosition(ctx, canvas, e, ignore) {
 	if (penData.points.length > 0) {
 		var lastPoint = penData.points[penData.points.length - 1];
 		velocity = dist(pos, penData.points[lastPointIndex]);
-		sigIntro.text(velocity);
 	}
 	
 	pos.push(velocity);
