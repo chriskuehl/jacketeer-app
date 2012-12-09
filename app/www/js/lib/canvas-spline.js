@@ -109,7 +109,7 @@ function drawSpline(ctx, points, tension, closed) {
 		//penSize = (oldPenSize + penSize) / 2;
 		//penSize = 15;
 		
-		var maxChange = 1;
+		var maxChange = 2;
 		
 		if ((oldPenSize - penSize) > maxChange) { // decreasing in size
 			penSize = Math.max(penSize, oldPenSize - maxChange);
@@ -146,21 +146,21 @@ function drawSpline(ctx, points, tension, closed) {
 		ctx.closePath();
 
 		// draw last point curve
-		ctx.lineWidth = 15;
+		ctx.lineWidth = oldPenSize;
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
 		ctx.moveTo(secondEndPoint[0], secondEndPoint[1]);
-		ctx.quadraticCurveTo(secondSecondEndPoint[0], secondSecondEndPoint[1], secondEndPoint[0], secondEndPoint[1]);
+		ctx.quadraticCurveTo(secondEndPoint[0], secondEndPoint[1], endPoint[0], endPoint[1]);
 		ctx.stroke();
 		ctx.closePath();
 		
 		// plot circles at the endpoints
 		ctx.beginPath();
-		ctx.arc(startPoint[0], startPoint[1], 7, 0, 2 * Math.PI, true);
+		ctx.arc(startPoint[0], startPoint[1], 7.5, 0, 2 * Math.PI, true);
 		ctx.fill();
 		
 		ctx.beginPath();
-		ctx.arc(endPoint[0], endPoint[1], 7, 0, 2 * Math.PI, true);
+		ctx.arc(endPoint[0], endPoint[1], oldPenSize / 2, 0, 2 * Math.PI, true);
 		ctx.fill();
 	} catch (ex) {
 
