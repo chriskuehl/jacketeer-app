@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (getLoginDetails()) {
-		setScreen(screenSignature);
+		setScreen(screenPortal);
 	} else {
 		setScreen(screenIntro);
 	}
