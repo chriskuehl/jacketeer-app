@@ -66,7 +66,7 @@ function drawSpline(ctx, points, tension, closed) {
 	}
 
 	// draw the curve
-	var oldPenSize = 1;
+	var oldPenSize = 15;
 
 	for (var i = 1; i < points.length - 2; i++) {
 		var vPoints = [];
@@ -108,6 +108,14 @@ function drawSpline(ctx, points, tension, closed) {
 		penSize = Math.min(15, Math.max(penSize, 8));
 		//penSize = (oldPenSize + penSize) / 2;
 		//penSize = 15;
+		
+		var maxChange = 1;
+		
+		if ((oldPenSize - penSize) > maxChange) { // decreasing in size
+			penSize = Math.max(penSize, oldPenSize - maxChange);
+		} else if ((oldPenSize - penSize) < (- maxChange)) { // increasing in size
+			penSize = Math.min(penSize, oldPenSize + maxChange);
+		}
 
 		oldPenSize = penSize;
 
