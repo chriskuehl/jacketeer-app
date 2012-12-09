@@ -145,7 +145,15 @@ function drawSpline(ctx, points, tension, closed) {
 		ctx.quadraticCurveTo(secondSecondEndPoint[0], secondSecondEndPoint[1], secondEndPoint[0], secondEndPoint[1]);
 		ctx.stroke();
 		ctx.closePath();
-
+		
+		// plot circles at the endpoints
+		ctx.beginPath();
+		ctx.arc(startPoint[0], startPoint[1], 7, 0, 2 * Math.PI, true);
+		ctx.fill();
+		
+		ctx.beginPath();
+		ctx.arc(endPoint[0], endPoint[1], 7, 0, 2 * Math.PI, true);
+		ctx.fill();
 	} catch (ex) {
 
 	}
