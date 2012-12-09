@@ -266,7 +266,12 @@ var screenSignature = {
 				return;
 			}
 			
-			setScreen(screenPortal);
+			var img = canvas[0].toDataURL("image/png");
+			$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
+				alert("done!");
+			});
+			
+			//setScreen(screenPortal);
 		});
 		
 		var canvas = $("<canvas />");
