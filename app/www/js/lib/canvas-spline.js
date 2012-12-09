@@ -40,22 +40,48 @@ function drawSpline(ctx, points, tension, closed){
     }
     
     // draw the curve
-    var oldPenSize = 15;
+    var oldPenSize = 1;
     
     for (var i = 1; i < points.length - 2; i ++) {
+    	var vPoints = [];
+    	var vTotal = 0;
+    	
+    	if ((i - 1) > 0) {
+    	//	vPoints.push(points[i - 1]);
+    	}
+    	
+    	for (var j = (- 10); j < 0; j ++) {
+    		var idx = i + j;
+    		
+    		if (idx < 0 || idx >= points.length) {
+    			vPoints.push(null);
+    			vTotal += 10;
+    			continue;
+    		}
+    		
+    		vTotal += points[idx][2];
+    		vPoints.push(points[idx]);
+    	}
+    	
+    	var pointA = points[i - 1]; // prev point
     	var pointB = points[i]; // current point
     	var pointC = points[i + 1]; // next point
+    	var pointD = points[i + 2]; // next-next point
     	
     	var controlPointA = controlPoints[i - 1][1]; // previous control point
     	var controlPointAA = controlPoints[i - i];
     	var controlPointB = controlPoints[i][0]; // current control point
     	var controlPointBB = controlPoints[i];
     	
-    	var velocity = pointB[2]; //Math.max(controlPointAA[2], controlPointBB[2]);
-    	var penSize = 1 / velocity;
+    	var velocity = vTotal / vPoints.length;// Math.pow(pointB[2], 1);
     	
-    	penSize = Math.min(10, Math.max(penSize, 5));
-    	penSize = (oldPenSize + penSize) / 2;
+    	//var velocity = Math.max(pointB[2], pointC[2]);
+    	//velocity = Math.pow(velocity, 0.5); // // velocity ranges from like 0 to 400
+    	var penSize = 200 / velocity;
+    	
+    	penSize = Math.min(15, Math.max(penSize, 8));
+    	//penSize = (oldPenSize + penSize) / 2;
+    	//penSize = 15;
     	
     	oldPenSize = penSize;
     	
@@ -71,13 +97,13 @@ function drawSpline(ctx, points, tension, closed){
     //  use a simple quadratic (as opposed to a bezier curve) for the first and last curves
     // TODO: clean this up
     try {
-	    var startPoint = points[0];
+	    var secondPoint = points[1];
 	    var secondPoint = points[1];
 	    var secondSecondEndPoint = points[points.length - 3];
 	    var secondEndPoint = points[points.length - 2];
 	    var endPoint = points[points.length - 1];
 	    
-	    ctx.lineWidth = 15;
+	    ctx.lineWidth = 1;
 	    ctx.strokeStyle= "black";
 	    ctx.beginPath();
 	    ctx.moveTo(startPoint[0], startPoint[1]);

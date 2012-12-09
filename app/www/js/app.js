@@ -157,7 +157,7 @@ function setScreen(screen) {
 }
 
 var globalTension = 0.35;
-var globalInterval = 25;
+var globalInterval = 0;
 var sigIntro = null;
 
 var screenSignature = {
