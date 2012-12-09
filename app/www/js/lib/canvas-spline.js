@@ -35,7 +35,7 @@ function drawSpline(ctx, points, tension, closed) {
 		if (points.length > 1) {
 			// draw a simple quadratic if possible
 			ctx.lineWidth = 15;
-			ctx.strokeStyle = "red";
+			ctx.strokeStyle = "black";
 			ctx.beginPath();
 			ctx.moveTo(points[0][0], points[0][1]);
 			ctx.quadraticCurveTo(points[0][0], points[0][1], points[1][0], points[1][1]);
@@ -121,7 +121,6 @@ function drawSpline(ctx, points, tension, closed) {
 	}
 
 	//  use a simple quadratic (as opposed to a bezier curve) for the first and last curves
-	// TODO: clean this up
 	try {
 		var startPoint = points[0];
 		var secondPoint = points[1];
@@ -142,8 +141,8 @@ function drawSpline(ctx, points, tension, closed) {
 		ctx.lineWidth = 15;
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
-		ctx.moveTo(secondEndPoint[0], secondEndPoint[1]); // second-second-last element x/y
-		ctx.quadraticCurveTo(secondSecondEndPoint[0], secondSecondEndPoint[1], secondEndPoint[0], secondEndPoint[1]); //pts[n-4],pts[n-3]);
+		ctx.moveTo(secondEndPoint[0], secondEndPoint[1]);
+		ctx.quadraticCurveTo(secondSecondEndPoint[0], secondSecondEndPoint[1], secondEndPoint[0], secondEndPoint[1]);
 		ctx.stroke();
 		ctx.closePath();
 
