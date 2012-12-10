@@ -1079,6 +1079,81 @@ var screenIntro = {
 		
 		rowPassword.append($("<td />").append(inputPassword));
 		
+		// loading cover
+		var loadingCover = $("<div />");
+		globalLoadingCover = loadingCover;
+		loadingCover.appendTo(container);
+		loadingCover.css({
+			position: "absolute",
+			top: "0px",
+			left: "0px",
+			right: "0px",
+			bottom: "0px",
+			backgroundColor: "rgba(0, 0, 0, 0.5)",
+			zIndex: "100",
+			display: "none"
+		});
+		
+		var loadingBox = $("<div />");
+		globalLoadingBox = loadingBox;
+		loadingBox.appendTo(loadingCover);
+		loadingBox.css({
+			position: "absolute",
+			top: "50%",
+			left: "50%",
+			
+			width: "400px",
+			height: "240px",
+			
+			marginLeft: "-230px",
+			marginTop: "-150px",
+			
+			backgroundColor: "rgba(255, 255, 255, 1)",
+			borderRadius: "20px",
+			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
+			
+			padding: "30px"
+		});
+		
+		var loadingImageContainer = $("<p />");
+		loadingImageContainer.appendTo(loadingBox);
+		loadingImageContainer.css({
+			textAlign: "center"
+		});
+		
+		var loadingImage = $("<img />");
+		loadingImage.appendTo(loadingImageContainer);
+		loadingImage.attr({
+			src: "css/assets/loading.gif",
+			width: 64,
+			height: 64
+		});
+		
+		var loadingText = $("<p />");
+		globalLoadingText = loadingText;
+		loadingText.appendTo(loadingBox);
+		loadingText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			marginTop: "10px"
+		});
+		loadingText.text("Logging in...");
+		
+		var cancelButton = $("<input type=\"button\" />");
+		cancelButton.appendTo(loadingBox);
+		cancelButton.css({
+			width: "400px",
+			height: "80px",
+			fontSize: "24px",
+			marginTop: "40px"
+		});
+		cancelButton.val("Cancel");
+		cancelButton.click(function() {
+			if (globalLoadingCancelEvent) {
+				globalLoadingCancelEvent();
+			}
+		});
+		
 		// login button
 		var loginButton = $("<a />");
 		loginButton.appendTo(tableHolder);
@@ -1097,80 +1172,6 @@ var screenIntro = {
 			color: "rgba(0, 0, 0, 0.5)"
 		});
 		loginButton.click(function() {
-			var loadingCover = $("<div />");
-			globalLoadingCover = loadingCover;
-			loadingCover.appendTo(container);
-			loadingCover.css({
-				position: "absolute",
-				top: "0px",
-				left: "0px",
-				right: "0px",
-				bottom: "0px",
-				backgroundColor: "rgba(0, 0, 0, 0.5)",
-				zIndex: "100",
-				display: "none"
-			});
-			
-			var loadingBox = $("<div />");
-			globalLoadingBox = loadingBox;
-			loadingBox.appendTo(loadingCover);
-			loadingBox.css({
-				position: "absolute",
-				top: "50%",
-				left: "50%",
-				
-				width: "400px",
-				height: "240px",
-				
-				marginLeft: "-230px",
-				marginTop: "-150px",
-				
-				backgroundColor: "rgba(255, 255, 255, 1)",
-				borderRadius: "20px",
-				boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
-				
-				padding: "30px"
-			});
-			
-			var loadingImageContainer = $("<p />");
-			loadingImageContainer.appendTo(loadingBox);
-			loadingImageContainer.css({
-				textAlign: "center"
-			});
-			
-			var loadingImage = $("<img />");
-			loadingImage.appendTo(loadingImageContainer);
-			loadingImage.attr({
-				src: "css/assets/loading.gif",
-				width: 64,
-				height: 64
-			});
-			
-			var loadingText = $("<p />");
-			globalLoadingText = loadingText;
-			loadingText.appendTo(loadingBox);
-			loadingText.css({
-				textAlign: "center",
-				fontSize: "38px",
-				marginTop: "10px"
-			});
-			loadingText.text("Logging in...");
-			
-			var cancelButton = $("<input type=\"button\" />");
-			cancelButton.appendTo(loadingBox);
-			cancelButton.css({
-				width: "400px",
-				height: "80px",
-				fontSize: "24px",
-				marginTop: "40px"
-			});
-			cancelButton.val("Cancel");
-			cancelButton.click(function() {
-				if (globalLoadingCancelEvent) {
-					globalLoadingCancelEvent();
-				}
-			});
-			
 			loadingCover.stop(true).fadeIn(500);
 			
 			// send the request
@@ -1252,13 +1253,6 @@ var screenIntro = {
 function updateInformation() {
 	if (! ui.screen || ui.screen.data("conf").id != "intro") {
 		setScreen(screenIntro);
-	}
-	
-	if (! globalLoadingCover) {
-		return setTimeout(function() {
-			alert("ok");
-			//updateInformation();
-		}, 1000);
 	}
 	
 	if (! globalLoadingCover.is(":visible")) {
