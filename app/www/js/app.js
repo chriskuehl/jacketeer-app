@@ -1171,7 +1171,7 @@ var screenIntro = {
 				}
 			});
 			
-			loadingCover.fadeIn(500);
+			loadingCover.stop(true).fadeIn(500);
 			
 			// send the request
 			var req = $.ajax("https://jacketeer.org/auth/?a=" + (Math.floor(Math.random() * 99999999) + 1), {
@@ -1180,6 +1180,7 @@ var screenIntro = {
 				cache: false
 			});
 			
+			globalLoadingText.text("Logging in...");
 			globalLoadingCancelEvent = function() {
 				loadingCover.fadeOut(200);
 				req.aborted = true;
@@ -1196,17 +1197,12 @@ var screenIntro = {
 					
 					var map = {
 						user: inputUser.val(),
-						firstName: content.firstName,
-						lastName: content.lastName,
-						email: content.email
+						password: inputPassword.val()
 					};
 
-					localStorage.loginDetails = JSON.stringify({
-						user: inputUser.val(),
-						password: inputPassword.val()
-					});
+					localStorage.loginDetails = JSON.stringify(map);
 					
-					// load the portal
+					// load the information we need for the portal
 					updateInformation();
 				} else {
 					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk (room 117) for assistance.", null, "Unsuccessful Login");
@@ -1254,7 +1250,25 @@ var screenIntro = {
 };
 
 function updateInformation() {
-	setScreen(screenIntro);
+	if (! ui.screen || ui.screen.data("conf").id != "intro") {
+		setScreen(screenIntro);
+	}
+	
+	if (! globalLoadingCover) {
+		return setTimeout(function() {
+			alert("ok");
+			//updateInformation();
+		}, 1000);
+	}
+	
+	if (! globalLoadingCover.is(":visible")) {
+		globalLoadingCover.stop(true).show(); //.fadeTo(0, 1);
+	}
+	
+	globalLoadingText.text("Updating...");
+	globalLoadingCancelEvent = function() {
+		setScreen(screenIntro);
+	};
 }
 
 function getLoginDetails() {
