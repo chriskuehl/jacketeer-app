@@ -779,7 +779,7 @@ var screenPortal = {
 		updateTitle(loginDetails ? loginDetails.firstName + " " + loginDetails.lastName : "UNKNOWN");
 		
 		container.css({
-			backgroundColor: "rgba(255, 210, 0, 0.1)"
+			backgroundColor: "rgba(253, 249, 207, .4)"
 		});
 		
 		var introText = $("<p />");
@@ -832,7 +832,7 @@ var screenPortal = {
 				margin: "60px",
 				padding: "70px",
 				paddingLeft: "225px",
-				backgroundColor: "rgba(100, 100, 0, 0.1)",
+				backgroundColor: "rgba(253, 249, 207, 1)",
 				backgroundImage: "url('css/assets/" + (section.complete ? "accept" : "alert") + ".png')",
 				backgroundPosition: "50px 50%",
 				backgroundRepeat: "no-repeat",
