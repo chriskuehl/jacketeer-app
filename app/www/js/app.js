@@ -13,7 +13,7 @@ function initialize() {
 	
 	// load the first screen
 	if (getLoginDetails()) {
-		setScreen(screenPortal);
+		updateInformation();
 	} else {
 		setScreen(screenIntro);
 	}
@@ -941,6 +941,8 @@ var screenIntro = {
             backgroundColor: "rgba(255, 210, 0, 0.1)",
 		});
 		
+		var loginDetails = getLoginDetails();
+		
 		var page = $("<div />");
 		page.appendTo(container);
 		page.css({
@@ -973,7 +975,7 @@ var screenIntro = {
 		
 		var introText = $("<p />");
 		introText.appendTo(page);
-		introText.html("As you probably know, the senior section of the WCHS <em>Jacketeer</em> contains not only your senior picture, but also a favorite quote, your future plans, and your signature. This app will help you submit all of this informaton to us. In order to get started, please log in like you do at a WCHS computer.");
+		introText.html("As you probably know, the senior section of the WCHS <em>Jacketeer</em> contains not only your senior picture, but also your favorite quote and your signature. This app will help you submit all of this informaton to us. In order to get started, please log in like you do at a WCHS computer.");
 		introText.css({
 			fontSize: "28px",
 			marginTop: "40px",
@@ -1029,6 +1031,10 @@ var screenIntro = {
 			width: "610px"
 		});
 		
+		if (loginDetails) {
+			inputUser.val(loginDetails.user);
+		}
+		
 		rowUser.append($("<td />").css("paddingBottom", "20px").append(inputUser));
 		
 		// password row
@@ -1061,6 +1067,10 @@ var screenIntro = {
 			padding: "10px",
 			width: "610px"
 		});
+		
+		if (loginDetails) {
+			inputPassword.val(loginDetails.password);
+		}
 		
 		rowPassword.append($("<td />").append(inputPassword));
 		
@@ -1172,10 +1182,13 @@ var screenIntro = {
 						email: content.email
 					};
 
-					localStorage.loginDetails = JSON.stringify(map);
+					localStorage.loginDetails = JSON.stringify({
+						user: inputUser.val(),
+						password: inputPassword.val()
+					});
 					
 					// load the portal
-					setScreen(screenPortal);
+					updateInformation();
 				} else {
 					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk (room 117) for assistance.", null, "Unsuccessful Login");
 					loadingCover.stop(true).hide();
@@ -1220,6 +1233,10 @@ var screenIntro = {
 		});
 	}
 };
+
+function updateInformation() {
+	setScreen(screenIntro);
+}
 
 function getLoginDetails() {
 	var loginDetails = localStorage["loginDetails"];
