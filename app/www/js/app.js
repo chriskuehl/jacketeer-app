@@ -932,6 +932,11 @@ var screenPortal = {
 	}
 };
 
+var globalLoadingCover;
+var globalLoadingBox = null;
+var globalLoadingText = null;
+var globalLoadingCancelEvent = null;
+
 var screenIntro = {
 	id: "intro",
 	title: "Jacketeer 2013",
@@ -1093,6 +1098,7 @@ var screenIntro = {
 		});
 		loginButton.click(function() {
 			var loadingCover = $("<div />");
+			globalLoadingCover = loadingCover;
 			loadingCover.appendTo(container);
 			loadingCover.css({
 				position: "absolute",
@@ -1106,6 +1112,7 @@ var screenIntro = {
 			});
 			
 			var loadingBox = $("<div />");
+			globalLoadingBox = loadingBox;
 			loadingBox.appendTo(loadingCover);
 			loadingBox.css({
 				position: "absolute",
@@ -1140,6 +1147,7 @@ var screenIntro = {
 			});
 			
 			var loadingText = $("<p />");
+			globalLoadingText = loadingText;
 			loadingText.appendTo(loadingBox);
 			loadingText.css({
 				textAlign: "center",
@@ -1157,6 +1165,11 @@ var screenIntro = {
 				marginTop: "40px"
 			});
 			cancelButton.val("Cancel");
+			cancelButton.click(function() {
+				if (globalLoadingCancelEvent) {
+					globalLoadingCancelEvent();
+				}
+			});
 			
 			loadingCover.fadeIn(500);
 			
@@ -1167,11 +1180,11 @@ var screenIntro = {
 				cache: false
 			});
 			
-			cancelButton.click(function() {
+			globalLoadingCancelEvent = function() {
 				loadingCover.fadeOut(200);
 				req.aborted = true;
 				req.abort();
-			});
+			};
 			
 			req.done(function(content) {
 				if (content.success) {
