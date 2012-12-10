@@ -196,8 +196,9 @@ var screenSignature = {
 		canvasHolder.css({
 			width: "1500px",
 			height: "800px",
-			border: "solid 10px gray",
-			float: "left"
+			border: "solid 2px rgba(150, 150, 150, 1)",
+			float: "left",
+
 		});
 		
 		var buttonHolder = $("<div />");
@@ -293,7 +294,8 @@ var screenSignature = {
 			id: "handwritingCanvas"
 		});
 		canvas.css({
-			backgroundColor: "solid rgba(255, 255, 255, 1)"
+			backgroundColor: "solid rgba(255, 255, 255, 1)",
+            boxShadow: "inset 0px 0px 15px 10px rgba(100, 100, 0, 0.05)"
 		});
 		canvas.data("paths", []);
 		
@@ -582,7 +584,8 @@ var screenName = {
 		var submit = $("<input type=\"button\" />");
 		submit.appendTo(nameHolder);
 		submit.css({
-			fontSize: "68px"
+			fontSize: "68px",
+            backgroundColor: "rgba(100, 100, 0, 0.1)"
 		});
 		submit.val("Confirm");
 		
@@ -835,7 +838,10 @@ var screenPortal = {
 				backgroundRepeat: "no-repeat",
 				borderRadius: "15px",
 				marginBottom: "30px !important",
-				position: "relative"
+				position: "relative",
+                border: "solid 2px rgba(150, 150, 150, 1)",
+                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			});
 			
 			sectionButton.data("section", section);
@@ -981,9 +987,12 @@ var screenIntro = {
 			padding: "50px",
 			borderRadius: "20px",
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
-            backgroundColor: "rgba(240, 236, 207, 1)",
+            backgroundColor: "rgba(245, 240, 207, 0.6)",
 			marginTop: "30px",
-			position: "relative"
+			position: "relative",
+            border: "solid 2px rgba(150, 150, 150, 1)",
+            boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+            boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 		});
 		
 		var table = $("<table />");
