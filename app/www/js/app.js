@@ -975,7 +975,7 @@ var screenIntro = {
 		
 		var introText = $("<p />");
 		introText.appendTo(page);
-		introText.html("As you probably know, the senior section of the WCHS <em>Jacketeer</em> contains not only your senior picture, but also your favorite quote and your signature. This app will help you submit all of this informaton to us. In order to get started, please log in like you do at a WCHS computer.");
+		introText.html("As you probably know, the senior section of the WCHS <em>Jacketeer</em> contains not only your senior picture, but also your favorite quote and your signature. This app will help you submit all of this informaton to us. In order to get started, please log in like you would at a WCHS computer.");
 		introText.css({
 			fontSize: "28px",
 			marginTop: "40px",
@@ -1175,6 +1175,12 @@ var screenIntro = {
 			
 			req.done(function(content) {
 				if (content.success) {
+					if (! inputUser.val().startsWith("13")) {
+						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by the iPad Help Desk (room 117) for assistance.", null, "You're Not a Senior!", "Sorry!");
+						loadingCover.stop(true).hide();
+						return;
+					}
+					
 					var map = {
 						user: inputUser.val(),
 						firstName: content.firstName,
@@ -1200,7 +1206,7 @@ var screenIntro = {
 					return;
 				}
 				
-				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later.", function(response) {
+				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function(response) {
 					if (response == 1) {
 						loginButton.click();
 					}
