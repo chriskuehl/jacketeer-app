@@ -12,9 +12,10 @@ function initialize() {
 	initInterface();
 	
 	// load the first screen
-	if (getLoginDetails()) {
+	if (getLoginDetails() && localStorage.loginToken) {
 		updateInformation();
 	} else {
+		localStorage.removeItem("loginToken");
 		setScreen(screenIntro);
 	}
 }
@@ -1175,7 +1176,7 @@ var screenIntro = {
 			loadingCover.stop(true).fadeIn(500);
 			
 			// send the request
-			var req = $.ajax("https://jacketeer.org/auth/?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			var req = $.ajax("https://jacketeer.org/app/login.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: {user: inputUser.val(), password: inputPassword.val()},
 				cache: false
@@ -1200,7 +1201,10 @@ var screenIntro = {
 						user: inputUser.val(),
 						password: inputPassword.val()
 					};
-
+					
+					localStorage.loginToken = content.user.SessionToken;
+					alert(localStorage.loginToken);
+					
 					localStorage.loginDetails = JSON.stringify(map);
 					
 					// load the information we need for the portal
@@ -1255,11 +1259,29 @@ function updateInformation() {
 		setScreen(screenIntro);
 	}
 	
+	// send the request
+	var loginDetails = getLoginDetails();
+	var req = $.ajax("https://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+		type: "POST",
+		data: {user: loginDetails, token: localStorage.loginToken},
+		cache: false
+	});
+	
+	req.done(function(info) {
+		alert(JSON.stringify(info));
+	});
+	
+	req.fail(function() {
+		alert("FAILURE");
+	});
+	
+	// show the loading screen
+	
 	if (! globalLoadingCover.is(":visible")) {
 		globalLoadingCover.stop(true).show().fadeTo(0, 1);
 	}
 	
-	globalLoadingText.text("Updating...");
+	globalLoadingText.text("Fetching data...");
 	globalLoadingCancelEvent = function() {
 		globalLoadingCover.stop(true).fadeOut(500);
 	};
