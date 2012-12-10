@@ -1256,12 +1256,12 @@ function updateInformation() {
 	}
 	
 	if (! globalLoadingCover.is(":visible")) {
-		globalLoadingCover.stop(true).show(); //.fadeTo(0, 1);
+		globalLoadingCover.stop(true).show().fadeTo(0, 1);
 	}
 	
 	globalLoadingText.text("Updating...");
 	globalLoadingCancelEvent = function() {
-		setScreen(screenIntro);
+		globalLoadingCover.stop(true).fadeOut(500);
 	};
 }
 
