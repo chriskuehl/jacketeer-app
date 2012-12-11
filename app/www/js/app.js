@@ -123,7 +123,7 @@ function setScreen(screen) {
 	// is a screen already being displayed?
 	if (ui.screen != null) {
 		// attempt to intelligently switch screens
-		if (ui.screen.data("conf") && ui.screen.data("conf").parent == screen.id) { // go "back"
+		if (ui.screen.data("conf") && ui.screen.data("conf").parent == screen.id || screen.id == "intro") { // go "back"
 			// the old (current) screen is a child of the new screen, so the old screen should
 			// slide out right while the new one (the parent) slides in from the left
 			container.css("left", "-" + (ui.screenContainer.width()) + "px");
