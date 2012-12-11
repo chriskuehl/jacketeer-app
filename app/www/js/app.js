@@ -1028,6 +1028,78 @@ var screenPortal = {
 		});
 		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
 		
+		// signature preview cover
+		var signatureCover = $("<div />");
+		signatureCover.appendTo(container);
+		signatureCover.css({
+			position: "absolute",
+			top: "0px",
+			left: "0px",
+			right: "0px",
+			bottom: "0px",
+			backgroundColor: "rgba(0, 0, 0, 0.5)",
+			zIndex: "100"
+		});
+		
+		var signatureBox = $("<div />");
+		signatureBox.appendTo(signatureCover);
+		signatureBox.css({
+			position: "absolute",
+			top: "50%",
+			left: "50%",
+			
+			width: "1000px",
+			height: "700px",
+			
+			marginLeft: "-230px",
+			marginTop: "-150px",
+			
+			backgroundColor: "rgba(255, 255, 255, 1)",
+			borderRadius: "20px",
+			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
+			
+			padding: "30px"
+		});
+		
+		var signatureImageContainer = $("<p />");
+		signatureImageContainer.appendTo(signatureBox);
+		signatureImageContainer.css({
+			textAlign: "center"
+		});
+		
+		var signatureImage = $("<img />");
+		signatureImage.appendTo(signatureImageContainer);
+		signatureImage.attr({
+			src: "css/assets/loading.gif",
+			width: 64,
+			height: 64
+		});
+		
+		var signatureText = $("<p />");
+		globalLoadingText = signatureText;
+		signatureText.appendTo(signatureBox);
+		signatureText.css({
+			textAlign: "center",
+			fontSize: "38px",
+			marginTop: "10px"
+		});
+		signatureText.text("Logging in...");
+		
+		var cancelButton = $("<input type=\"button\" />");
+		cancelButton.appendTo(signatureBox);
+		cancelButton.css({
+			width: "400px",
+			height: "80px",
+			fontSize: "24px",
+			marginTop: "40px"
+		});
+		cancelButton.val("Cancel");
+		cancelButton.click(function() {
+			if (globalLoadingCancelEvent) {
+				globalLoadingCancelEvent();
+			}
+		});
+		
 	}
 };
 
