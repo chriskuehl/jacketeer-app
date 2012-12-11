@@ -278,18 +278,15 @@ var screenSignature = {
 		});
 		
 		doneButton.click(function() {
-			// is there anything on the screen?
-			if (sigPaths.length <= 0) {
-				// TODO: have they already completed a signature? if so, this should keep their old one (and indicate in the message)
-				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back? Any changes you've made will not be saved.", function(response) {
-					if (response == 2) {
-						setScreen(screenPortal);
-					}
-				}, "Signature Incomplete", "Cancel,Go Back");
-			} else {
-				// TODO: upload signature to the server iff they like it better than the old one (ask them which they prefer if they've already done it)
-				setScreen(screenPortal);
+			if ($(this).hasClass("disabled")) {
+				return;
 			}
+			
+			navigator.notification.alert("Are you sure you want to use this signature?", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Signature Incomplete", "Cancel,Use Signature");
 			
 			//var img = canvas[0].toDataURL("image/png");
 			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
