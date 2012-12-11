@@ -1038,7 +1038,8 @@ var screenPortal = {
 			right: "0px",
 			bottom: "0px",
 			backgroundColor: "rgba(0, 0, 0, 0.5)",
-			zIndex: "100"
+			zIndex: "100",
+		//	display: "none"
 		});
 		
 		var signatureBox = $("<div />");
@@ -1048,11 +1049,11 @@ var screenPortal = {
 			top: "50%",
 			left: "50%",
 			
-			width: "1000px",
-			height: "700px",
+			width: "1800px",
+			height: "1200px",
 			
-			marginLeft: "-230px",
-			marginTop: "-150px",
+			marginLeft: "-930px",
+			marginTop: "-630px",
 			
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
@@ -1061,18 +1062,20 @@ var screenPortal = {
 			padding: "30px"
 		});
 		
-		var signatureImageContainer = $("<p />");
+		var signatureImageContainer = $("<div />");
 		signatureImageContainer.appendTo(signatureBox);
 		signatureImageContainer.css({
-			textAlign: "center"
+			marginLeft: "auto",
+			marginRight: "auto",
+			border: "solid 4px gray"
 		});
 		
-		var signatureImage = $("<img />");
+		var signatureImage = $("<embed />");
 		signatureImage.appendTo(signatureImageContainer);
 		signatureImage.attr({
-			src: "css/assets/loading.gif",
-			width: 64,
-			height: 64
+			src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
+			width: 1000,
+			border: "solid 3px red"
 		});
 		
 		var signatureText = $("<p />");
