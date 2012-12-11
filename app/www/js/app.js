@@ -332,8 +332,8 @@ var screenSignature = {
         });
 		
 		var tipsLeft = [
-                    "You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
-                    "Do <strong>not</strong> include your middle name, unless you go by two first names.",
+                    "Sign as you normally would; you can use your full name, your initials, or whatever you go by.",
+                    "Go slow and naturally. Take your time, and make it look nice.",
                     ];
 		
 		for (var i = 0; i < tipsLeft.length; i ++) {
@@ -370,8 +370,8 @@ var screenSignature = {
                      });
 		
 		var tipsRight = [
-                    "You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
-                    "Do <strong>not</strong> include your middle name, unless you go by two first names.",
+                    "You can always redo the signature. Don't worry about getting it perfect the first time.",
+                    "If you need a stylus, go find Ruff (room 138). He's there 24/7, 365 days per year (sometimes 366!).",
                     ];
 		
 		for (var i = 0; i < tipsRight.length; i ++) {
@@ -1039,7 +1039,8 @@ var screenIntro = {
 	
 	setup: function(container) {
 		container.css({
-            backgroundColor: "rgba(255, 210, 0, 0.1)",
+            backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
 		});
 		
 		var loginDetails = getLoginDetails();
@@ -1090,7 +1091,7 @@ var screenIntro = {
 			padding: "50px",
 			borderRadius: "20px",
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
-            backgroundColor: "rgba(245, 240, 207, 0.6)",
+            backgroundColor: "rgba(253, 249, 207, .7)",
 			marginTop: "30px",
 			position: "relative",
             border: "solid 2px rgba(150, 150, 150, 1)",
