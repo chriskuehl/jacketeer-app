@@ -285,11 +285,16 @@ var screenSignature = {
 			
 			navigator.notification.alert("Are you sure you want to use this signature?", function(response) {
 				if (response == 2) {
-					setScreen(screenPortal);
+					var img = canvas[0].toDataURL("image/png");
+					// name was valid, so upload it to the server
+					updateInformation({
+						path: "c-signature.php",
+						data: {user: getLoginDetails().user, token: localStorage.loginToken, signature: img}
+					});
 				}
 			}, "Signature Confirmation", "Cancel,Use Signature");
 			
-			//var img = canvas[0].toDataURL("image/png");
+			//
 			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
 			//	alert("done!");
 			//});
