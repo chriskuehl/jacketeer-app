@@ -769,6 +769,7 @@ var screenPortal = {
 			navigator.notification.alert("Are you sure you want to sign out?", function(response) {
 				if (response == 2) {
 					localStorage.removeItem("loginDetails");
+					localStorage.removeItem("loginToken");
 					setScreen(screenIntro);
 				}
 			}, "Sign Out", "Cancel,Sign Out");
@@ -917,7 +918,7 @@ var screenPortal = {
 			color: "rgba(0, 0, 0, 0.4)",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
 		});
-		progressText.html("Current Progress: <span style=\"color: rgba(0, 0, 0, 0.6);\">" + calculatedPercent + "%</span>");
+		progressText.html("<a onclick=\"updateInformation();\">Current Progress: <span style=\"color: rgba(0, 0, 0, 0.6);\">" + calculatedPercent + "%</span></a>");
 		
 		var helpText = $("<p />");
 		helpText.appendTo(container);
@@ -1184,9 +1185,10 @@ var screenIntro = {
 			
 			globalLoadingText.text("Logging in...");
 			globalLoadingCancelEvent = function() {
-				loadingCover.fadeOut(200);
 				req.aborted = true;
 				req.abort();
+				
+				globalLoadingCover.stop(true).fadeOut(200);
 			};
 			
 			req.done(function(content) {
@@ -1203,8 +1205,6 @@ var screenIntro = {
 					};
 					
 					localStorage.loginToken = content.user.SessionToken;
-					alert(localStorage.loginToken);
-					
 					localStorage.loginDetails = JSON.stringify(map);
 					
 					// load the information we need for the portal
@@ -1260,20 +1260,38 @@ function updateInformation() {
 	}
 	
 	// send the request
-	var loginDetails = getLoginDetails();
-	var req = $.ajax("https://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
-		type: "POST",
-		data: {user: loginDetails, token: localStorage.loginToken},
-		cache: false
-	});
+	var req = {aborted: false, fake: true};
 	
-	req.done(function(info) {
-		alert(JSON.stringify(info));
-	});
+	setTimeout(function() {
+		if (req.aborted) {
+			return alert("give up");
+		}
+		
+		var loginDetails = getLoginDetails();
+		req = $.ajax("https://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			type: "POST",
+			data: {user: loginDetails.user, token: localStorage.loginToken},
+			cache: false
+		});
 	
-	req.fail(function() {
-		alert("FAILURE");
-	});
+		req.done(function(info) {
+			setScreen(screenPortal);
+		});
+	
+		req.fail(function() {
+			if (req.aborted) {
+				return;
+			}
+	
+			navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function(response) {
+				if (response == 1) {
+					updateInformation();
+				}
+			}, "Connection Problems", "Try Again,Cancel");
+		
+			loadingCover.stop(true).hide();
+		});
+	}, 2000);
 	
 	// show the loading screen
 	
@@ -1283,6 +1301,12 @@ function updateInformation() {
 	
 	globalLoadingText.text("Fetching data...");
 	globalLoadingCancelEvent = function() {
+		req.aborted = true;
+		
+		if (! req.fake) {
+			req.abort();
+		}
+		
 		globalLoadingCover.stop(true).fadeOut(500);
 	};
 }
