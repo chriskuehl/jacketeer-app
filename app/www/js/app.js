@@ -518,6 +518,7 @@ var screenQuote = {
 	}
 };
 
+var demoName = null;
 var screenName = {
 	id: "name",
 	title: "Preferred Name",
@@ -541,8 +542,8 @@ var screenName = {
 		});
 		
 		var loginDetails = getLoginDetails();
-		// TODO: have we already recorded their name? if so, let's use that instead
-		var name = loginDetails ? (loginDetails.firstName + " " + loginDetails.lastName) : "John Doe";
+		var backupName = userInfo.FirstName ? userInfo.FirstName + " " + userInfo.LastName : "John Doe";
+		var name = userInfo.PreferredName ? userInfo.PreferredName : backupName;
 		
 		// intro
 		var introText = $("<p />");
@@ -581,6 +582,9 @@ var screenName = {
 			padding: "20px"
 		});
 		inputName.val(name);
+		inputName.keyup(function() {
+			demoName.html($(this).val().replace(/ /g, "<br />"));
+		});
 		
 		// submit
 		var submit = $("<input type=\"button\" />");
@@ -711,7 +715,7 @@ var screenName = {
 			width: "400px"
 		});
 		
-		var demoName = $("<h3 />");
+		demoName = $("<h3 />"); // this is global because we're on a deadline!
 		demoName.appendTo(demoInfo);
 		demoName.css({
 			color: "white",
@@ -719,7 +723,7 @@ var screenName = {
 			fontSize: "56px",
 			textTransform: "uppercase"
 		});
-		demoName.text(name);
+		demoName.html(name.replace(/ /g, "<br />"));
 		
 		var demoQuote = $("<p />");
 		demoQuote.appendTo(demoInfo);
