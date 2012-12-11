@@ -266,13 +266,14 @@ var screenSignature = {
 			
 			undoButton.addClass("disabled");
 			clearButton.addClass("disabled");
-			doneButton.text("Cancel");
+			doneButton.addClass("disabled");
 		});
 				
 		var doneButton = $("<a />");
 		doneButton.appendTo(buttonHolder);
-		doneButton.text("Cancel");
+		doneButton.text("Done");
 		doneButton.addClass("signatureButton");
+		doneButton.addClass("disabled");
 		doneButton.attr({
 			id: "signatureDoneButton"
 		});
@@ -286,7 +287,7 @@ var screenSignature = {
 				if (response == 2) {
 					setScreen(screenPortal);
 				}
-			}, "Signature Incomplete", "Cancel,Use Signature");
+			}, "Signature Confirmation", "Cancel,Use Signature");
 			
 			//var img = canvas[0].toDataURL("image/png");
 			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
@@ -401,7 +402,7 @@ var screenSignature = {
 			// change button statuses
 			clearButton.removeClass("disabled");
 			undoButton.removeClass("disabled");
-			doneButton.text("Done");
+			doneButton.removeClass("disabled");
 		}, false);
 	}
 };
