@@ -600,7 +600,7 @@ var screenName = {
 			var valid = true;
 			var invalidReason;
 			
-			var name = inputName.val();
+			var name = inputName.val().trim();
 			var words = name.split(" ");
 			
 			if (words.length < 2 || words.length > 4) {
