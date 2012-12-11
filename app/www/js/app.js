@@ -180,7 +180,8 @@ var screenSignature = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 210, 0, 0.1)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
 		});
 		
 		sigPaths = [];
@@ -524,7 +525,8 @@ var screenQuote = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 210, 0, 0.1)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
 		});
 		
 		// intro text
@@ -606,7 +608,8 @@ var screenName = {
 	
 	setup: function(container) {
 		container.css({
-			backgroundColor: "rgba(255, 210, 0, 0.1)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
 		});
 		
 		var loginDetails = getLoginDetails();
@@ -870,8 +873,8 @@ var screenPortal = {
 		}
 		
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.8)",
-            boxShadow: "inset 0px 100px 800px rgba(255, 255, 255, .8)",
+			backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
 		});
 		
 		var introText = $("<p />");
