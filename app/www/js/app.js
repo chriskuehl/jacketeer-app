@@ -167,6 +167,17 @@ var screenSignature = {
 	title: "Senior Signature",
 	parent: "portal",
 	
+	titleButton: {
+		text: "Cancel",
+		event: function() {
+			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function(response) {
+				if (response == 2) {
+					setScreen(screenPortal);
+				}
+			}, "Return to Portal", "Stay Here,Go Back");
+		}
+	},
+	
 	setup: function(container) {
 		container.css({
 			backgroundColor: "rgba(255, 210, 0, 0.1)"
@@ -270,7 +281,7 @@ var screenSignature = {
 			// is there anything on the screen?
 			if (sigPaths.length <= 0) {
 				// TODO: have they already completed a signature? if so, this should keep their old one (and indicate in the message)
-				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back?", function(response) {
+				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back? Any changes you've made will not be saved.", function(response) {
 					if (response == 2) {
 						setScreen(screenPortal);
 					}
@@ -550,8 +561,7 @@ var screenName = {
 	titleButton: {
 		text: "Cancel",
 		event: function() {
-			// TODO: have they already completed their name?
-			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function(response) {
 				if (response == 2) {
 					setScreen(screenPortal);
 				}
