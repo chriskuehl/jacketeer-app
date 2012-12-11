@@ -1264,8 +1264,10 @@ function updateInformation() {
 	
 	setTimeout(function() {
 		if (req.aborted) {
-			return alert("give up");
+			return;
 		}
+		
+		globalLoadingText.text("Downloading data...");
 		
 		var loginDetails = getLoginDetails();
 		req = $.ajax("https://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
@@ -1291,7 +1293,7 @@ function updateInformation() {
 		
 			loadingCover.stop(true).hide();
 		});
-	}, 2000);
+	}, 1000);
 	
 	// show the loading screen
 	
@@ -1299,7 +1301,7 @@ function updateInformation() {
 		globalLoadingCover.stop(true).show().fadeTo(0, 1);
 	}
 	
-	globalLoadingText.text("Fetching data...");
+	globalLoadingText.text("Retrieving data...");
 	globalLoadingCancelEvent = function() {
 		req.aborted = true;
 		
