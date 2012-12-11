@@ -1,6 +1,7 @@
 // global variable definitions
 var ui = [];
 var container;
+var userInfo;
 
 // bootstrap the app
 $(document).ready(function() {
@@ -777,8 +778,12 @@ var screenPortal = {
 	},
 	
 	setup: function(container) {
-		var loginDetails = getLoginDetails();
-		updateTitle(loginDetails ? loginDetails.firstName + " " + loginDetails.lastName : "UNKNOWN");
+		alert(JSON.stringify(userInfo));
+		if (userInfo.PreferredName) {
+			updateTitle(userInfo.PreferredName);
+		} else {
+			updateTitle(localStorage.loginDetails.user);
+		}
 		
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, .4)"
@@ -801,21 +806,21 @@ var screenPortal = {
 				id: "name",
 				title: "Preferred Name",
 				description: "The name you want to be used next to identify you in the yearbook.",
-				complete: false
+				complete: (userInfo.PreferredName != null)
 			},
 			
 			{
 				id: "signature",
 				title: "Personal Signature",
 				description: "Your personal, hand-written signature, done from your iPad.",
-				complete: false
+				complete: (userInfo.Signature != null)
 			},
 			
 			{
 				id: "quote",
 				title: "Featured Quote",
 				description: "An inspiring, witty, or memorable quote of your choice.",
-				complete: false
+				complete: (userInfo.Quote != null)
 			}
 		];
 		var total = 0;
@@ -1276,8 +1281,14 @@ function updateInformation() {
 			cache: false
 		});
 	
-		req.done(function(info) {
-			setScreen(screenPortal);
+		req.done(function(data) {
+			if (data.success) {
+				userInfo = data.info;
+				setScreen(screenPortal);
+			} else {
+				navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+				globalLoadingCover.stop(true).hide();
+			}
 		});
 	
 		req.fail(function() {
