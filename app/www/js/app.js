@@ -782,7 +782,6 @@ var screenPortal = {
 	},
 	
 	setup: function(container) {
-		alert(JSON.stringify(userInfo));
 		if (userInfo.PreferredName) {
 			updateTitle(userInfo.PreferredName);
 		} else {
