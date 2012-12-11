@@ -870,7 +870,8 @@ var screenPortal = {
 		}
 		
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, .4)"
+			backgroundColor: "rgba(253, 249, 207, 0.8)",
+            boxShadow: "inset 0px 100px 800px rgba(255, 255, 255, .8)",
 		});
 		
 		var introText = $("<p />");
@@ -907,6 +908,7 @@ var screenPortal = {
 				complete: (userInfo.Quote != null)
 			}
 		];
+        
 		var total = 0;
 		
 		for (var i = 0; i < sections.length; i ++) {
