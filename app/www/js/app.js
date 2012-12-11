@@ -193,7 +193,7 @@ var screenSignature = {
 			fontSize: "44px",
 			textAlign: "center"
 		});
-		intro.text("Lorem ipsum dolor sit amet blah blah blah");
+		intro.text("Either with a stylus or your finger, sign your personal signature below.");
 		
 		var artHolder = $("<div />");
 		artHolder.appendTo(container);
@@ -312,44 +312,81 @@ var screenSignature = {
 		
 		var ctx = canvas[0].getContext("2d");
 		
-		var tensionRange = $("<input type=\"range\" />");
-		tensionRange.appendTo(container);
-		tensionRange.css({
-			width: "500px",
-			height: "100px",
-			marginTop: "50px"
-		});
-		tensionRange.attr({
-			min: 0,
-			max: 1,
-			step: 0.01
-		});
-		tensionRange.val(globalTension);
-		tensionRange.change(function() {
-			globalTension = $(this).val();
-			intro.text("tension=" + globalTension + "; interval=" + globalInterval);
-			
-			redrawCanvas(canvas, ctx);
-		});
+        // tips holder left
+		var tipsHolderLeft = $("<div />");
+		tipsHolderLeft.appendTo(container);
+		tipsHolderLeft.css({
+                       marginLeft: "130px",
+                       marginTop: "50px",
+                       width: "800px",
+                       float: "left"
+                       });
 		
-		var intervalRange = $("<input type=\"range\" />");
-		intervalRange.appendTo(container);
-		intervalRange.css({
-			width: "500px",
-			height: "100px",
-			marginTop: "50px"
-		});
-		intervalRange.attr({
-			min: 0,
-			max: 1000,
-			step: 1
-		});
-		intervalRange.val(globalInterval);
-		intervalRange.change(function() {
-			globalInterval = $(this).val();
-			intro.text("tension=" + globalTension + "; interval=" + globalInterval);
-			redrawCanvas(canvas, ctx);
-		});
+		// tips list
+		var tipsListLeft = $("<ul />");
+		tipsListLeft.appendTo(tipsHolderLeft);
+		tipsListLeft.css({
+                         //listStyle: "disc outside none",
+                         marginTop: "10px"
+        });
+		
+		var tipsLeft = [
+                    "You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
+                    "Do <strong>not</strong> include your middle name, unless you go by two first names.",
+                    ];
+		
+		for (var i = 0; i < tipsLeft.length; i ++) {
+			var tip = tipsLeft[i];
+			
+			var li = $("<li />");
+			li.appendTo(tipsListLeft);
+			li.css({
+                   fontSize: "36px",
+                   //textIndent: "60px",
+                   //marginLeft: "80px",
+                   lineHeight: "1.4em",
+                   marginBottom: "30px"
+                   });
+			li.html(tip);
+		}
+        
+        // tips holder
+		var tipsHolderRight = $("<div />");
+		tipsHolderRight.appendTo(container);
+		tipsHolderRight.css({
+                       marginRight: "130px",
+                       marginTop: "30px",
+                       width: "800px",
+                       float: "right"
+                       });
+		
+		// tips list
+		var tipsListRight = $("<ul />");
+		tipsListRight.appendTo(tipsHolderRight);
+		tipsListRight.css({
+                     //listStyle: "disc outside none",
+                     marginTop: "10px"
+                     });
+		
+		var tipsRight = [
+                    "You <strong>must</strong> use your first name (the name you go by) and your full, legal last name.",
+                    "Do <strong>not</strong> include your middle name, unless you go by two first names.",
+                    ];
+		
+		for (var i = 0; i < tipsRight.length; i ++) {
+			var tip = tipsRight[i];
+			
+			var li = $("<li />");
+			li.appendTo(tipsListRight);
+			li.css({
+                   fontSize: "36px",
+                   //textIndent: "60px",
+                   //marginLeft: "80px",
+                   lineHeight: "1.4em",
+                   marginBottom: "30px"
+                   });
+			li.html(tip);
+		}
 		
 		// iPad touch events
 		canvas[0].addEventListener("touchstart", function(e) {
@@ -845,7 +882,7 @@ var screenPortal = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel ante id libero pretium scelerisque at id sem. Mauris sodales viverra lacus. Ut euismod augue nec magna ullamcorper tincidunt. Fusce fringilla pellentesque nunc quis vulputate.");
+		introText.html("To make your yearbook portrait more personal, tap on one of the areas below. If you want to revisit one of the sections, you can always go back to it. Make sure that you complete every item; your total progress is at the bottom. A yearbook is a lifelong memory, so make it yours!");
 		
 		// sections to complete
 		var sections = [
