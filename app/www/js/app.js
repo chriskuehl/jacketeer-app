@@ -295,8 +295,6 @@ var screenSignature = {
 			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
 			//	alert("done!");
 			//});
-			
-			setScreen(screenPortal);
 		});
 		
 		var canvas = $("<canvas />");
