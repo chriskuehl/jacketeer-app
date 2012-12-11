@@ -596,14 +596,27 @@ var screenName = {
 		submit.val("Confirm");
 		
 		submit.click(function() {
-			// TODO: validate the name they've entered
-			if (false) {
-				// TODO: have they already completed a name? if so, this should keep their old one (and indicate in the message)
-				navigator.notification.alert("That doesn't look like a valid name. Make sure to use only first and last name. See the tips below for more details.", null, "Invalid Name", "Oops!");
-			} else {
-				// TODO: upload name to the server, replace old one if it exists
-				setScreen(screenPortal);
+			// validate the name they've entered
+			var valid = true;
+			var invalidReason;
+			
+			var name = inputName.val();
+			var words = name.split(" ");
+			
+			if (words.length < 2 || words.length > 4) {
+				valid = false;
+				invalidReason = "Please enter only your first name and last name. You should only enter more if you go by two or more names (such as \"Sarah Jane Smith\"). See the tips below for more details.";
 			}
+			
+			if (! valid) {
+				return navigator.notification.alert(invalidReason, null, "Invalid Name", "Oops!");
+			}
+			
+			// name was valid, so upload it to the server
+			updateInformation({
+				path: "c-name.php",
+				data: {user: localStorage.loginDetails.user, token: localStorage.loginToken, name: name}
+			});
 		});
 		
 		// submit by enter on input field
