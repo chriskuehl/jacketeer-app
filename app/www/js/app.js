@@ -267,32 +267,35 @@ var screenSignature = {
 			
 			undoButton.addClass("disabled");
 			clearButton.addClass("disabled");
-			doneButton.text("Cancel");
+			doneButton.addClass("disabled");
 		});
 				
 		var doneButton = $("<a />");
 		doneButton.appendTo(buttonHolder);
-		doneButton.text("Cancel");
+		doneButton.text("Done");
 		doneButton.addClass("signatureButton");
+		doneButton.addClass("disabled");
 		doneButton.attr({
 			id: "signatureDoneButton"
 		});
 		
 		doneButton.click(function() {
-			// is there anything on the screen?
-			if (sigPaths.length <= 0) {
-				// TODO: have they already completed a signature? if so, this should keep their old one (and indicate in the message)
-				navigator.notification.alert("You haven't completed a signature. Are you sure you want to go back? Any changes you've made will not be saved.", function(response) {
-					if (response == 2) {
-						setScreen(screenPortal);
-					}
-				}, "Signature Incomplete", "Cancel,Go Back");
-			} else {
-				// TODO: upload signature to the server iff they like it better than the old one (ask them which they prefer if they've already done it)
-				setScreen(screenPortal);
+			if ($(this).hasClass("disabled")) {
+				return;
 			}
 			
-			//var img = canvas[0].toDataURL("image/png");
+			navigator.notification.alert("Are you sure you want to use this signature?", function(response) {
+				if (response == 2) {
+					var img = canvas[0].toDataURL("image/png");
+					// name was valid, so upload it to the server
+					updateInformation({
+						path: "c-signature.php",
+						data: {user: getLoginDetails().user, token: localStorage.loginToken, signature: img}
+					});
+				}
+			}, "Signature Confirmation", "Cancel,Use Signature");
+			
+			//
 			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
 			//	alert("done!");
 			//});
@@ -442,7 +445,7 @@ var screenSignature = {
 			// change button statuses
 			clearButton.removeClass("disabled");
 			undoButton.removeClass("disabled");
-			doneButton.text("Done");
+			doneButton.removeClass("disabled");
 		}, false);
 	}
 };
