@@ -513,6 +513,31 @@ var screenQuote = {
 			placeholder: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisi tortor, ac posuere massa. Etiam suscipit dolor at mi tincidunt dignissim. In hac habitasse platea dictumst.\" —Dan Ruff"
 		});
 		textArea.val(userInfo.Quote ? userInfo.Quote : "");
+		
+		// submit button
+		var submit = $("<input type=\"button\" />");
+		submit.appendTo(textAreaHolder);
+		submit.css({
+			fontSize: "68px",
+            		backgroundColor: "rgba(100, 100, 0, 0.1)",
+            		textAlign: "center",
+            		marginTop: "100px"
+		});
+		submit.val("Submit Quote");
+		
+		submit.click(function() {
+			var quote = textArea.val();
+			
+			if (quote.length <= 0) {
+				return navigator.notification.alert("Please fill in a quote! If you're not ready to submit your quote, hit cancel at the top-right of the screen.", null, "Empty Quote", "Oops!");
+			}
+			
+			// name was valid, so upload it to the server
+			updateInformation({
+				path: "c-quote.php",
+				data: {user: getLoginDetails().user, token: localStorage.loginToken, quote: quote}
+			});
+		});
 	}
 };
 
