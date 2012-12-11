@@ -468,8 +468,7 @@ var screenQuote = {
 	titleButton: {
 		text: "Cancel",
 		event: function() {
-			// TODO: have they already completed their quote?
-			navigator.notification.alert("Are you sure you want to go back?", function(response) {
+			navigator.notification.alert("Are you sure you want to go back? This will revert your quote to its previous state.", function(response) {
 				if (response == 2) {
 					setScreen(screenPortal);
 				}
@@ -482,8 +481,6 @@ var screenQuote = {
 			backgroundColor: "rgba(255, 210, 0, 0.1)"
 		});
 		
-		// TODO: have we already recorded their quote? if so, let's use that
-		
 		// intro text
 		var introText = $("<p />");
 		introText.appendTo(container);
@@ -494,7 +491,7 @@ var screenQuote = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("Tap the area below to edit your quote. Keep it appropriate&ndash;otherwise, it's a personal statement, and we'll draw a frowny face next to your portrait. Be creative and remember to give credit to the person who originally said it, unless that was you. If your quote is in a language other than English, consider including a translation.");
+		introText.html("Tap the area below to edit your quote. Keep it appropriate&ndash;otherwise, we'll draw a frowny face next to your portrait. Be creative and remember to give credit to the person who originally said it, unless that was you. If your quote is in a language other than English, consider including a translation.");
 		
 		// text field
 		var textAreaHolder = $("<div />");
@@ -515,6 +512,7 @@ var screenQuote = {
 		textArea.attr({
 			placeholder: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae nisi tortor, ac posuere massa. Etiam suscipit dolor at mi tincidunt dignissim. In hac habitasse platea dictumst.\" —Dan Ruff"
 		});
+		textArea.val(userInfo.Quote ? userInfo.Quote : "");
 	}
 };
 
@@ -591,7 +589,7 @@ var screenName = {
 		submit.appendTo(nameHolder);
 		submit.css({
 			fontSize: "68px",
-            backgroundColor: "rgba(100, 100, 0, 0.1)"
+            		backgroundColor: "rgba(100, 100, 0, 0.1)"
 		});
 		submit.val("Confirm");
 		
