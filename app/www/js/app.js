@@ -1341,21 +1341,31 @@ function updateInformation(reqToHandle) {
 		// 
 		// but first, wait a second to avoid GUI glitches
 		updateTimeout = setTimeout(function() {
-			alert("OK NOW SEND");
-			
 			req = $.ajax("https://jacketeer.org/app/" + reqToHandle.path + "?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: reqToHandle.data,
 				cache: false
 			});
 		
-			req.done(function() {
-				alert("OK GOT");
-				// actuallyUpdateInformation();
+			req.done(function(data) {
+				if (data.success) {
+					req = actuallyUpdateInformation();
+				} else {
+					navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+					globalLoadingCover.stop(true).hide();
+				}
 			});
 		
 			req.fail(function() {
-				alert("FAILURE!");
+				if (req.aborted) {
+					return;
+				}
+				
+				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function(response) {
+					if (response == 1) {
+						updateInformation(reqToHandle);
+					}
+				}, "Connection Problems", "Try Again,Cancel");
 			});
 		}, 1000);
 		
@@ -1363,7 +1373,6 @@ function updateInformation(reqToHandle) {
 	} else {
 		// there was no real function to submit, so wait a second before updating (to avoid GUI glitches)
 		updateTimeout = setTimeout(function() {
-			alert("OK GO UPDATE");
 			submittedRealRequest = true;
 			req = actuallyUpdateInformation();
 		}, 1000);
