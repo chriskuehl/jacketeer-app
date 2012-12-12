@@ -1,4 +1,4 @@
-// All site scripts in use on this site (as of Tue Dec 11 22:55:05 2012)
+// All site scripts in use on this site (as of Tue Dec 11 22:59:48 2012)
 
 // /www/js/lib/cordova-2.1.0.js
 // commit 143f5221a6251c9cbccdedc57005c61551b97f12
@@ -31548,7 +31548,7 @@ var screenSignature = {
 			if (sigPaths.length <= 0) {
 				undoButton.addClass("disabled");
 				clearButton.addClass("disabled");
-				doneButton.text("Cancel");
+				doneButton.addClass("disabled");
 			}
 		});
 

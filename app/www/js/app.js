@@ -242,7 +242,7 @@ var screenSignature = {
 			if (sigPaths.length <= 0) {
 				undoButton.addClass("disabled");
 				clearButton.addClass("disabled");
-				doneButton.text("Cancel");
+				doneButton.addClass("disabled");
 			}
 		});
 
