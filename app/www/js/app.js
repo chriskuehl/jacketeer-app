@@ -336,8 +336,8 @@ var screenSignature = {
 		
 		var tipsLeft = [
                     "Sign as you normally would; you can use your full name, your initials, or whatever you go by.",
-                    "Go slow and naturally. Take your time, and make it look nice.",
-                    ];
+                    "Go slow. Take your time, and don't worry&ndash;we'll smooth out the wrinkles automagically.",
+                ];
 		
 		for (var i = 0; i < tipsLeft.length; i ++) {
 			var tip = tipsLeft[i];
