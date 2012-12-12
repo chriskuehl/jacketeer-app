@@ -21,8 +21,8 @@ function initialize() {
 	}
 }
 
-// create the general interface elements
 function initInterface() {
+	// create the general interface elements
 	container = $("#container");
 
 	// title bar
