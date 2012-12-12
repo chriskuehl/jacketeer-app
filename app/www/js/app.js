@@ -916,6 +916,7 @@ var screenPortal = {
 		];
         
 		var total = 0;
+		var signatureCover;
 		
 		for (var i = 0; i < sections.length; i ++) {
 			var section = sections[i];
@@ -950,6 +951,10 @@ var screenPortal = {
 				if (selectedSection.id == "name") {
 					setScreen(screenName);
 				} else if (selectedSection.id == "signature") {
+					if (userInfo.Signature != null) {
+						return signatureCover.stop(true).fadeIn(250);
+					}
+					
 					setScreen(screenSignature);
 				} else if (selectedSection.id == "quote") {
 					setScreen(screenQuote);
@@ -1029,7 +1034,7 @@ var screenPortal = {
 		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
 		
 		// signature preview cover
-		var signatureCover = $("<div />");
+		signatureCover = $("<div />");
 		signatureCover.appendTo(container);
 		signatureCover.css({
 			position: "absolute",
@@ -1039,7 +1044,7 @@ var screenPortal = {
 			bottom: "0px",
 			backgroundColor: "rgba(0, 0, 0, 0.5)",
 			zIndex: "100",
-		//	display: "none"
+			display: "none"
 		});
 		
 		var signatureBox = $("<div />");
@@ -1059,9 +1064,7 @@ var screenPortal = {
 			borderRadius: "20px",
 			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 			
-			padding: "30px",
-			
-			display: "none"
+			padding: "30px"
 		});
 		
 		var signatureImageContainer = $("<div />");
@@ -1112,7 +1115,7 @@ var screenPortal = {
 		});
 		cancelButton.val("Cancel");
 		cancelButton.click(function() {
-			signatureCover.fadeOut(500);
+			signatureCover.fadeOut(200);
 		});
 		
 		var continueButton = $("<input type=\"button\" />");
