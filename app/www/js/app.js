@@ -1049,17 +1049,19 @@ var screenPortal = {
 			top: "50%",
 			left: "50%",
 			
-			width: "1800px",
-			height: "1200px",
+			width: "1600px",
+			height: "1050px",
 			
-			marginLeft: "-930px",
+			marginLeft: "-830px",
 			marginTop: "-630px",
 			
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
 			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 			
-			padding: "30px"
+			padding: "30px",
+			
+			display: "none"
 		});
 		
 		var signatureImageContainer = $("<div />");
@@ -1067,40 +1069,63 @@ var screenPortal = {
 		signatureImageContainer.css({
 			marginLeft: "auto",
 			marginRight: "auto",
-			border: "solid 4px gray"
+			marginTop: "30px",
+			border: "solid 8px gray",
+			width: "1500px",
+			height: "800px"
 		});
 		
 		var signatureImage = $("<embed />");
 		signatureImage.appendTo(signatureImageContainer);
 		signatureImage.attr({
 			src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
-			width: 1000,
-			border: "solid 3px red"
+			width: 1500,
+			height: 800,
+			marginLeft: "-146px"
 		});
 		
 		var signatureText = $("<p />");
-		globalLoadingText = signatureText;
 		signatureText.appendTo(signatureBox);
 		signatureText.css({
 			textAlign: "center",
 			fontSize: "38px",
-			marginTop: "10px"
+			marginTop: "30px",
+			fontSize: "32px",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
 		});
-		signatureText.text("Logging in...");
+		signatureText.text("Above is the signature you already completed. Do you want to change it?");
+		
+		var buttonHolder = $("<div />");
+		buttonHolder.appendTo(signatureBox);
+		buttonHolder.css({
+			textAlign: "center",
+			marginTop: "5px"
+		});
 		
 		var cancelButton = $("<input type=\"button\" />");
-		cancelButton.appendTo(signatureBox);
+		cancelButton.appendTo(buttonHolder);
 		cancelButton.css({
+			width: "400px",
+			height: "80px",
+			fontSize: "24px",
+			marginRight: "60px"
+		});
+		cancelButton.val("Cancel");
+		cancelButton.click(function() {
+			signatureCover.fadeOut(500);
+		});
+		
+		var continueButton = $("<input type=\"button\" />");
+		continueButton.appendTo(buttonHolder);
+		continueButton.css({
 			width: "400px",
 			height: "80px",
 			fontSize: "24px",
 			marginTop: "40px"
 		});
-		cancelButton.val("Cancel");
-		cancelButton.click(function() {
-			if (globalLoadingCancelEvent) {
-				globalLoadingCancelEvent();
-			}
+		continueButton.val("Make Changes");
+		continueButton.click(function() {
+			setScreen(screenSignature);
 		});
 		
 	}
