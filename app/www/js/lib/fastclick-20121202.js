@@ -1,5 +1,5 @@
 /**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+ * FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
  * @version 0.4.3
  * @codingstandard ftlabs-jslint
