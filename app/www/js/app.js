@@ -181,7 +181,7 @@ var screenSignature = {
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
+			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		sigPaths = [];
@@ -211,14 +211,13 @@ var screenSignature = {
 			width: "1500px",
 			height: "800px",
 			border: "solid 2px rgba(150, 150, 150, 1)",
-			float: "left",
-
+			"float": "left"
 		});
 
 		var buttonHolder = $("<div />");
 		buttonHolder.appendTo(artHolder);
 		buttonHolder.css({
-			float: "right",
+			"float": "right",
 			width: "240px",
 			height: "820px"
 		});
@@ -327,7 +326,7 @@ var screenSignature = {
 			marginLeft: "130px",
 			marginTop: "50px",
 			width: "800px",
-			float: "left"
+			"float": "left"
 		});
 
 		// tips list
@@ -340,7 +339,8 @@ var screenSignature = {
 
 		var tipsLeft = [
 			"Sign as you normally would; you can use your full name, your initials, or whatever you go by.",
-			"Go slow. Take your time, and don't worry&ndash;we'll smooth out the wrinkles automagically.", ];
+			"Go slow. Take your time, and don't worry&ndash;we'll smooth out the wrinkles automagically."
+		];
 
 		for (var i = 0; i < tipsLeft.length; i++) {
 			var tip = tipsLeft[i];
@@ -364,7 +364,7 @@ var screenSignature = {
 			marginRight: "130px",
 			marginTop: "30px",
 			width: "800px",
-			float: "right"
+			"float": "right"
 		});
 
 		// tips list
@@ -377,7 +377,8 @@ var screenSignature = {
 
 		var tipsRight = [
 			"You can always redo the signature. Don't worry about getting it perfect the first time.",
-			"If you need a stylus, go find Ruff (room 138). He's there 24/7, 365 days per year (sometimes 366!).", ];
+			"If you need a stylus, go find Ruff (room 138). He's there 24/7, 365 days per year (sometimes 366!)."
+		];
 
 		for (var i = 0; i < tipsRight.length; i++) {
 			var tip = tipsRight[i];
@@ -531,7 +532,7 @@ var screenQuote = {
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
+			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		// intro text
@@ -618,7 +619,7 @@ var screenName = {
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
+			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		var loginDetails = getLoginDetails();
@@ -721,7 +722,7 @@ var screenName = {
 			marginLeft: "130px",
 			marginTop: "70px",
 			width: "900px",
-			float: "left"
+			"float": "left"
 		});
 
 		// tips header
@@ -769,7 +770,7 @@ var screenName = {
 			marginRight: "130px",
 			marginTop: "70px",
 			width: "800px",
-			float: "right"
+			"float": "right"
 		});
 
 		var demoHeader = $("<h2 />");
@@ -794,7 +795,7 @@ var screenName = {
 		var demoPortrait = $("<div />");
 		demoPortrait.appendTo(demoBox);
 		demoPortrait.css({
-			float: "left",
+			"float": "left",
 			border: "solid 4px rgba(0, 0, 0, 0.5)",
 			width: "300px",
 			height: "400px",
@@ -807,7 +808,7 @@ var screenName = {
 		var demoInfo = $("<div />");
 		demoInfo.appendTo(demoBox);
 		demoInfo.css({
-			float: "right",
+			"float": "right",
 			width: "400px"
 		});
 
@@ -886,7 +887,7 @@ var screenPortal = {
 
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
+			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		var introText = $("<p />");
@@ -948,7 +949,7 @@ var screenPortal = {
 				position: "relative",
 				border: "solid 2px rgba(150, 150, 150, 1)",
 				boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-				boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
+				boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
 			});
 
 			sectionButton.data("section", section);
@@ -1153,7 +1154,7 @@ var screenIntro = {
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)",
+			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		var loginDetails = getLoginDetails();
@@ -1209,7 +1210,7 @@ var screenIntro = {
 			position: "relative",
 			border: "solid 2px rgba(150, 150, 150, 1)",
 			boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
+			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
 		});
 
 		var table = $("<table />");
@@ -1222,7 +1223,7 @@ var screenIntro = {
 		var labelUser = $("<label />");
 		labelUser.text("Username:");
 		labelUser.attr({
-			for: "inputUser"
+			"for": "inputUser"
 		});
 		labelUser.css({
 			fontSize: "34px",
@@ -1262,7 +1263,7 @@ var screenIntro = {
 		var labelPassword = $("<label />");
 		labelPassword.text("Password:");
 		labelPassword.attr({
-			for: "inputPassword"
+			"for": "inputPassword"
 		});
 		labelPassword.css({
 			fontSize: "34px",
