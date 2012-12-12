@@ -1,4 +1,4 @@
-// All site scripts in use on this site (as of Tue Dec 11 22:44:48 2012)
+// All site scripts in use on this site (as of Tue Dec 11 22:55:05 2012)
 
 // /www/js/lib/cordova-2.1.0.js
 // commit 143f5221a6251c9cbccdedc57005c61551b97f12
@@ -5311,7 +5311,6 @@ window.cordova = require('cordova');
 // /www/js/lib/strings.js
 // http://stackoverflow.com/questions/646628/javascript-startswith
 if (typeof String.prototype.startsWith != 'function') {
-  // see below for better implementation!
   String.prototype.startsWith = function (str){
     return this.indexOf(str) == 0;
   };
@@ -32395,12 +32394,15 @@ var screenPortal = {
 
 		var signatureImage = $("<embed />");
 		signatureImage.appendTo(signatureImageContainer);
-		signatureImage.attr({
-			src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
-			width: 1500,
-			height: 800,
-			marginLeft: "-146px"
-		});
+		
+		if (userInfo.Signature != null) {
+			signatureImage.attr({
+				src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
+				width: 1500,
+				height: 800,
+				marginLeft: "-146px"
+			});
+		}
 
 		var signatureText = $("<p />");
 		signatureText.appendTo(signatureBox);

@@ -1088,12 +1088,15 @@ var screenPortal = {
 
 		var signatureImage = $("<embed />");
 		signatureImage.appendTo(signatureImageContainer);
-		signatureImage.attr({
-			src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
-			width: 1500,
-			height: 800,
-			marginLeft: "-146px"
-		});
+		
+		if (userInfo.Signature != null) {
+			signatureImage.attr({
+				src: "data:image/svg+xml;charset=utf-8;base64," + Base64.encode(userInfo.Signature),
+				width: 1500,
+				height: 800,
+				marginLeft: "-146px"
+			});
+		}
 
 		var signatureText = $("<p />");
 		signatureText.appendTo(signatureBox);
