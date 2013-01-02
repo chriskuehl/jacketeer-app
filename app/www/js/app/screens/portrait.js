@@ -1,7 +1,7 @@
 var screenPortrait = {
-	id: "portal",
+	id: "portrait",
 	title: "Jacketeer 2013",
-	parent: "intro",
+	parent: "portal",
 
 	titleButton: {
 		text: "Sign Out",
