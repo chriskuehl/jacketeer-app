@@ -172,7 +172,7 @@ var screenSignature = {
 		event: function () {
 			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
 				if (response == 2) {
-					setScreen(screenPortal);
+					setScreen(screenPortrait);
 				}
 			}, "Return to Portal", "Stay Here,Go Back");
 		}
@@ -523,7 +523,7 @@ var screenQuote = {
 		event: function () {
 			navigator.notification.alert("Are you sure you want to go back? This will revert your quote to its previous state.", function (response) {
 				if (response == 2) {
-					setScreen(screenPortal);
+					setScreen(screenPortrait);
 				}
 			}, "Return to Portal", "Stay Here,Go Back");
 		}
@@ -610,7 +610,7 @@ var screenName = {
 		event: function () {
 			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
 				if (response == 2) {
-					setScreen(screenPortal);
+					setScreen(screenPortrait);
 				}
 			}, "Return to Portal", "Stay Here,Go Back");
 		}
@@ -860,7 +860,7 @@ var screenName = {
 	}
 };
 
-var screenPortal = {
+var screenPortrait = {
 	id: "portal",
 	title: "Jacketeer 2013",
 	parent: "intro",
@@ -1488,7 +1488,7 @@ function actuallyUpdateInformation() {
 	req.done(function (data) {
 		if (data.success) {
 			userInfo = data.info;
-			setScreen(screenPortal);
+			setScreen(screenPortrait);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
 			globalLoadingCover.stop(true).hide();
