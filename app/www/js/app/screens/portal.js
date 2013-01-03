@@ -3,6 +3,19 @@ var screenPortal = {
 	title: "Jacketeer 2013",
 	parent: "into",
 
+	titleButton: {
+		text: "Sign Out",
+		event: function () {
+			navigator.notification.alert("Are you sure you want to sign out?", function (response) {
+				if (response == 2) {
+					localStorage.removeItem("loginDetails");
+					localStorage.removeItem("loginToken");
+					setScreen(screenIntro);
+				}
+			}, "Sign Out", "Cancel,Sign Out");
+		}
+	},
+	
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
@@ -25,8 +38,8 @@ var screenPortal = {
 		var boxContainer = $("<div />");
 		boxContainer.appendTo(container);
 		boxContainer.css({
-			border: "solid 2px red",
-			margin: "60px",
+		//	border: "solid 2px red",
+			margin: "116px",
 			marginRight: "0px"
 		});
 		
@@ -38,8 +51,9 @@ var screenPortal = {
 					"Sign your signature next to your portrait",
 					"Share your favorite quote with us and your classmates"
 				],
-				complete: false,
-				completable: true
+				complete: (userInfo.PreferredName != null && userInfo.Signature != null && userInfo.Quote != null),
+				completable: true,
+				screen: screenPortrait
 			},
 			
 			{
@@ -50,7 +64,8 @@ var screenPortal = {
 					"Nominate events or activities that deserve a page"
 				],
 				complete: false,
-				completable: false
+				completable: false,
+				screen: screenPortal //screenVoice
 			},
 			
 			{
@@ -61,7 +76,8 @@ var screenPortal = {
 					"Sign for and pick up your yearbook upon release"
 				],
 				complete: false,
-				completable: false
+				completable: false,
+				screen: screenPortal //screenYearbook
 			}
 		];
 		
@@ -73,10 +89,29 @@ var screenPortal = {
 				display: "block",
 				width: "500px",
 				padding: "40px",
-				backgroundColor: "rgba(255, 0, 0, 0.2)",
 				marginRight: "30px",
 				borderRadius: "50px",
 				"float": "left"
+			});
+			
+			if (boxData.completable) {
+				if (boxData.complete) {
+					box.css("backgroundColor", "rgba(0, 255, 0, 0.3)");
+				} else {
+					box.css("backgroundColor", "rgba(255, 0, 0, 0.3)");
+				}
+			} else {
+				box.css("backgroundColor", "rgba(255, 255, 0, 0.3)");
+			}
+			
+			box.data({
+				screen: boxData.screen
+			});
+			box.click(function(e) {
+				setScreen($(this).data("screen"));
+				
+				e.preventDefault();
+				return false;
 			});
 			
 			var header = $("<h1 />");
@@ -113,7 +148,7 @@ var screenPortal = {
 			var incomplete = $("<p />");
 			incomplete.appendTo(box);
 			incomplete.css({
-				marginTop: "30px",
+				marginTop: "60px",
 				marginBottom: "30px",
 				fontSize: "40px",
 				color: "rgba(0, 0, 0, .6)",
@@ -126,5 +161,29 @@ var screenPortal = {
 		var clear = $("<div />");
 		clear.appendTo(boxContainer);
 		clear.css("clear", "both");
+		
+		var progressText = $("<p />");
+		progressText.appendTo(container);
+		progressText.css({
+			textAlign: "center",
+			fontSize: "48px",
+			lineHeight: "1.6em",
+			margin: "80px",
+			marginBottom: "0px",
+			color: "rgba(0, 0, 0, 0.4)",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
+		});
+		progressText.html("Tap one of the boxes above to get started.");
+
+		var helpText = $("<p />");
+		helpText.appendTo(container);
+		helpText.css({
+			textAlign: "center",
+			fontSize: "30px",
+			lineHeight: "1.6em",
+			color: "rgba(0, 0, 0, 0.6)",
+			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
+		});
+		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
 	}
 };

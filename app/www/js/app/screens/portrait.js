@@ -4,15 +4,9 @@ var screenPortrait = {
 	parent: "portal",
 
 	titleButton: {
-		text: "Sign Out",
+		text: "Back to Portal",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to sign out?", function (response) {
-				if (response == 2) {
-					localStorage.removeItem("loginDetails");
-					localStorage.removeItem("loginToken");
-					setScreen(screenIntro);
-				}
-			}, "Sign Out", "Cancel,Sign Out");
+			setScreen(screenPortal);
 		}
 	},
 
@@ -46,7 +40,7 @@ var screenPortrait = {
 			description: "The name you want to be used next to identify you in the yearbook.",
 			complete: (userInfo.PreferredName != null)
 		},
-
+		
 		{
 			id: "signature",
 			title: "Personal Signature",
