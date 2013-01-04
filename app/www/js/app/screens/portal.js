@@ -1,6 +1,6 @@
 var screenPortal = {
 	id: "portal",
-	title: "Jacketeer 2013",
+	title: "Jacketeer 2013 Student Portal",
 	parent: "into",
 
 	titleButton: {
@@ -17,6 +17,12 @@ var screenPortal = {
 	},
 	
 	setup: function (container) {
+		if (userInfo.PreferredName) {
+			updateTitle(userInfo.PreferredName);
+		} else {
+			updateTitle(localStorage.loginDetails.user);
+		}
+		
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
 			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
@@ -65,7 +71,7 @@ var screenPortal = {
 				],
 				complete: false,
 				completable: false,
-				screen: screenPortal //screenVoice
+				screen: screenVoice
 			},
 			
 			{
@@ -77,7 +83,7 @@ var screenPortal = {
 				],
 				complete: false,
 				completable: false,
-				screen: screenPortal //screenYearbook
+				screen: screenHelp
 			}
 		];
 		

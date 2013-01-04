@@ -1,6 +1,6 @@
 var screenPortrait = {
 	id: "portrait",
-	title: "Jacketeer 2013",
+	title: "My Portrait and Information",
 	parent: "portal",
 
 	titleButton: {
@@ -11,12 +11,6 @@ var screenPortrait = {
 	},
 
 	setup: function (container) {
-		if (userInfo.PreferredName) {
-			updateTitle(userInfo.PreferredName);
-		} else {
-			updateTitle(localStorage.loginDetails.user);
-		}
-
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
 			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
