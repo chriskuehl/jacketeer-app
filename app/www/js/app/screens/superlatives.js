@@ -14,14 +14,14 @@ var superlativeCategories = [
 	"Most Flirtatious",
 	"Most Likely to Be Famous",
 	"Most Likely to Travel the world",
-	"Most likely to live with their parents in 20 years",
+	"Most likely to live with Their Parents in 20 Years",
 	"Best Dance Moves",
 	"Most Likely to Get a Useless Degree",
 	"Most Likely to Succeed",
 	"Most Likely to Make a Time Machine",
 	"Most Likely to Steal a Time Machine",
 	"Most Likely to Go on Jersey Shore",
-	"Most Likely to trip UP the stairs",
+	"Most Likely to Trip UP the Stairs",
 	"Best Should-Have-Been Couple",
 	"Best Body",
 	"Best Dressed",
@@ -30,12 +30,12 @@ var superlativeCategories = [
 	"Most Changed",
 	"Most Likely to Rule the World",
 	"Most Likely to Get a Ticket",
-	"Most Likely to be a reality TV star",
-	"Best Person to Share a desert island With",
-	"Best hair",
-	"Most tardies",
-	"Most likely to dissapear after high school",
-	"Most hours spent at school"
+	"Most Likely to Be a Reality TV Star",
+	"Best Person with Which to Share a Desert Island",
+	"Best Hair",
+	"Most Tardies",
+	"Most Likely to Dissapear after High School",
+	"Most Hours Spent at School"
 ];
 
 var screenSuperlatives = {
