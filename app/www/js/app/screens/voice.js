@@ -33,8 +33,10 @@ var screenVoice = {
 			width: "1800px",
 			border: "solid 2px rgba(0, 0, 0, 0.3)",
 			padding: "40px",
-			borderRadius: "40px",
-			backgroundColor: "rgba(255, 255, 255, 0.9)",
+			borderRadius: "15px",
+			backgroundColor: "rgba(253, 249, 207, 1)",
+            boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+            boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			marginLeft: "auto",
 			marginRight: "auto",
 			overflow: "hidden"
@@ -56,7 +58,7 @@ var screenVoice = {
 		superlativesList = $("<div />");
 		superlativesList.appendTo(superlativesBox);
 		superlativesList.css({ 
-		//	backgroundColor: "rgba(0, 0, 0, 0.1)",
+			// backgroundColor: "rgba(255, 255, 255, 1)",
 			height: "400px",
 			position: "relative"
 		});
@@ -98,10 +100,12 @@ var screenVoice = {
 				marginTop: "40px",
 				marginLeft: "80px",
 				marginRight: "-40px",
-				border: "solid 2px rgba(0, 0, 0, 0.3)",
 				padding: "40px",
-				borderRadius: "40px",
-				backgroundColor: "rgba(255, 255, 255, 0.9)",
+                backgroundColor: "rgba(253, 249, 207, 1)",
+				borderRadius: "15px",
+                border: "solid 2px rgba(150, 150, 150, 1)",
+                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 				width: "838px"
 			});
 			div.data("screen", box.screen);

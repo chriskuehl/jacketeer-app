@@ -96,18 +96,21 @@ var screenPortal = {
 				width: "500px",
 				padding: "40px",
 				marginRight: "30px",
-				borderRadius: "50px",
-				"float": "left"
+				borderRadius: "15px",
+				"float": "left",
+                border: "solid 2px rgba(150, 150, 150, 1)",
+                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
 			});
 			
 			if (boxData.completable) {
 				if (boxData.complete) {
-					box.css("backgroundColor", "rgba(0, 255, 0, 0.3)");
+					box.css("backgroundColor", "rgba(253, 249, 207, 1)");
 				} else {
-					box.css("backgroundColor", "rgba(255, 0, 0, 0.3)");
+					box.css("backgroundColor", "rgba(253, 229, 150, 1)");
 				}
 			} else {
-				box.css("backgroundColor", "rgba(255, 255, 0, 0.3)");
+				box.css("backgroundColor", "rgba(253, 249, 207, 1)");
 			}
 			
 			box.data({
