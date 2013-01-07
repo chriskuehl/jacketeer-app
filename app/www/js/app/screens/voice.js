@@ -172,13 +172,16 @@ function stepSuperlativeList(initial, j) {
 	newItem.text(getSuperlativeText());
 	newItem.appendTo(superlativesList);
 	newItem.animate({
-		left: (-2000) + "px"
+		left: (-2500) + "px"
 	}, initial ? (((Math.random() * 4000) + 3000) * ((newItem.position().left + 2000) / 4000)) : ((Math.random() * 4000) + 3000), "linear", function() {
 		$(this).remove();
 	});
 	
 	if (! initial) {
 		setTimeout(function() {
+			if (ui.screen && ui.screen.data("conf").id != "voice") {
+				alert("T");
+			}
 			stepSuperlativeList(false, j);
 		}, Math.random() * 1000);
 	}
