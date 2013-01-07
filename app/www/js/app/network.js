@@ -18,7 +18,7 @@ function actuallyUpdateInformation() {
 	req.done(function (data) {
 		if (data.success) {
 			userInfo = data.info;
-			setScreen(screenPortal);
+			setScreen(screenVoice);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
 			globalLoadingCover.stop(true).hide();

@@ -134,6 +134,6 @@ function setScreen(screen) {
 		}
 	}
 
-	// update current screen
+	// update current screen 
 	ui.screen = container;
 }
