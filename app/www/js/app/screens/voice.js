@@ -32,7 +32,7 @@ var screenVoice = {
 		var superlativesBox = $("<div />");
 		superlativesBox.appendTo(container);
 		superlativesBox.css({
-			width: "1600px",
+			width: "1800px",
 			border: "solid 2px rgba(0, 0, 0, 0.3)",
 			padding: "40px",
 			borderRadius: "40px",
@@ -40,6 +40,9 @@ var screenVoice = {
 			marginLeft: "auto",
 			marginRight: "auto",
 			overflow: "hidden"
+		});
+		superlativesBox.click(function() {
+			setScreen(screenSuperlatives);
 		});
 		
 		var header = $("<h2 />");
@@ -73,6 +76,71 @@ var screenVoice = {
 			fontSize: "30px"
 		});
 		superlativesTip.text("Tap here to submit your picks for senior superlatives.");
+		
+		var boxes = [
+			{
+				title: "Yearbook Coverage",
+				description: "Are we missing something? We're only human, so we need your help! Let us know about any events or activities that you think we should include in the yearbook (note: all recommendations must be received prior to the book's release).",
+				screen: screenSuggestCoverage
+			},
+			
+			{
+				title: "Hail Woodford",
+				description: "Is there something about Woodford County that makes you bubble up with pride? Do you feel like shouting praise from the highest mountain in Versailles? Tell us what you hail about Woodford County and we'll include it (anonymously) in the book!",
+				screen: screenHailWoodford
+			}
+		];
+		
+		for (var i = 0; i < boxes.length; i ++) {
+			var box = boxes[i];
+			var div = $("<div />");
+			div.appendTo(container);
+			div.css({
+				"float": "left",
+				marginTop: "40px",
+				marginLeft: "80px",
+				marginRight: "-40px",
+				border: "solid 2px rgba(0, 0, 0, 0.3)",
+				padding: "40px",
+				borderRadius: "40px",
+				backgroundColor: "rgba(255, 255, 255, 0.9)",
+				width: "838px"
+			});
+			div.data("screen", box.screen);
+			div.click(function() {
+				setScreen($(this).data("screen"));
+			});
+			
+			var h2 = $("<h2 />");
+			h2.text(box.title);
+			h2.appendTo(div);
+			h2.css({
+				textAlign: "center",
+				fontSize: "44px",
+				marginBottom: "20px",
+				fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\""
+			});
+			
+			var description = $("<p />");
+			description.text(box.description);
+			description.appendTo(div);
+			description.css({
+				fontSize: "32px",
+				color: "rgba(0, 0, 0, 0.7)",
+				lineHeight: "1.5em",
+				textAlign: "justify"
+			});
+		/*
+			var superlativesTip = $("<p />");
+			superlativesTip.appendTo(div);
+			superlativesTip.css({
+				textAlign: "center",
+				fontSize: "30px",
+				color: "rgba(0, 0, 0, 0.5)",
+				marginTop: "30px"
+			});
+			superlativesTip.text("Tap here.");*/
+		}
 	}
 };
 
