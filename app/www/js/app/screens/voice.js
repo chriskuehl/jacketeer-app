@@ -180,8 +180,9 @@ function stepSuperlativeList(initial, j) {
 	if (! initial) {
 		setTimeout(function() {
 			if (ui.screen && ui.screen.data("conf").id != "voice") {
-				alert("T");
+				return;
 			}
+			
 			stepSuperlativeList(false, j);
 		}, Math.random() * 1000);
 	}
