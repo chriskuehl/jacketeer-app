@@ -8,8 +8,6 @@
 	<string>Jacketeer</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>jacketeer-144.png</key>
-	<string>icon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>jacketeer-144.png</string>
@@ -37,7 +35,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -59,5 +57,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>jacketeer-144.png</key>
+	<string>icon.png</string>
 </dict>
 </plist>

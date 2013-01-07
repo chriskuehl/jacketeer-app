@@ -1,3 +1,6 @@
+var superlativesShort = [];
+var superlativeIndex = 0;
+
 var screenVoice = {
 	id: "voice",
 	title: "My Voice in Jacketeer",
@@ -7,10 +10,13 @@ var screenVoice = {
 		text: "Back to Portal",
 		event: function () {
 			setScreen(screenPortal);
+				superlativeIndex ++;
 		}
 	},
 
 	setup: function (container) {
+		superlativeIndex ++;
+		
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
 			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
@@ -43,6 +49,7 @@ var screenVoice = {
 		});
 		superlativesBox.click(function() {
 			setScreen(screenSuperlatives);
+			superlativeIndex ++;
 		});
 		
 		var header = $("<h2 />");
@@ -64,10 +71,10 @@ var screenVoice = {
 		});
 		
 		for (var j = 0; j < 7; j ++) {
-			stepSuperlativeList(true);
+			stepSuperlativeList(true, superlativeIndex);
 		}
 		
-		stepSuperlativeList();
+		stepSuperlativeList(false, superlativeIndex);
 		
 		var superlativesTip = $("<p />");
 		superlativesTip.appendTo(superlativesBox);
@@ -111,6 +118,7 @@ var screenVoice = {
 			div.data("screen", box.screen);
 			div.click(function() {
 				setScreen($(this).data("screen"));
+				superlativeIndex ++;
 			});
 			
 			var h2 = $("<h2 />");
@@ -146,9 +154,9 @@ var screenVoice = {
 	}
 };
 
-function stepSuperlativeList(initial) {
-	if (ui.screen && ui.screen.data("conf").id != "voice") {
-	//	return;
+function stepSuperlativeList(initial, j) {
+	if (superlativeIndex != j) {
+		return;
 	}
 	
 	var newItem = $("<div />");
@@ -161,7 +169,7 @@ function stepSuperlativeList(initial) {
 		opacity: (Math.random()),
 		textAlign: "right"
 	});
-	newItem.text(superlativeCategories[Math.floor(Math.random() * superlativeCategories.length)]);
+	newItem.text(getSuperlativeText());
 	newItem.appendTo(superlativesList);
 	newItem.animate({
 		left: (-2000) + "px"
@@ -170,6 +178,20 @@ function stepSuperlativeList(initial) {
 	});
 	
 	if (! initial) {
-		setTimeout(stepSuperlativeList, Math.random() * 1000);
+		setTimeout(function() {
+			stepSuperlativeList(false, j);
+		}, Math.random() * 1000);
 	}
+}
+
+function getSuperlativeText() {
+	if (superlativesShort.length <= 0) {
+		superlativesShort = superlativeCategories.slice(0);
+	}
+	
+	var i = Math.floor(Math.random() * superlativesShort.length);
+	var t = superlativesShort[i];
+	superlativesShort.remove(i);
+	
+	return t;
 }
