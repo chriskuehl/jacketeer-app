@@ -2,7 +2,7 @@ var demoName = null;
 var screenName = {
 	id: "name",
 	title: "Preferred Name",
-	parent: "portal",
+	parent: "portrait",
 
 	titleButton: {
 		text: "Cancel",

@@ -1,7 +1,7 @@
 var screenQuote = {
 	id: "quote",
 	title: "Featured Quote",
-	parent: "portal",
+	parent: "portrait",
 
 	titleButton: {
 		text: "Cancel",

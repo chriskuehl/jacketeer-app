@@ -5,7 +5,7 @@ var sigIntro = null;
 var screenSignature = {
 	id: "signature",
 	title: "Senior Signature",
-	parent: "portal",
+	parent: "portrait",
 
 	titleButton: {
 		text: "Cancel",
