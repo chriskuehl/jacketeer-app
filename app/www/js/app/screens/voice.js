@@ -1,5 +1,3 @@
-var superlativesList;
-
 var screenVoice = {
 	id: "voice",
 	title: "My Voice in Jacketeer",
