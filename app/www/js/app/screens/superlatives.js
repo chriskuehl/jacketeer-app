@@ -137,6 +137,9 @@ var screenSuperlatives = {
 		for (var i = 0; i < superlatives.length; i ++) {
 			var superlative = superlatives[i];
 			var row = $("<tr />");
+			if ((i % 2) == 0) {	 	
+				row.css("backgroundColor", "rgba(255, 255, 0, 0.1)");
+			}
 			row.appendTo(table);
 			
 			var d1 = $("<td />");
@@ -198,8 +201,6 @@ var screenSuperlatives = {
 			}
 		}
 		
-		superlativeChooseStudent(superlative, true);
-		
 		// let the list of superlatives scroll
 		var superlativesScroll = new iScroll("superlativesHolder", {bounce: false});
 		
@@ -229,7 +230,7 @@ var screenSuperlatives = {
 		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to select a student. All superlatives are optional. If you can't think of a good match, just leave it blank.");
 		
 		// "choose student" window
-		/*
+		
 		// loading cover
 		superlativeChooseCover = $("<div />");
 		superlativeChooseCover.appendTo(container);
@@ -271,7 +272,6 @@ var screenSuperlatives = {
 			fontSize: "38px",
 			marginTop: "10px"
 		});
-		loadingText.text("Logging in...");
 
 		var cancelButton = $("<input type=\"button\" />");
 		cancelButton.appendTo(superlativeChooseBox);
@@ -287,21 +287,12 @@ var screenSuperlatives = {
 				globalLoadingCancelEvent();
 			}
 		});
-
-		// username tip at bottom
-		var tipText = $("<p />");
-		tipText.appendTo(page);
-		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2013. It's the same thing you use to login to computers at WCHS.");
-		tipText.css({
-			fontSize: "24px",
-			marginTop: "40px",
-			lineHeight: "1.4em",
-			textAlign: "justify"
-		});*/
+		
+		superlativeChooseStudent(superlative, true);
 
 	}
 };
 
 function superlativeChooseStudent(superlative, isMale) {
-	//superlativeChooseCover.show();
+	superlativeChooseCover.show();
 }
