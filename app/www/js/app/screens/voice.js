@@ -171,7 +171,7 @@ function stepSuperlativeList(initial, j) {
 		top: yPos + "px",
 		left: (initial ? (((Math.random() * 4000) - 2000)) : 2000) + "px",
 		width: "2000px",
-		opacity: a ? 0.2 : (Math.random()),
+		opacity: a ? 0.1 : (Math.random()),
 		textAlign: "right"
 	});
 	newItem.text(getSuperlativeText());

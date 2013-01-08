@@ -92,8 +92,9 @@ var screenSuperlatives = {
 		c2.appendTo(headerRow);
 		c2.css({
 			width: "700px",
-			fontSize: "80px",
-			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\""
+			fontSize: "60px",
+			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
+			color: "rgba(0, 0, 0, 0.8)"
 		});
 		c2.text("MALE");
 		
@@ -101,8 +102,9 @@ var screenSuperlatives = {
 		c3.appendTo(headerRow);
 		c3.css({
 			width: "700px",
-			fontSize: "80px",
-			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\""
+			fontSize: "60px",
+			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
+			color: "rgba(0, 0, 0, 0.8)"
 		});
 		c3.text("FEMALE");
 		
@@ -142,11 +144,12 @@ var screenSuperlatives = {
 			d1.text(superlative[0]);
 			d1.css({
 				width: "540px",
-				fontSize: "48px",
+				fontSize: "42px",
 				textAlign: "center",
 				padding: "20px",
 				fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
-				verticalAlign: "middle"
+				verticalAlign: "middle",
+				color: "rgba(0, 0, 0, 0.8)"
 			});
 			
 			// male, female
