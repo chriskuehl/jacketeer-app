@@ -221,7 +221,7 @@ var screenSuperlatives = {
 		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to select a student. All superlatives are optional. If you can't think of a good match, just leave it blank.");
 		
 		// "choose student" window
-		
+		/*
 		// loading cover
 		superlativeChooseCover = $("<div />");
 		superlativeChooseCover.appendTo(container);
@@ -289,11 +289,11 @@ var screenSuperlatives = {
 			marginTop: "40px",
 			lineHeight: "1.4em",
 			textAlign: "justify"
-		});
+		});*/
 
 	}
 };
 
 function superlativeChooseStudent(superlative, isMale) {
-	superlativeChooseCover.show();
+	//superlativeChooseCover.show();
 }
