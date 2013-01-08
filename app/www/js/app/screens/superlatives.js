@@ -115,7 +115,10 @@ var screenSuperlatives = {
 			height: "1070px",
 			marginLeft: "auto",
 			marginRight: "auto",
-			marginTop: "0px"
+			marginTop: "0px",
+            //border: "solid 2px rgba(150, 150, 150, 1)",
+                        backgroundColor: "rgba(255,255,255,0.8)",
+                        boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.15)"
 		});
 		
 		var table = $("<table />");
@@ -161,13 +164,15 @@ var screenSuperlatives = {
 				var button = $("<a />");
 				button.appendTo(cell);
 				button.css({
-					borderRadius: "20px",
+					borderRadius: "15px",
 					display: "block",
 					padding: "40px",
 					textAlign: "center",
 					fontSize: "32px",
-					border: "solid 4px rgba(0, 0, 0, 0.5)",
-					backgroundColor: "rgba(255, 255, 255, 0.3)"
+                    border: "solid 2px rgba(150, 150, 150, 1)",
+                    boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+                    boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
+					backgroundColor: "rgba(253, 249, 207, 0.2)",
 				});
 				// button.addClass("buttonGrad");
 				
