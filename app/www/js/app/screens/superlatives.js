@@ -38,6 +38,8 @@ var superlativeCategories = [
 	"Most Hours Spent at School"
 ];
 
+var superlativeChooseCover;
+
 var screenSuperlatives = {
 	id: "superlatives",
 	title: "Senior Superlatives",
@@ -110,7 +112,7 @@ var screenSuperlatives = {
 		tableHolder.css({
 			overflow: "auto",
 			width: "1980px",
-			height: "1000px",
+			height: "1070px",
 			marginLeft: "auto",
 			marginRight: "auto",
 			marginTop: "0px"
@@ -188,8 +190,20 @@ var screenSuperlatives = {
 			}
 		}
 		
+		superlativeChooseStudent(superlative, true);
+		
 		// let the list of superlatives scroll
-		new iScroll("superlativesHolder");
+		var superlativesScroll = new iScroll("superlativesHolder", {bounce: false});
+		
+		// http://stackoverflow.com/questions/9210178/why-cant-i-click-input
+		superlativesScroll.options.onBeforeScrollStart = function(e) {                
+			var target = e.target;
+
+			while (target.nodeType != 1) target = target.parentNode;
+			if (target.tagName != 'A') {
+				e.preventDefault();
+			}
+		}
 		
 		// help text at bottom
 		var helpText = $("<p />");
@@ -201,9 +215,85 @@ var screenSuperlatives = {
 			color: "rgba(0, 0, 0, 0.6)",
 			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\"",
 			marginLeft: "40px",
-			marginRight: "40px"
+			marginRight: "40px",
+			marginTop: "20px"
 		});
 		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to select a student. All superlatives are optional. If you can't think of a good match, just leave it blank.");
+		
+		// "choose student" window
+		
+		// loading cover
+		superlativeChooseCover = $("<div />");
+		superlativeChooseCover.appendTo(container);
+		superlativeChooseCover.css({
+			position: "absolute",
+			top: "0px",
+			left: "0px",
+			right: "0px",
+			bottom: "0px",
+			backgroundColor: "rgba(0, 0, 0, 0.5)",
+			zIndex: "100",
+			display: "none"
+		});
+
+		var superlativeChooseBox = $("<div />");
+		superlativeChooseBox.appendTo(superlativeChooseCover);
+		superlativeChooseBox.css({
+			position: "absolute",
+			top: "50%",
+			left: "50%",
+
+			width: "400px",
+			height: "240px",
+
+			marginLeft: "-230px",
+			marginTop: "-150px",
+
+			backgroundColor: "rgba(255, 255, 255, 1)",
+			borderRadius: "20px",
+			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
+
+			padding: "30px"
+		});
+
+		var text = $("<p />");
+		text.appendTo(superlativeChooseBox);
+		text.css({
+			textAlign: "center",
+			fontSize: "38px",
+			marginTop: "10px"
+		});
+		loadingText.text("Logging in...");
+
+		var cancelButton = $("<input type=\"button\" />");
+		cancelButton.appendTo(superlativeChooseBox);
+		cancelButton.css({
+			width: "400px",
+			height: "80px",
+			fontSize: "24px",
+			marginTop: "40px"
+		});
+		cancelButton.val("Cancel");
+		cancelButton.click(function () {
+			if (globalLoadingCancelEvent) {
+				globalLoadingCancelEvent();
+			}
+		});
+
+		// username tip at bottom
+		var tipText = $("<p />");
+		tipText.appendTo(page);
+		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2013. It's the same thing you use to login to computers at WCHS.");
+		tipText.css({
+			fontSize: "24px",
+			marginTop: "40px",
+			lineHeight: "1.4em",
+			textAlign: "justify"
+		});
 
 	}
 };
+
+function superlativeChooseStudent(superlative, isMale) {
+	superlativeChooseCover.show();
+}
