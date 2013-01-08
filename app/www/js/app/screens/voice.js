@@ -159,14 +159,19 @@ function stepSuperlativeList(initial, j) {
 		return;
 	}
 	
+	var fontSize = (Math.floor(Math.random() * 60) + 22);
+	var yPosD = selectNewYPositionVoice(fontSize);
+	var yPos = yPosD[0];
+	var a = yPosD[1];
+	
 	var newItem = $("<div />");
 	newItem.css({
-		fontSize: (Math.floor(Math.random() * 60) + 22) + "px",
+		fontSize: fontSize + "px",
 		position: "absolute",
-		top: (Math.floor(Math.random() * (superlativesList.height() - 80))) + "px",
+		top: yPos + "px",
 		left: (initial ? (((Math.random() * 4000) - 2000)) : 2000) + "px",
 		width: "2000px",
-		opacity: (Math.random()),
+		opacity: a ? 0.2 : (Math.random()),
 		textAlign: "right"
 	});
 	newItem.text(getSuperlativeText());
@@ -186,6 +191,48 @@ function stepSuperlativeList(initial, j) {
 			stepSuperlativeList(false, j);
 		}, Math.random() * 1000);
 	}
+}
+
+function selectNewYPositionVoice(fontSize) {
+	var i = 0;
+	
+	while (i < 100) {
+		var y = (Math.floor(Math.random() * (superlativesList.height() - fontSize)));
+		
+		if (! voiceYConflicts(y, fontSize)) {
+			return [y, false];
+		}
+		
+		// console.log("conflict: " + i);
+		
+		i ++;
+	}
+	
+	return [(Math.floor(Math.random() * (superlativesList.height() - fontSize))), true];
+}
+
+function voiceYConflicts(y, fontSize) {
+	var children = superlativesList.children();
+	
+	for (var i = 0; i < children.length; i ++) {
+		var child = $(children[i]);
+		var pos = child.position();
+		
+		var newY1 = y;
+		var newY2 = y + fontSize;
+		
+		var oldY1 = pos.top;
+		var oldY2 = child.height() + pos.top;
+		//child.text(Math.floor(pos.left));
+		if ((newY1 > oldY1 && newY1 < oldY2) || (newY2 > oldY1 && newY2 < oldY2) || (oldY1 > newY1 && oldY1 < newY2) || (oldY2 > newY1 && oldY2 < newY2)) {
+			if (pos.left > (- 600)) {
+				//child.text(pos.left);
+				return true;
+			}
+		}
+	}
+	
+	return false;
 }
 
 function getSuperlativeText() {
