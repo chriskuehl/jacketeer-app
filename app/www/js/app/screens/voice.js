@@ -18,8 +18,8 @@ var screenVoice = {
 		superlativeIndex ++;
 		
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)",
+            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		var introText = $("<p />");
@@ -113,7 +113,8 @@ var screenVoice = {
                 border: "solid 2px rgba(150, 150, 150, 1)",
                 boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
                 boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
-				width: "838px"
+				width: "838px",
+            
 			});
 			div.data("screen", box.screen);
 			div.click(function() {
