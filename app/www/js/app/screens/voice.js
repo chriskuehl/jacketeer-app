@@ -223,10 +223,9 @@ function voiceYConflicts(y, fontSize) {
 		
 		var oldY1 = pos.top;
 		var oldY2 = child.height() + pos.top;
-		//child.text(Math.floor(pos.left));
+		
 		if ((newY1 > oldY1 && newY1 < oldY2) || (newY2 > oldY1 && newY2 < oldY2) || (oldY1 > newY1 && oldY1 < newY2) || (oldY2 > newY1 && oldY2 < newY2)) {
 			if (pos.left > (- 600)) {
-				//child.text(pos.left);
 				return true;
 			}
 		}

@@ -239,8 +239,6 @@ var screenSuperlatives = {
 		cancelButton.click(function () {
 			superlativeChooseCover.fadeOut(200);
 		});
-		
-		superlativeChooseStudent("Most Likely to Rule the World", true);
 	}
 };
 
