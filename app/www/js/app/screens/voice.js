@@ -244,5 +244,5 @@ function getSuperlativeText() {
 	var t = superlativesShort[i];
 	superlativesShort.remove(i);
 	
-	return t;
+	return t[0];
 }
