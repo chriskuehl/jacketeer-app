@@ -93,7 +93,7 @@ var screenVoice = {
 			
 			{
 				title: "Hail Woodford",
-				description: "Is there something about Woodford County that makes you bubble up with pride? Do you feel like shouting praise from the highest mountain in Versailles? Tell us what you hail about Woodford County and we'll include it (anonymously) in the book!",
+				description: "Is there something about Woodford County that makes you bubble up with pride? Do you feel like shouting praise from the highest mountain in Versailles? Tell us what you hail about Woodford County and we'll include it in the book!",
 				screen: screenHailWoodford
 			}
 		];
