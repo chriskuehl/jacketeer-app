@@ -6,7 +6,7 @@ var screenOrder = {
 	titleButton: {
 		text: "Back to My Yearbook",
 		event: function () {
-			setScreen(screenVoice);
+			setScreen(screenHelp);
 		}
 	},
 
