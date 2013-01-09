@@ -300,7 +300,7 @@ function setupStudentListScroll() {
 	// let the list of students scroll
 	// TODO: reduce duplicate code
 	superlativeStudentListScroll = new iScroll("studentListWrapper", {bounce: false});
-	return;
+	
 	// http://stackoverflow.com/questions/9210178/why-cant-i-click-input
 	superlativeStudentListScroll.options.onBeforeScrollStart = function(e) {                
 		var target = e.target;
@@ -331,9 +331,7 @@ function updateStudentFilter(query, isMale) {
 		}
 	}
 	
-	setTimeout(function() {
-		console.log("refreshed");
-		console.log(superlativeStudentListScroll);
+	setTimeout(function() 
 		superlativeStudentListScroll.refresh();
 	}, 1000);
 }
