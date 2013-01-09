@@ -1,4 +1,4 @@
-var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected, superlativeSearchBox, superlativeLoadingCover;
+var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected, superlativeSearchBox, superlativeLoadingCover, superlativeListTable;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -83,77 +83,11 @@ var screenSuperlatives = {
                         boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.15)"
 		});
 		
-		var table = $("<table />");
-		table.appendTo(tableHolder);
+		superlativeListTable = $("<table />");
+		superlativeListTable.appendTo(tableHolder);
 		
-		var superlatives = superlativeCategories;
-		
-		for (var i = 0; i < superlatives.length; i ++) {
-			var superlative = superlatives[i];
-			var row = $("<tr />");
-			if ((i % 2) == 0) {	 	
-				row.css("backgroundColor", "rgba(255, 255, 0, 0.1)");
-			}
-			row.appendTo(table);
-			
-			var d1 = $("<td />");
-			d1.appendTo(row);
-			d1.text(superlative[0]);
-			d1.css({
-				width: "540px",
-				fontSize: "42px",
-				textAlign: "center",
-				padding: "20px",
-				fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
-				verticalAlign: "middle",
-				color: "rgba(0, 0, 0, 0.8)"
-			});
-			
-			// male, female
-			for (var j = 0; j < 2; j ++) {
-				var selectedStudent = superlative[1 + j];
-				
-				var cell = $("<td />");
-				cell.appendTo(row);
-				cell.css({
-					width: "660px",
-					padding: "20px",
-					verticalAlign: "middle"
-				});
-				
-				var button = $("<a />");
-				button.appendTo(cell);
-				button.css({
-					borderRadius: "15px",
-					display: "block",
-					padding: "40px",
-					textAlign: "center",
-					fontSize: "32px",
-					border: "solid 2px rgba(150, 150, 150, 1)",
-					boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-					boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
-					backgroundColor: "rgba(253, 249, 207, 0.2)",
-				});
-				// button.addClass("buttonGrad");
-				
-				if (selectedStudent == null) {
-					button.text("tap to select");
-				} else {
-					button.text(selectedStudent);
-					button.css("fontFamily", "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"");
-				}
-				
-				button.data("superlative", superlative[0]);
-				button.data("isMale", (j == 0));
-				
-				button.click(function() {
-					var superlative = $(this).data("superlative");
-					var isMale = $(this).data("isMale");
-					
-					superlativeChooseStudent(superlative, isMale);
-				});
-			}
-		}
+		// populate the table
+		updateSuperlativeChoices(superlativeCategories);
 		
 		// let the list of superlatives scroll
 		var superlativesScroll = new iScroll("superlativesHolder", {bounce: false});
@@ -310,6 +244,77 @@ var screenSuperlatives = {
 	}
 };
 
+function updateSuperlativeChoices(superlatives) {
+	superlativeListTable.empty();
+	
+	for (var i = 0; i < superlatives.length; i ++) {
+		var superlative = superlatives[i];
+		var row = $("<tr />");
+		if ((i % 2) == 0) {	 	
+			row.css("backgroundColor", "rgba(255, 255, 0, 0.1)");
+		}
+		row.appendTo(superlativeListTable);
+	
+		var d1 = $("<td />");
+		d1.appendTo(row);
+		d1.text(superlative[0]);
+		d1.css({
+			width: "540px",
+			fontSize: "42px",
+			textAlign: "center",
+			padding: "20px",
+			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
+			verticalAlign: "middle",
+			color: "rgba(0, 0, 0, 0.8)"
+		});
+	
+		// male, female
+		for (var j = 1; j >= 0; j--) {
+			var selectedStudent = superlative[1 + j];
+		
+			var cell = $("<td />");
+			cell.appendTo(row);
+			cell.css({
+				width: "660px",
+				padding: "20px",
+				verticalAlign: "middle"
+			});
+		
+			var button = $("<a />");
+			button.appendTo(cell);
+			button.css({
+				borderRadius: "15px",
+				display: "block",
+				padding: "40px",
+				textAlign: "center",
+				fontSize: "32px",
+				border: "solid 2px rgba(150, 150, 150, 1)",
+				boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+				boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
+				backgroundColor: "rgba(253, 249, 207, 0.2)",
+			});
+			// button.addClass("buttonGrad");
+		
+			if (selectedStudent == null) {
+				button.text("tap to select");
+			} else {
+				button.text(selectedStudent);
+				button.css("fontFamily", "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"");
+			}
+		
+			button.data("superlative", superlative[0]);
+			button.data("isMale", (j == 1));
+		
+			button.click(function() {
+				var superlative = $(this).data("superlative");
+				var isMale = $(this).data("isMale");
+			
+				superlativeChooseStudent(superlative, isMale);
+			});
+		}
+	}
+}
+
 function superlativeChooseStudent(superlative, isMale) {
 	superlativeLoadingCover.hide();
 	superlativeSearchBox.val("");
@@ -440,7 +445,7 @@ function saveSuperlative(superlative, isMale, student) {
 
 	req.done(function (data) {
 		if (data.success) {
-			// updateSuperlativeChoices(data.superlativeChoices);
+			updateSuperlativeChoices(data.superlatives);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
 		}
