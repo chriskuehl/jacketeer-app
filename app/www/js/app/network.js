@@ -22,7 +22,7 @@ function actuallyUpdateInformation() {
 			userInfo = data.info;
 			studentList = data.students;
 			superlativeCategories = data.superlatives;
-			setScreen(screenSuperlatives);
+			setScreen(screenSuggestCoverage);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
 			globalLoadingCover.stop(true).hide();
