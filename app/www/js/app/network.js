@@ -1,5 +1,6 @@
 // responsible for handling network communication and user details
 var studentList;
+var superlativeCategories;
 
 // used by #updateInformation to refresh all info we have on the user
 function actuallyUpdateInformation() {
@@ -20,6 +21,7 @@ function actuallyUpdateInformation() {
 		if (data.success) {
 			userInfo = data.info;
 			studentList = data.students;
+			superlativeCategories = data.superlatives;
 			setScreen(screenSuperlatives);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");

@@ -1,44 +1,4 @@
-var superlativeCategories = [
-	"Best Smile",
-	"Most Original",
-	"Most School Spirit",
-	"Class Clown",
-	"Most Friendly",
-	"Most Artistic",
-	"Best Ride",
-	"Worst Case of Senioritis",
-	"Teacher's Pet",
-	"Most Athletic",
-	"Most Sarcastic",
-	"Worst Driver",
-	"Most Flirtatious",
-	"Most Likely to Be Famous",
-	"Most Likely to Travel the world",
-	"Most likely to live with Their Parents in 20 Years",
-	"Best Dance Moves",
-	"Most Likely to Get a Useless Degree",
-	"Most Likely to Succeed",
-	"Most Likely to Make a Time Machine",
-	"Most Likely to Steal a Time Machine",
-	"Most Likely to Go on Jersey Shore",
-	"Most Likely to Trip UP the Stairs",
-	"Best Should-Have-Been Couple",
-	"Best Body",
-	"Best Dressed",
-	"Best All-Around",
-	"Most Twitter-Active",
-	"Most Changed",
-	"Most Likely to Rule the World",
-	"Most Likely to Get a Ticket",
-	"Most Likely to Be a Reality TV Star",
-	"Best Person with Which to Share a Desert Island",
-	"Best Hair",
-	"Most Tardies",
-	"Most Likely to Dissapear after High School",
-	"Most Hours Spent at School"
-];
-
-var superlativeChooseCover;
+var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -126,13 +86,7 @@ var screenSuperlatives = {
 		var table = $("<table />");
 		table.appendTo(tableHolder);
 		
-		var superlatives = [
-			
-		];
-		
-		for (var i = 0; i < superlativeCategories.length; i ++) {
-			superlatives.push([superlativeCategories[i], null, null]);
-		}
+		var superlatives = superlativeCategories;
 		
 		for (var i = 0; i < superlatives.length; i ++) {
 			var superlative = superlatives[i];
@@ -175,9 +129,9 @@ var screenSuperlatives = {
 					padding: "40px",
 					textAlign: "center",
 					fontSize: "32px",
-                    border: "solid 2px rgba(150, 150, 150, 1)",
-                    boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-                    boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
+					border: "solid 2px rgba(150, 150, 150, 1)",
+					boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
+					boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 					backgroundColor: "rgba(253, 249, 207, 0.2)",
 				});
 				// button.addClass("buttonGrad");
@@ -196,7 +150,7 @@ var screenSuperlatives = {
 					var superlative = $(this).data("superlative");
 					var isMale = $(this).data("isMale");
 					
-					alert("s=" + superlative + ", isMale=" + isMale);
+					superlativeChooseStudent(superlative, isMale);
 				});
 			}
 		}
@@ -212,7 +166,7 @@ var screenSuperlatives = {
 			if (target.tagName != 'A') {
 				e.preventDefault();
 			}
-		}
+		};
 		
 		// help text at bottom
 		var helpText = $("<p />");
@@ -230,8 +184,6 @@ var screenSuperlatives = {
 		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to select a student. All superlatives are optional. If you can't think of a good match, just leave it blank.");
 		
 		// "choose student" window
-		
-		// loading cover
 		superlativeChooseCover = $("<div />");
 		superlativeChooseCover.appendTo(container);
 		superlativeChooseCover.css({
@@ -252,11 +204,10 @@ var screenSuperlatives = {
 			top: "50%",
 			left: "50%",
 
-			width: "400px",
-			height: "240px",
+			width: "820px",
 
-			marginLeft: "-230px",
-			marginTop: "-150px",
+			marginLeft: "-440px",
+			marginTop: "-350px",
 
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
@@ -265,34 +216,139 @@ var screenSuperlatives = {
 			padding: "30px"
 		});
 
-		var text = $("<p />");
-		text.appendTo(superlativeChooseBox);
-		text.css({
+		superlativeTitleText = $("<h3 />");
+		superlativeTitleText.appendTo(superlativeChooseBox);
+		superlativeTitleText.css({
 			textAlign: "center",
-			fontSize: "38px",
-			marginTop: "10px"
+			fontSize: "46px",
+			marginTop: "10px",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			marginBottom: "30px"
 		});
+
+		superlativeGenderText = $("<h3 />");
+		superlativeGenderText.appendTo(superlativeChooseBox);
+		superlativeGenderText.css({
+			textAlign: "center",
+			fontSize: "32px",
+			marginTop: "10px",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			marginBottom: "30px",
+			color: "rgba(0, 0, 0, 0.6)"
+		});
+		
+		var searchBox = $("<input type=\"input\" />");
+		searchBox.appendTo(superlativeChooseBox);
+		searchBox.attr({
+			placeholder: "Start typing a name...",
+			autoCorrect: "off",
+			autoCapitalize: "off"
+		});
+		searchBox.css({
+			fontSize: "38px",
+			padding: "10px",
+			width: "800px"
+		});
+		
+		var studentListWrapper = $("<div />");
+		studentListWrapper.attr("id", "studentListWrapper");
+		studentListWrapper.appendTo(superlativeChooseBox);
+		studentListWrapper.css({
+			border: "solid 3px rgba(0, 0, 0, 0.3)",
+			marginTop: "30px",
+			overflow: "auto",
+			width: "820px",
+			height: "300px",
+			marginBottom: "30px"
+		});
+		
+		
+		
+		studentListContainer = $("<div />");
+		studentListContainer.appendTo(studentListWrapper);
 
 		var cancelButton = $("<input type=\"button\" />");
 		cancelButton.appendTo(superlativeChooseBox);
 		cancelButton.css({
-			width: "400px",
+			width: "820px",
 			height: "80px",
-			fontSize: "24px",
-			marginTop: "40px"
+			fontSize: "24px"
 		});
 		cancelButton.val("Cancel");
 		cancelButton.click(function () {
-			if (globalLoadingCancelEvent) {
-				globalLoadingCancelEvent();
-			}
+			superlativeChooseCover.fadeOut(200);
 		});
 		
-		superlativeChooseStudent(superlative, true);
-
+		superlativeChooseStudent("Most Likely to Rule the World", true);
 	}
 };
 
 function superlativeChooseStudent(superlative, isMale) {
+	superlativeTitleText.text(superlative);
+	superlativeGenderText.text(isMale ? "Male" : "Female");
+
+	updateStudentFilter("", isMale);
+	
 	superlativeChooseCover.show();
+}
+
+function setupStudentListScroll() {
+	if (superlativeStudentListScroll) {
+		return; // has already been setup
+	}
+	
+	addBlankElementToStudentList();
+	
+	// let the list of students scroll
+	// TODO: reduce duplicate code
+	superlativeStudentListScroll = new iScroll("studentListWrapper", {bounce: false});
+	return;
+	// http://stackoverflow.com/questions/9210178/why-cant-i-click-input
+	superlativeStudentListScroll.options.onBeforeScrollStart = function(e) {                
+		var target = e.target;
+
+		while (target.nodeType != 1) target = target.parentNode;
+		if (target.tagName != 'A') {
+			e.preventDefault();
+		}
+	};
+}
+
+function addBlankElementToStudentList() {
+	return;
+	
+	if (studentListBlankElement) {
+		return;
+	}
+	
+	studentListBlankElement = $("<div />");
+	studentListBlankElement.appendTo(studentListContainer);
+	studentListBlankElement.css("height", "20px"); //"display", "none");
+}
+
+function updateStudentFilter(query, isMale) {
+	setupStudentListScroll();
+	
+	studentListContainer.empty();
+	addBlankElementToStudentList();
+
+	for (var studentIndex = 0; studentIndex < studentList.length; studentIndex ++) {
+		var student = studentList[studentIndex];
+		
+		if (student.IsMale == isMale && student.FirstName != userInfo.FirstName && student.LastName != userInfo.LastName) {
+			var studentRow = $("<a />");
+			studentRow.appendTo(studentListContainer);
+			studentRow.css({
+				display: "block"
+			});
+			studentRow.data("student", student);
+			studentRow.text(student.LastName + ", " + student.FirstName);
+		}
+	}
+	
+	setTimeout(function() {
+		console.log("refreshed");
+		console.log(superlativeStudentListScroll);
+		superlativeStudentListScroll.refresh();
+	}, 1000);
 }
