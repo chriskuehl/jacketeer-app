@@ -24,6 +24,8 @@
 	<true/>
 	<key>ExternalHosts</key>
 	<array>
+		<string>yearbookordercenter.com</string>
+		<string>www.yearbookordercenter.com</string>
 		<string>jacketeer.org</string>
 	</array>
 	<key>Plugins</key>
