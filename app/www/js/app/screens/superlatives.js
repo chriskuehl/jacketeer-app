@@ -297,8 +297,6 @@ function setupStudentListScroll() {
 		return; // has already been setup
 	}
 	
-	addBlankElementToStudentList();
-	
 	// let the list of students scroll
 	// TODO: reduce duplicate code
 	superlativeStudentListScroll = new iScroll("studentListWrapper", {bounce: false});
@@ -314,23 +312,10 @@ function setupStudentListScroll() {
 	};
 }
 
-function addBlankElementToStudentList() {
-	return;
-	
-	if (studentListBlankElement) {
-		return;
-	}
-	
-	studentListBlankElement = $("<div />");
-	studentListBlankElement.appendTo(studentListContainer);
-	studentListBlankElement.css("height", "20px"); //"display", "none");
-}
-
 function updateStudentFilter(query, isMale) {
 	setupStudentListScroll();
 	
 	studentListContainer.empty();
-	addBlankElementToStudentList();
 
 	for (var studentIndex = 0; studentIndex < studentList.length; studentIndex ++) {
 		var student = studentList[studentIndex];
