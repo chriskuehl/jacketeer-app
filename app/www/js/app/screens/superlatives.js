@@ -1,4 +1,4 @@
-var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected;
+var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected, superlativeSearchBox, superlativeLoadingCover;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -56,7 +56,7 @@ var screenSuperlatives = {
 			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
 			color: "rgba(0, 0, 0, 0.8)"
 		});
-		c2.text("MALE");
+		c2.text("Male");
 		
 		var c3 = $("<td />");
 		c3.appendTo(headerRow);
@@ -66,7 +66,7 @@ var screenSuperlatives = {
 			fontFamily: "\"Helvetica Neue Medium\", \"HelveticaNeue-Medium\"",
 			color: "rgba(0, 0, 0, 0.8)"
 		});
-		c3.text("FEMALE");
+		c3.text("Female");
 		
 		var tableHolder = $("<div />");
 		tableHolder.appendTo(container);
@@ -204,10 +204,10 @@ var screenSuperlatives = {
 			top: "50%",
 			left: "50%",
 
-			width: "820px",
+			width: "1020px",
 
-			marginLeft: "-440px",
-			marginTop: "-350px",
+			marginLeft: "-540px",
+			marginTop: "-450px",
 
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
@@ -215,6 +215,31 @@ var screenSuperlatives = {
 
 			padding: "30px"
 		});
+		
+		superlativeLoadingCover = $("<div />");
+		superlativeLoadingCover.appendTo(superlativeChooseBox);
+		superlativeLoadingCover.css({
+			position: "absolute",
+			top: "0px",
+			left: "0px",
+			right: "0px",
+			bottom: "0px",
+			backgroundColor: "rgba(0, 0, 0, 0.8)",
+			borderRadius: "20px",
+			zIndex: "1000",
+			display: "none"
+		});
+		
+		var superlativeLoadingText = $("<p />");
+		superlativeLoadingText.appendTo(superlativeLoadingCover);
+		superlativeLoadingText.css({
+			color: "rgba(255, 255, 255, 0.9)",
+			fontSize: "64px",
+			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
+			textAlign: "center",
+			marginTop: "500px"
+		});
+		superlativeLoadingText.html("Saving...");
 
 		superlativeTitleText = $("<h3 />");
 		superlativeTitleText.appendTo(superlativeChooseBox);
@@ -223,7 +248,7 @@ var screenSuperlatives = {
 			fontSize: "46px",
 			marginTop: "10px",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
-			marginBottom: "30px"
+			marginBottom: "10px"
 		});
 
 		superlativeGenderText = $("<h3 />");
@@ -231,26 +256,26 @@ var screenSuperlatives = {
 		superlativeGenderText.css({
 			textAlign: "center",
 			fontSize: "32px",
-			marginTop: "10px",
+			marginTop: "0px",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
 			marginBottom: "30px",
 			color: "rgba(0, 0, 0, 0.6)"
 		});
 		
-		var searchBox = $("<input type=\"text\" />");
-		searchBox.appendTo(superlativeChooseBox);
-		searchBox.attr({
-			placeholder: "Start typing a name...",
+		superlativeSearchBox = $("<input type=\"text\" />");
+		superlativeSearchBox.appendTo(superlativeChooseBox);
+		superlativeSearchBox.attr({
+			placeholder: "Start typing a first or last name...",
 			autoCorrect: "off",
 			autoCapitalize: "off"
 		});
-		searchBox.css({
+		superlativeSearchBox.css({
 			fontSize: "38px",
 			padding: "10px",
-			width: "800px"
+			width: "1000px"
 		});
 		
-		searchBox.bind("keyup keydown", function() {
+		superlativeSearchBox.bind("keyup keydown", function() {
 			updateStudentFilter($(this).val(), superlativeIsMale);
 		});
 		
@@ -261,12 +286,10 @@ var screenSuperlatives = {
 			border: "solid 3px rgba(0, 0, 0, 0.3)",
 			marginTop: "30px",
 			overflow: "auto",
-			width: "820px",
-			height: "300px",
+			width: "1020px",
+			height: "500px",
 			marginBottom: "30px"
 		});
-		
-		
 		
 		studentListContainer = $("<div />");
 		studentListContainer.appendTo(studentListWrapper);
@@ -274,7 +297,7 @@ var screenSuperlatives = {
 		var cancelButton = $("<input type=\"button\" />");
 		cancelButton.appendTo(superlativeChooseBox);
 		cancelButton.css({
-			width: "820px",
+			width: "1020px",
 			height: "80px",
 			fontSize: "24px"
 		});
@@ -288,6 +311,13 @@ var screenSuperlatives = {
 };
 
 function superlativeChooseStudent(superlative, isMale) {
+	superlativeLoadingCover.hide();
+	superlativeSearchBox.val("");
+	
+	if (superlativeStudentListScroll) {
+		superlativeStudentListScroll.scrollTo(0, 0, 0);
+	}
+	
 	superlativeSelected = superlative;
 	superlativeIsMale = isMale;
 	superlativeTitleText.text(superlative);
@@ -374,7 +404,10 @@ function updateStudentFilter(query, isMale) {
 				var student = $(this).data("student");
 				navigator.notification.alert("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
 					if (response == 1) {
-						superlativeChooseCover.fadeOut(200);
+						superlativeLoadingCover.fadeIn(300, function() {
+							// try to save
+							saveSuperlative(superlativeSelected, superlativeIsMale, student);
+						});
 					}
 				}, "Confirm Nomination", "Nominate,Cancel");
 			});
@@ -386,4 +419,42 @@ function updateStudentFilter(query, isMale) {
 	setTimeout(function() {
 		superlativeStudentListScroll.refresh();
 	}, 1000);
+}
+
+function saveSuperlative(superlative, isMale, student) {
+	var loginDetails = getLoginDetails();
+	
+	req = $.ajax("https://jacketeer.org/app/superlative.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+		type: "POST",
+		data: {
+			superlative: superlative,
+			isMale: isMale,
+			studentFirstName: student.FirstName,
+			studentMiddleName: student.MiddleName,
+			studentLastName: student.LastName,
+			user: loginDetails.user,
+			token: localStorage.loginToken
+		},
+		cache: false
+	});
+
+	req.done(function (data) {
+		if (data.success) {
+			// updateSuperlativeChoices(data.superlativeChoices);
+		} else {
+			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+		}
+		
+		superlativeChooseCover.fadeOut(200);
+	});
+
+	req.fail(function () {
+		navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+			if (response == 1) {
+				saveSuperlative(superlative, isMale, student);
+			} else {
+				superlativeChooseCover.fadeOut(200);
+			}
+		}, "Connection Problems", "Try Again,Cancel");
+	});
 }
