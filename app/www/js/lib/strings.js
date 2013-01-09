@@ -10,3 +10,9 @@ if (typeof String.prototype.endsWith != 'function') {
     return this.slice(-str.length) == str;
   };
 }
+
+if (typeof String.prototype.contains != 'function') {
+	String.prototype.contains = function(it) {
+		return this.indexOf(it) != -1;
+	};
+}

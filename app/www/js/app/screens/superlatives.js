@@ -1,4 +1,4 @@
-var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer;
+var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -181,7 +181,7 @@ var screenSuperlatives = {
 			marginRight: "40px",
 			marginTop: "20px"
 		});
-		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to select a student. All superlatives are optional. If you can't think of a good match, just leave it blank.");
+		helpText.html("Scroll the area above to see all possible superlatives. Tap a button to nominate a student (or to change your current selection). All superlatives are optional. If you can't think of a good match, just leave it blank.");
 		
 		// "choose student" window
 		superlativeChooseCover = $("<div />");
@@ -237,7 +237,7 @@ var screenSuperlatives = {
 			color: "rgba(0, 0, 0, 0.6)"
 		});
 		
-		var searchBox = $("<input type=\"input\" />");
+		var searchBox = $("<input type=\"text\" />");
 		searchBox.appendTo(superlativeChooseBox);
 		searchBox.attr({
 			placeholder: "Start typing a name...",
@@ -248,6 +248,10 @@ var screenSuperlatives = {
 			fontSize: "38px",
 			padding: "10px",
 			width: "800px"
+		});
+		
+		searchBox.bind("keyup keydown", function() {
+			updateStudentFilter($(this).val(), superlativeIsMale);
 		});
 		
 		var studentListWrapper = $("<div />");
@@ -284,12 +288,14 @@ var screenSuperlatives = {
 };
 
 function superlativeChooseStudent(superlative, isMale) {
+	superlativeSelected = superlative;
+	superlativeIsMale = isMale;
 	superlativeTitleText.text(superlative);
 	superlativeGenderText.text(isMale ? "Male" : "Female");
 
 	updateStudentFilter("", isMale);
 	
-	superlativeChooseCover.show();
+	superlativeChooseCover.fadeIn(200);
 }
 
 function setupStudentListScroll() {
@@ -312,26 +318,72 @@ function setupStudentListScroll() {
 	};
 }
 
+function studentMatchesQuery(query, student) {
+	if (query == "" || query == null) {
+		return true;
+	}
+	
+	query = query.toLowerCase();
+	
+	var possibilities = [
+		student.FirstName + " " + student.LastName,
+		student.FirstName + student.LastName,
+		student.LastName + ", " + student.FirstName,
+		student.LastName + " " + student.FirstName,
+		student.LastName + student.FirstName,
+		student.FirstName + " " + student.MiddleName + " " + student.LastName
+	];
+	
+	for (var i = 0; i < possibilities.length; i ++) {
+		var possibility = possibilities[i].toLowerCase();
+		
+		if (possibility.startsWith(query)) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 function updateStudentFilter(query, isMale) {
 	setupStudentListScroll();
 	
 	studentListContainer.empty();
-
+	
+	var j = 0;
 	for (var studentIndex = 0; studentIndex < studentList.length; studentIndex ++) {
 		var student = studentList[studentIndex];
 		
-		if (student.IsMale == isMale && student.FirstName != userInfo.FirstName && student.LastName != userInfo.LastName) {
+		if (student.IsMale == isMale && student.FirstName != userInfo.FirstName && student.LastName != userInfo.LastName && studentMatchesQuery(query, student)) {
 			var studentRow = $("<a />");
 			studentRow.appendTo(studentListContainer);
 			studentRow.css({
-				display: "block"
+				display: "block",
+				padding: "16px",
+				fontSize: "48px"
 			});
+			
+			if ((j % 2) == 0) {
+				studentRow.css("backgroundColor", "rgba(255, 255, 0, 0.1)");
+			}
+			
 			studentRow.data("student", student);
 			studentRow.text(student.LastName + ", " + student.FirstName);
+			
+			studentRow.click(function() {
+				var student = $(this).data("student");
+				navigator.notification.alert("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
+					if (response == 1) {
+						superlativeChooseCover.fadeOut(200);
+					}
+				}, "Confirm Nomination", "Nominate,Cancel");
+			});
+			
+			j ++;
 		}
 	}
 	
-	setTimeout(function() 
+	setTimeout(function() {
 		superlativeStudentListScroll.refresh();
 	}, 1000);
 }
