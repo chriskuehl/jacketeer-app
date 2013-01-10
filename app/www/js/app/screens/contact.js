@@ -48,7 +48,7 @@ var screenContact = {
 			fontSize: "48px",
 			width: "1600px",
 			padding: "20px",
-			marginBottom: "40px",
+			marginBottom: "40px"
 		});
 		inputEmail.val(userInfo.Email);
 		
