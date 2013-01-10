@@ -447,6 +447,7 @@ function saveSuperlative(superlative, isMale, student) {
 
 	req.done(function (data) {
 		if (data.success) {
+			superlativeCategories = data.superlatives;
 			updateSuperlativeChoices(data.superlatives);
 		} else {
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");

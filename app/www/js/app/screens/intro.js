@@ -254,6 +254,10 @@ var screenIntro = {
 
 			globalLoadingText.text("Logging in...");
 			globalLoadingCancelEvent = function () {
+				if (req.aborted) {
+					return;
+				}
+				
 				req.aborted = true;
 				req.abort();
 

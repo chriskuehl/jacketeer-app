@@ -82,6 +82,7 @@ function updateInformation(reqToHandle) {
 	var req;
 	var updateTimeout;
 	var submittedRealRequest = false;
+	var hasCancelled = false;
 
 	if (reqToHandle) {
 		// need to submit some update request before reloading information
@@ -129,6 +130,12 @@ function updateInformation(reqToHandle) {
 
 	// handle what happens when we cancel
 	globalLoadingCancelEvent = function () {
+		if (hasCancelled) {
+			return;
+		}
+		
+		hasCancelled = true;
+		
 		// if we haven't submitted the actual request, just cancel the timeout it's waiting on
 		if (updateTimeout && !submittedRealRequest) {
 			window.clearTimeout(updateTimeout);
