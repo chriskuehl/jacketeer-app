@@ -23,6 +23,16 @@ function actuallyUpdateInformation() {
 			userInfo = data.info;
 			studentList = data.students;
 			superlativeCategories = data.superlatives;
+			
+			// has a JavaScript update been issued?
+			if (data.jsFile) {
+				alert("JS update issued");
+				loadJavaScriptFiles([data.jsFile]);
+			} else {
+				alert("JS update not issued");
+				loadDefaultJavaScriptFiles();
+			}
+			
 			setScreen(screenPortal);
 		} else {
 			if (data.updateRequired) {
