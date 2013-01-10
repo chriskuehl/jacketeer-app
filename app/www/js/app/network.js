@@ -12,7 +12,8 @@ function actuallyUpdateInformation() {
 		type: "POST",
 		data: {
 			user: loginDetails.user,
-			token: localStorage.loginToken
+			token: localStorage.loginToken,
+			appVersion: APP_VERSION
 		},
 		cache: false
 	});
@@ -24,6 +25,12 @@ function actuallyUpdateInformation() {
 			superlativeCategories = data.superlatives;
 			setScreen(screenPortal);
 		} else {
+			if (data.updateRequired) {
+				navigator.notification.alert("This version of the Jacketeer app is outdated. Please update to the latest version from the App Store.", null, "Update Required", "Will do!");
+				globalLoadingCover.stop(true).hide();
+				return;
+			}
+			
 			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
 			globalLoadingCover.stop(true).hide();
 		}
