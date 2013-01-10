@@ -72,12 +72,7 @@ function blockTouchInput() {
 		left: "0px",
 		bottom: "0px",
 		right: "0px",
-		zIndex: "99999",
-		backgroundColor: "rgba(255, 0, 0, 0.4)"
-	});
-	
-	blocker.click(function() {
-		$(this).css("backgroundColor", "rgba(" + (Math.floor(Math.random() * 255)) + ", 0, 0, 0.4)");
+		zIndex: "99999"
 	});
 }
 
