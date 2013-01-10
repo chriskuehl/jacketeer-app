@@ -78,6 +78,7 @@ var screenSuperlatives = {
 			marginLeft: "auto",
 			marginRight: "auto",
 			marginTop: "0px",
+            //borderRadius: "15px",
             //border: "solid 2px rgba(150, 150, 150, 1)",
                         backgroundColor: "rgba(255,255,255,0.8)",
                         boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.15)"
@@ -249,8 +250,10 @@ function updateSuperlativeChoices(superlatives) {
 		var superlative = superlatives[i];
 		var row = $("<tr />");
 		if ((i % 2) == 0) {	 	
-			row.css("backgroundColor", "rgba(255, 255, 0, 0.1)");
-		}
+			row.css("backgroundColor", "rgba(255, 255, 100, 0.1)");
+		} else {
+            row.css("backgroundColor", "rgba(255, 255, 255, 1)");
+        }
 		row.appendTo(superlativeListTable);
 	
 		var d1 = $("<td />");
@@ -289,12 +292,13 @@ function updateSuperlativeChoices(superlatives) {
 				border: "solid 2px rgba(150, 150, 150, 1)",
 				boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
 				boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
-				backgroundColor: "rgba(253, 249, 207, 0.2)",
+				backgroundColor: "rgba(253, 249, 207, 1)",
 			});
 			// button.addClass("buttonGrad");
 		
 			if (selectedStudent == null) {
 				button.text("tap to select");
+				button.css("color", "gray");
 			} else {
 				button.text(selectedStudent);
 				button.css("fontFamily", "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"");
