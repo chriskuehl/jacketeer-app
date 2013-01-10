@@ -2,6 +2,8 @@ var ui = [];
 var container;
 
 function initInterface() {
+	document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
+	
 	// create the general interface elements
 	container = $("#container");
 
@@ -57,6 +59,30 @@ function initInterface() {
 	});
 }
 
+var blocker;
+
+function blockTouchInput() {
+	unblockTouchInput();
+	
+	blocker = $("<div />");
+	blocker.appendTo($("body"));
+	blocker.css({
+		position: "fixed",
+		top: "0px",
+		left: "0px",
+		bottom: "0px",
+		right: "0px",
+		zIndex: "99999",
+		backgroundColor: "rgba(255, 0, 0, 0.4)"
+	});
+}
+
+function unblockTouchInput() {
+	if (blocker) {
+		blocker.remove();
+	}
+}
+
 function updateTitle(newTitle) {
 	if (newTitle != null) {
 		$("title").text(newTitle);
@@ -102,6 +128,8 @@ function setScreen(screen) {
 
 	// is a screen already being displayed?
 	if (ui.screen != null) {
+		blockTouchInput();
+		
 		// attempt to intelligently switch screens
 		if (ui.screen.data("conf") && ui.screen.data("conf").parent == screen.id || screen.id == "intro") { // go "back"
 			// the old (current) screen is a child of the new screen, so the old screen should
@@ -116,6 +144,7 @@ function setScreen(screen) {
 				left: (ui.screenContainer.width() * 2) + "px"
 			}, 500, "swing", function () {
 				$(this).remove();
+				unblockTouchInput();
 			});
 		} else { // go forward to a new screen
 			// the new screen is probably a child of the current one (even if not explicitly defined)
@@ -130,6 +159,7 @@ function setScreen(screen) {
 				left: "-" + (ui.screenContainer.width()) + "px"
 			}, 500, "swing", function () {
 				$(this).remove();
+				unblockTouchInput();
 			});
 		}
 	}
