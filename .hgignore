@@ -6,3 +6,4 @@ app/Jacketeer.xcodeproj/project.xcworkspace/xcuserdata/*
 app/Jacketeer.xcodeproj/project.xcworkspace/xcuserdata/
 xcuserdata
 .DS_Store
+app/www/js-bin/*
