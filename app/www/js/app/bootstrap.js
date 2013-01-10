@@ -34,7 +34,7 @@ function loadDefaultJavaScriptFiles(callback) {
 		"js/app/screens/help.js",
 		"js/app/screens/contact.js",
 		"js/app/screens/order.js",
-		"js/app/start.js",
+		"js/app/start.js"
 	];
 	
 	loadJavaScriptFiles(files, callback);
