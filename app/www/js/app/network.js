@@ -24,16 +24,16 @@ function actuallyUpdateInformation() {
 			studentList = data.students;
 			superlativeCategories = data.superlatives;
 			
+			var callback = function() {
+				startApp();
+			};
+			
 			// has a JavaScript update been issued?
 			if (data.jsFile) {
-				alert("JS update issued");
-				loadJavaScriptFiles([data.jsFile]);
+				loadJavaScriptFiles([data.jsFile], callback);
 			} else {
-				alert("JS update not issued");
-				loadDefaultJavaScriptFiles();
+				loadDefaultJavaScriptFiles(callback);
 			}
-			
-			setScreen(screenPortal);
 		} else {
 			if (data.updateRequired) {
 				navigator.notification.alert("This version of the Jacketeer app is outdated. Please update to the latest version from the App Store.", null, "Update Required", "Will do!");
