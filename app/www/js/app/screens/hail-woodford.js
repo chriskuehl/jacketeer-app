@@ -99,7 +99,8 @@ var screenHailWoodford = {
 		inputName.attr({
 			name: "inputName",
 			placeHolder: randomPlaceholderHail(),
-			autoCorrect: "off"
+			autoCorrect: "on",
+			autoCapitalize: "off"
 		});
 		inputName.css({
 			padding: "10px",
@@ -110,9 +111,6 @@ var screenHailWoodford = {
 			fontSize: "48px"
 		});
 		inputName.val(name);
-		inputName.keyup(function () {
-			demoName.html($(this).val().replace(/ /g, "<br />"));
-		});
 
 		// submit
 		var submit = $("<input type=\"button\" />");

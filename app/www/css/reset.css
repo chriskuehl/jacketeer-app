@@ -50,6 +50,6 @@ table {
     -webkit-user-select: none;                     /* prevent copy paste, to allow, change 'none' to 'text' */
 }
 
-input[type='text'], input[type='password'], textarea {
+input[type='text'], input[type='password'], input[type='email'], textarea {
 	-webkit-user-select: text;
 }
