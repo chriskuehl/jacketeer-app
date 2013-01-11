@@ -1,3 +1,5 @@
+var orderIframeLoader;
+
 var screenOrder = {
 	id: "order",
 	title: "Order Your Yearbook",
@@ -25,26 +27,33 @@ var screenOrder = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("To order your yearbook, click the button below and use the school code \"14548\".");
+		introText.html("To order your yearbook, visit www.yearbookordercenter.com and use the school code \"14548\".");
 		
 		// submit button
-		var p = $("<p />");
+		/*var p = $("<p />");
 		p.appendTo(container);
 		p.css("textAlign", "center");
 		
-		var submit = $("<input type=\"button\" />");
+		
+		var submit = $("<a />");
+		submit.attr({
+			href: "https://jacketjournal.com/index.cfm/jobSearch/displayLanding?searchNbr=jobNbr&txtSearchNbr=14548",
+			target: "_blank"
+		});
 		submit.appendTo(p);
 		submit.css({
 			fontSize: "48px",
 			backgroundColor: "rgba(100, 100, 0, 0.1)",
 			textAlign: "center",
-			marginTop: "60px"
+			marginTop: "100px",
+			border: "solid 4px rgba(0, 0, 0, 0.4)",
+			backgroundColor: "rgba(255, 255, 0, 0.4)",
+			padding: "30px",
+			borderRadius: "15px",
+			textDecoration: "none",
+			color: "rgba(0, 0, 0, 0.8)"
 		});
-		submit.val("Place an Order");
-
-		submit.click(function () {
-			window.location.href = "https://www.yearbookordercenter.com/index.cfm/jobSearch/displayLanding?searchNbr=jobNbr&txtSearchNbr=14548";
-		});
+		submit.text("Place an Order"); */
 		
 		/*
 		var iframeHolder = $("<div />");
@@ -57,21 +66,60 @@ var screenOrder = {
 		});
 		iframeHolder.appendTo(container);
 		
-		$.post("https://www.yearbookordercenter.com/index.cfm/jobSearch/displayLanding", {searchNbr: "jobNbr", txtSearchNbr: "14548"}, function() {
+		orderIframeLoader = $("<iframe />");
+		orderIframeLoader.appendTo(container);
+		orderIframeLoader.attr({
+			width: "1",
+			height: "1"
+		});
+		
+		loadOrder("https://www.yearbookordercenter.com/index.cfm/jobSearch/displayLanding", {searchNbr: "jobNbr", txtSearchNbr: "14548"}, function(data) {
+			var hasLoaded = false;
+			
 			var iframe = $("<iframe />");
 			iframe.appendTo(iframeHolder);
 			iframe.attr({
 				src: "https://www.yearbookordercenter.com/index.cfm/Product/index",
-				width: iframeHolder.innerWidth(),
-				height: iframeHolder.innerHeight(),
+				width: iframeHolder.innerWidth() / 2,
+				height: iframeHolder.innerHeight() / 2,
 				seamless: "seamless"
 			});
 			
+			//iframe[0].contentDocument.open();
+			//iframe[0].contentDocument.write(data);
+			//iframe[0].contentDocument.close();
+			
 			iframe.load(function() {
 				var contents = $(this).contents();
-				contents.find('head').append('<meta id="viewport" name="viewport" content="width=device-width; initial-scale=2.0; maximum-scale=3.0; user-scalable=1; minimum-scale=2.0;">');
+				
+				if (contents.find("html")[0].outerHTML.contains("jacketeer.org")) {
+					return alert("l8r=" + iframe[0].contentDocument.cookie);;
+				}
+				
+				//alert(iframe[0].contentDocument.cookie);
+				
+				// contents.find('head').append('<meta id="viewport" name="viewport" content="width=1024, initial-scale=5.0, maximum-scale=5.0, user-scalable=0, minimum-scale=5.0">');
+				contents.find("body").css("zoom", 2); // = 2.0;
+				contents.find("script[src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js']").attr("src", "https://jacketeer.org/app/order/jquery.min.js");
+				
+				console.log(contents.find("html")[0].outerHTML);
+				var html = contents.find("html")[0].outerHTML;
+				
+				
+				//iframe[0].contentDocument.open();
+				iframe[0].contentDocument.write(html + "<script>document.domain = \"www.yearbookordercenter.com\";</script>"); // + " <!-- test --> <script>alert(document.cookie);</script>");
+				//iframe[0].contentDocument.domain = ";
+				//iframe[0].contentDocument.close();
+				alert("after=" + iframe[0].contentDocument.cookie);
 			});
 		});*/
 
 	}
 };
+
+function loadOrder(url, data, callback) {
+	orderIframeLoader.attr("src", url);
+	orderIframeLoader.load(function() {
+		callback();
+	});
+}
