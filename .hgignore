@@ -7,3 +7,4 @@ app/Jacketeer.xcodeproj/project.xcworkspace/xcuserdata/
 xcuserdata
 .DS_Store
 app/www/js-bin/*
+server/code/package.min.js
