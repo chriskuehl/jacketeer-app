@@ -217,7 +217,7 @@ var screenSignature = {
 
 		var tipsRight = [
 			"You can always redo the signature. Don't worry about getting it perfect the first time.",
-			"If you need a stylus, go find Ruff (room 138). He's there 24/7, 365 days per year (sometimes 366!)."
+			"If you need a stylus, go find Mr. Ruff (room 138), or stop by the help desk (room 117)."
 		];
 
 		for (var i = 0; i < tipsRight.length; i++) {

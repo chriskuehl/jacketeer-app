@@ -39,7 +39,7 @@ var screenPortal = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("Welcome to the Jacketeer 2013 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. It's like having your own personal Ruff in your pocket. Remember, though: with great power comes great responsibility.");
+		introText.html("Welcome to the Jacketeer 2013 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. This app is probably the best thing since sliced bread. Remember, though: with great power comes great responsibility.");
 		
 		var boxContainer = $("<div />");
 		boxContainer.appendTo(container);
