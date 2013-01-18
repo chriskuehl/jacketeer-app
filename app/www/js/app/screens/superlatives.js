@@ -391,7 +391,7 @@ function updateStudentFilter(query, isMale) {
 	for (var studentIndex = 0; studentIndex < studentList.length; studentIndex ++) {
 		var student = studentList[studentIndex];
 		
-		if (student.IsMale == isMale && student.FirstName != userInfo.FirstName && student.LastName != userInfo.LastName && studentMatchesQuery(query, student)) {
+		if (student.IsMale == isMale && (! (student.FirstName == userInfo.FirstName && student.LastName == userInfo.LastName)) && studentMatchesQuery(query, student)) {
 			var studentRow = $("<a />");
 			studentRow.appendTo(studentListContainer);
 			studentRow.css({
