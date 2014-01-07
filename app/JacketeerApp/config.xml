@@ -13,7 +13,6 @@
 	<preference name="FadeSplashScreenDuration" value="2" />
 	<preference name="DisallowOverscroll" value="true" />
 	<plugins>
-		<plugin name="Debug Console" value="CDVDebugConsole"/>
 		<plugin name="Device" value="CDVDevice"/>
 		<plugin name="Echo" value="CDVEcho"/>
 		<plugin name="Logger" value="CDVLogger"/>
