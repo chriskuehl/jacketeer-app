@@ -22,4 +22,6 @@
 	<access origin="jacketeer.org"/>
 	<access origin="www.yearbookordercenter.com"/>
 	<access origin="yearbookordercenter.com"/>
+
+	<content src="index.html" />
 </cordova>
