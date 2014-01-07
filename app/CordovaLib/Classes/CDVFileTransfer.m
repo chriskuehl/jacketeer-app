@@ -47,8 +47,8 @@ NSString* const kFormBoundary = @"+++++org.apache.cordova.formBoundary";
 static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
 {
     UInt8* bytes = (UInt8*)[data bytes];
-    NSUInteger bytesToWrite = [data length];
-    NSUInteger totalBytesWritten = 0;
+    long long bytesToWrite = [data length];
+    long long totalBytesWritten = 0;
 
     while (totalBytesWritten < bytesToWrite) {
         CFIndex result = CFWriteStreamWrite(stream,
@@ -206,8 +206,8 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     DLog(@"fileData length: %d", [fileData length]);
     NSData* postBodyAfterFile = [[NSString stringWithFormat:@"\r\n--%@--\r\n", kFormBoundary] dataUsingEncoding:NSUTF8StringEncoding];
 
-    NSUInteger totalPayloadLength = [postBodyBeforeFile length] + [fileData length] + [postBodyAfterFile length];
-    [req setValue:[[NSNumber numberWithInteger:totalPayloadLength] stringValue] forHTTPHeaderField:@"Content-Length"];
+    long long totalPayloadLength = [postBodyBeforeFile length] + [fileData length] + [postBodyAfterFile length];
+    [req setValue:[[NSNumber numberWithLongLong:totalPayloadLength] stringValue] forHTTPHeaderField:@"Content-Length"];
 
     if (chunkedMode) {
         CFReadStreamRef readStream = NULL;
@@ -348,13 +348,7 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     CDVFileTransferDelegate* delegate = [activeTransfers objectForKey:objectId];
 
     if (delegate != nil) {
-        [delegate.connection cancel];
-        [activeTransfers removeObjectForKey:objectId];
-
-        // delete uncomplete file
-        NSFileManager* fileMgr = [NSFileManager defaultManager];
-        [fileMgr removeItemAtPath:delegate.target error:nil];
-
+        [delegate cancelTransfer:delegate.connection];
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:[self createFileTransferError:CONNECTION_ABORTED AndSource:delegate.source AndTarget:delegate.target]];
         [self.commandDelegate sendPluginResult:result callbackId:delegate.callbackId];
     }
@@ -429,8 +423,12 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     NSMutableDictionary* result = [NSMutableDictionary dictionaryWithCapacity:3];
 
     [result setObject:[NSNumber numberWithInt:code] forKey:@"code"];
-    [result setObject:source forKey:@"source"];
-    [result setObject:target forKey:@"target"];
+    if (source != nil) {
+        [result setObject:source forKey:@"source"];
+    }
+    if (target != nil) {
+        [result setObject:target forKey:@"target"];
+    }
     NSLog(@"FileTransferError %@", result);
 
     return result;
@@ -445,10 +443,16 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     NSMutableDictionary* result = [NSMutableDictionary dictionaryWithCapacity:5];
 
     [result setObject:[NSNumber numberWithInt:code] forKey:@"code"];
-    [result setObject:source forKey:@"source"];
-    [result setObject:target forKey:@"target"];
+    if (source != nil) {
+        [result setObject:source forKey:@"source"];
+    }
+    if (target != nil) {
+        [result setObject:target forKey:@"target"];
+    }
     [result setObject:[NSNumber numberWithInt:httpStatus] forKey:@"http_status"];
-    [result setObject:body forKey:@"body"];
+    if (body != nil) {
+        [result setObject:body forKey:@"body"];
+    }
     NSLog(@"FileTransferError %@", result);
 
     return result;
@@ -529,7 +533,7 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
             if (uploadResponse != nil) {
                 [uploadResult setObject:uploadResponse forKey:@"response"];
             }
-            [uploadResult setObject:[NSNumber numberWithInt:self.bytesTransfered] forKey:@"bytesSent"];
+            [uploadResult setObject:[NSNumber numberWithLongLong:self.bytesTransfered] forKey:@"bytesSent"];
             [uploadResult setObject:[NSNumber numberWithInt:self.responseCode] forKey:@"responseCode"];
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:uploadResult];
         } else {
@@ -560,13 +564,26 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     self.command.backgroundTaskID = UIBackgroundTaskInvalid;
 }
 
+- (void)removeTargetFile
+{
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
+
+    [fileMgr removeItemAtPath:self.target error:nil];
+}
+
+- (void)cancelTransfer:(NSURLConnection*)connection
+{
+    [connection cancel];
+    [self.command.activeTransfers removeObjectForKey:self.objectId];
+    [self removeTargetFile];
+}
+
 - (void)cancelTransferWithError:(NSURLConnection*)connection errorMessage:(NSString*)errorMessage
 {
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_IO_EXCEPTION messageAsDictionary:[self.command createFileTransferError:FILE_NOT_FOUND_ERR AndSource:self.source AndTarget:self.target AndHttpStatus:self.responseCode AndBody:errorMessage]];
 
     NSLog(@"File Transfer Error: %@", errorMessage);
-    [connection cancel];
-    [self.command.activeTransfers removeObjectForKey:self.objectId];
+    [self cancelTransfer:connection];
     [self.command.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
@@ -631,8 +648,7 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
 
     NSLog(@"File Transfer Error: %@", [error localizedDescription]);
 
-    // remove connection for activeTransfers
-    [command.activeTransfers removeObjectForKey:objectId];
+    [self cancelTransfer:connection];
     [self.command.commandDelegate sendPluginResult:result callbackId:callbackId];
 }
 
@@ -647,9 +663,9 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
     [self updateProgress];
 }
 
-- (void)updateBytesExpected:(NSInteger)newBytesExpected
+- (void)updateBytesExpected:(long long)newBytesExpected
 {
-    DLog(@"Updating bytesExpected to %d", newBytesExpected);
+    DLog(@"Updating bytesExpected to %lld", newBytesExpected);
     self.bytesExpected = newBytesExpected;
     [self updateProgress];
 }
@@ -665,8 +681,8 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
         }
         NSMutableDictionary* downloadProgress = [NSMutableDictionary dictionaryWithCapacity:3];
         [downloadProgress setObject:[NSNumber numberWithBool:lengthComputable] forKey:@"lengthComputable"];
-        [downloadProgress setObject:[NSNumber numberWithInt:self.bytesTransfered] forKey:@"loaded"];
-        [downloadProgress setObject:[NSNumber numberWithInt:self.bytesExpected] forKey:@"total"];
+        [downloadProgress setObject:[NSNumber numberWithLongLong:self.bytesTransfered] forKey:@"loaded"];
+        [downloadProgress setObject:[NSNumber numberWithLongLong:self.bytesExpected] forKey:@"total"];
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:downloadProgress];
         [result setKeepCallbackAsBool:true];
         [self.command.commandDelegate sendPluginResult:result callbackId:callbackId];
@@ -679,8 +695,8 @@ static CFIndex WriteDataToStream(NSData* data, CFWriteStreamRef stream)
         NSMutableDictionary* uploadProgress = [NSMutableDictionary dictionaryWithCapacity:3];
 
         [uploadProgress setObject:[NSNumber numberWithBool:true] forKey:@"lengthComputable"];
-        [uploadProgress setObject:[NSNumber numberWithInt:totalBytesWritten] forKey:@"loaded"];
-        [uploadProgress setObject:[NSNumber numberWithInt:totalBytesExpectedToWrite] forKey:@"total"];
+        [uploadProgress setObject:[NSNumber numberWithLongLong:totalBytesWritten] forKey:@"loaded"];
+        [uploadProgress setObject:[NSNumber numberWithLongLong:totalBytesExpectedToWrite] forKey:@"total"];
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:uploadProgress];
         [result setKeepCallbackAsBool:true];
         [self.command.commandDelegate sendPluginResult:result callbackId:callbackId];

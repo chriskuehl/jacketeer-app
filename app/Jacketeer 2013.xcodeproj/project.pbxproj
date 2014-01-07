@@ -40,6 +40,7 @@
 		83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */; };
 		83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */; };
 		83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF800187BF1B500B7DADC /* ImageIO.framework */; };
+		83CEF806187BF84100B7DADC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF805187BF84100B7DADC /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		83CEF800187BF1B500B7DADC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		83CEF805187BF84100B7DADC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Jacketeer 2013-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Jacketeer 2013-Info.plist"; path = "../Jacketeer 2013-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83CEF806187BF84100B7DADC /* CoreMotion.framework in Frameworks */,
 				83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */,
 				83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */,
 				83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */,
@@ -217,6 +220,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83CEF805187BF84100B7DADC /* CoreMotion.framework */,
 				83CEF800187BF1B500B7DADC /* ImageIO.framework */,
 				83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */,
 				83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */,
@@ -512,7 +516,8 @@
 					"-weak_framework",
 					CoreMedia,
 					"-weak-lSystem",
-					"-all_load",
+					"-force_load",
+					"${TARGET_BUILD_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -570,7 +575,8 @@
 					"-weak_framework",
 					CoreMedia,
 					"-weak-lSystem",
-					"-all_load",
+					"-force_load",
+					"${TARGET_BUILD_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				SDKROOT = iphoneos;
@@ -607,7 +613,8 @@
 					"-weak_framework",
 					CoreMedia,
 					"-weak-lSystem",
-					"-all_load",
+					"-force_load",
+					"${TARGET_BUILD_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				SDKROOT = iphoneos;

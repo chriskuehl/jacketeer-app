@@ -17,10 +17,10 @@
  under the License.
  */
 
-#import "CDVPlugin.h"
-#import "CDVInvokedUrlCommand.h"
-#import "CDVScreenOrientationDelegate.h"
-#import "CDVWebViewDelegate.h"
+#import <Cordova/CDVPlugin.h>
+#import <Cordova/CDVInvokedUrlCommand.h>
+#import <Cordova/CDVScreenOrientationDelegate.h>
+#import <Cordova/CDVWebViewDelegate.h>
 
 @class CDVInAppBrowserViewController;
 
@@ -34,6 +34,7 @@
 - (void)open:(CDVInvokedUrlCommand*)command;
 - (void)close:(CDVInvokedUrlCommand*)command;
 - (void)injectScriptCode:(CDVInvokedUrlCommand*)command;
+- (void)show:(CDVInvokedUrlCommand*)command;
 
 @end
 
@@ -81,6 +82,7 @@
 @property (nonatomic, assign) BOOL allowinlinemediaplayback;
 @property (nonatomic, assign) BOOL keyboarddisplayrequiresuseraction;
 @property (nonatomic, assign) BOOL suppressesincrementalrendering;
+@property (nonatomic, assign) BOOL hidden;
 
 + (CDVInAppBrowserOptions*)parseOptions:(NSString*)options;
 
