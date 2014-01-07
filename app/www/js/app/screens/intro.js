@@ -5,7 +5,7 @@ var globalLoadingCancelEvent = null;
 
 var screenIntro = {
 	id: "intro",
-	title: "Jacketeer 2013",
+	title: "Jacketeer 2014",
 
 	setup: function (container) {
 		container.css({
@@ -38,7 +38,7 @@ var screenIntro = {
 
 		var title = $("<p />");
 		title.appendTo(page);
-		title.text("Jacketeer 2013 Student Portal");
+		title.text("Jacketeer 2014 Student Portal");
 		title.css({
 			textAlign: "center",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
@@ -319,7 +319,7 @@ var screenIntro = {
 		// username tip at bottom
 		var tipText = $("<p />");
 		tipText.appendTo(page);
-		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2013. It's the same thing you use to login to computers at WCHS.");
+		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2014. It's the same thing you use to login to computers at WCHS.");
 		tipText.css({
 			fontSize: "24px",
 			marginTop: "40px",
