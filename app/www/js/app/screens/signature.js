@@ -139,7 +139,7 @@ var screenSignature = {
 			}, "Signature Confirmation", "Cancel,Use Signature");
 
 			//
-			//$.post("https://jacketeer.org/app/up.php", {img: img}, function() {
+			//$.post("http://jacketeer.org/app/up.php", {img: img}, function() {
 			//	alert("done!");
 			//});
 		});

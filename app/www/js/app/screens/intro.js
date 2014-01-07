@@ -243,7 +243,7 @@ var screenIntro = {
 			loadingCover.stop(true).fadeIn(500);
 
 			// send the request
-			var req = $.ajax("https://jacketeer.org/app/login.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			var req = $.ajax("http://jacketeer.org/app/login.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: {
 					user: inputUser.val(),

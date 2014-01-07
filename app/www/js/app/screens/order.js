@@ -37,7 +37,7 @@ var screenOrder = {
 		
 		var submit = $("<a />");
 		submit.attr({
-			href: "https://jacketjournal.com/index.cfm/jobSearch/displayLanding?searchNbr=jobNbr&txtSearchNbr=14548",
+			href: "http://jacketjournal.com/index.cfm/jobSearch/displayLanding?searchNbr=jobNbr&txtSearchNbr=14548",
 			target: "_blank"
 		});
 		submit.appendTo(p);
@@ -100,7 +100,7 @@ var screenOrder = {
 				
 				// contents.find('head').append('<meta id="viewport" name="viewport" content="width=1024, initial-scale=5.0, maximum-scale=5.0, user-scalable=0, minimum-scale=5.0">');
 				contents.find("body").css("zoom", 2); // = 2.0;
-				contents.find("script[src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js']").attr("src", "https://jacketeer.org/app/order/jquery.min.js");
+				contents.find("script[src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js']").attr("src", "http://jacketeer.org/app/order/jquery.min.js");
 				
 				console.log(contents.find("html")[0].outerHTML);
 				var html = contents.find("html")[0].outerHTML;
