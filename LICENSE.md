@@ -5,7 +5,7 @@ individually. All other code and images are licensed under an MIT license.
 
 * * *
 
-All original code and images are copyright &copy; 2013 Chris Kuehl and
+All original code and images are copyright &copy; 2014 Chris Kuehl and
 Caleb Dotson.
 
 All code and images which do not have their own copyright attached (e.g. as
@@ -13,7 +13,7 @@ a comment block or a separate LICENSE or COPYING file), are released under
 the MIT license, a copy of which is included below.
 
 
-Copyright (c) 2013 Chris Kuehl, Caleb Dotson
+Copyright (c) 2014 Chris Kuehl, Caleb Dotson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
