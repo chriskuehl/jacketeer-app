@@ -295,7 +295,7 @@ var screenIntro = {
 					return;
 				}
 
-				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
 					if (response == 1) {
 						loginButton.click();
 					}

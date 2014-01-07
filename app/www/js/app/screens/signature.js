@@ -10,7 +10,7 @@ var screenSignature = {
 	titleButton: {
 		text: "Cancel",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
+			navigator.notification.confirm("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
 				if (response == 2) {
 					setScreen(screenPortrait);
 				}
@@ -123,7 +123,7 @@ var screenSignature = {
 				return;
 			}
 
-			navigator.notification.alert("Are you sure you want to use this signature?", function (response) {
+			navigator.notification.confirm("Are you sure you want to use this signature?", function (response) {
 				if (response == 2) {
 					var img = canvas[0].toDataURL("image/png");
 					// name was valid, so upload it to the server

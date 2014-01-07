@@ -409,7 +409,7 @@ function updateStudentFilter(query, isMale) {
 			
 			studentRow.click(function() {
 				var student = $(this).data("student");
-				navigator.notification.alert("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
+				navigator.notification.confirm("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
 					if (response == 1) {
 						superlativeLoadingCover.fadeIn(300, function() {
 							// try to save
@@ -457,7 +457,7 @@ function saveSuperlative(superlative, isMale, student) {
 	});
 
 	req.fail(function () {
-		navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
 			if (response == 1) {
 				saveSuperlative(superlative, isMale, student);
 			} else {

@@ -6,7 +6,7 @@ var screenQuote = {
 	titleButton: {
 		text: "Cancel",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to go back? This will revert your quote to its previous state.", function (response) {
+			navigator.notification.confirm("Are you sure you want to go back? This will revert your quote to its previous state.", function (response) {
 				if (response == 2) {
 					setScreen(screenPortrait);
 				}

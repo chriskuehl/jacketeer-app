@@ -6,7 +6,7 @@ var screenPortal = {
 	titleButton: {
 		text: "Sign Out",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to sign out?", function (response) {
+			navigator.notification.confirm("Are you sure you want to sign out?", function (response) {
 				if (response == 2) {
 					localStorage.removeItem("loginDetails");
 					localStorage.removeItem("loginToken");

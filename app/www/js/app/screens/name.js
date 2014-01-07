@@ -7,7 +7,7 @@ var screenName = {
 	titleButton: {
 		text: "Cancel",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
+			navigator.notification.confirm("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
 				if (response == 2) {
 					setScreen(screenPortrait);
 				}
