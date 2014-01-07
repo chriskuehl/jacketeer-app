@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -17,7 +19,22 @@
 # under the License.
 #
 
-Include these headers if you are using a bleeding edge plugin in an older version of Cordova.
+#
+# Returns the VERSION of CordovaLib used. 
+# Note: it does not work if the --shared option was used to create the project.
+#
 
-1.5.0 -- only for 1.5.0 projects
-0.9.6 -- for projects between 0.9.6 and 1.4.1
+set -e
+
+CORDOVA_PATH=$( cd "$( dirname "$0" )" && pwd -P)
+PROJECT_PATH="$(dirname "$CORDOVA_PATH")"
+
+VERSION_FILE_PATH="$PROJECT_PATH/CordovaLib/VERSION"
+VERSION=$(<$VERSION_FILE_PATH)
+
+if [ -f "$VERSION_FILE_PATH" ]; then
+  echo $VERSION 
+else
+  echo "The file \"$VERSION_FILE_PATH\" does not exist."
+  exit 1
+fi

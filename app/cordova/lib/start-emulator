@@ -1,3 +1,4 @@
+#!/usr/bin/env bash 
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -16,8 +17,19 @@
 # specific language governing permissions and limitations
 # under the License.
 #
+# Valid values for "--target" (case insensitive):
+#     "iPhone (Retina 3.5-inch)" (default)
+#     "iPhone (Retina 4-inch)"
+#     "iPhone"
+#     "iPad"
+#     "iPad (Retina)"
 
-Include these headers if you are using a bleeding edge plugin in an older version of Cordova.
+set -e
 
-1.5.0 -- only for 1.5.0 projects
-0.9.6 -- for projects between 0.9.6 and 1.4.1
+
+DEFAULT_TARGET="iPhone (Retina 3.5-inch)"
+TARGET=${1:-$DEFAULT_TARGET}
+LIB_PATH=$( cd "$( dirname "$0" )" && pwd -P)
+
+SCPT=`sed -e "s/\\$DEVICE_NAME/$TARGET/g" $LIB_PATH/sim.applescript`
+osascript -e "$SCPT"

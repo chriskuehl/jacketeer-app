@@ -38,6 +38,8 @@
 		831B9CCF1669374100944359 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CCE1669374100944359 /* Default-Landscape~ipad.png */; };
 		831B9CD11669374800944359 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CD01669374800944359 /* Default-Landscape@2x~ipad.png */; };
 		83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */; };
+		83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */; };
+		83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF800187BF1B500B7DADC /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		831B9CCE1669374100944359 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		831B9CD01669374800944359 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		83CEF800187BF1B500B7DADC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Jacketeer 2013-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Jacketeer 2013-Info.plist"; path = "../Jacketeer 2013-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */,
+				83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */,
 				83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -211,6 +217,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83CEF800187BF1B500B7DADC /* ImageIO.framework */,
+				83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */,
 				83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -512,7 +520,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-all_load",
-					"-Obj-C",
+					"-ObjC",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -571,7 +579,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-all_load",
-					"-Obj-C",
+					"-ObjC",
 				);
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -608,7 +616,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-all_load",
-					"-Obj-C",
+					"-ObjC",
 				);
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
