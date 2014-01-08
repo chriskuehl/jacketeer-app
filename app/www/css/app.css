@@ -5,7 +5,7 @@ body {
 	background-color: #F6F6F7;
 }
 
-input {
+input, textarea {
 	border: none;
 }
 
@@ -100,10 +100,6 @@ em {
 	margin-bottom: 20px;
 	
 	padding: 108px 20px;
-	
-	border: solid 2px rgba(150, 150, 150, 1);
-    box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0px 0px 20px rgba(100, 100, 0, 0.1);
 }
 
 .disabled {

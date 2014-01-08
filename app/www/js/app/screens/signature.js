@@ -20,8 +20,7 @@ var screenSignature = {
 
 	setup: function (container) {
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+			backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		sigPaths = [];
@@ -50,7 +49,6 @@ var screenSignature = {
 		canvasHolder.css({
 			width: "1500px",
 			height: "800px",
-			border: "solid 2px rgba(150, 150, 150, 1)",
 			"float": "left"
 		});
 
@@ -152,8 +150,7 @@ var screenSignature = {
 			id: "handwritingCanvas"
 		});
 		canvas.css({
-			backgroundColor: "solid rgba(255, 255, 255, 1)",
-			boxShadow: "inset 0px 0px 15px 10px rgba(100, 100, 0, 0.05)"
+			backgroundColor: "solid rgba(255, 255, 255, 1)"
 		});
 		canvas.data("paths", []);
 

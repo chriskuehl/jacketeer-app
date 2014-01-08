@@ -43,8 +43,7 @@ var screenHailWoodford = {
 
 	setup: function (container) {
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+			backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		var introText2 = $("<h2 />");
@@ -170,9 +169,6 @@ var screenHailWoodford = {
 			marginRight: "auto",
 			backgroundColor: "rgba(253, 249, 207, 1)",
 			// borderRadius: "15px",
-			border: "solid 2px rgba(150, 150, 150, 1)",
-			boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			fontSize: "72px",
 			lineHeight: "1em",
 			color: "rgba(0, 0, 0, 0.65)",

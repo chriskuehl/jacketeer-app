@@ -14,8 +14,7 @@ var screenSuperlatives = {
 
 	setup: function (container) {
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+			backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		/*
@@ -80,8 +79,7 @@ var screenSuperlatives = {
 			marginTop: "0px",
             //borderRadius: "15px",
             //border: "solid 2px rgba(150, 150, 150, 1)",
-                        backgroundColor: "rgba(255,255,255,0.8)",
-                        boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.15)"
+                        backgroundColor: "rgba(255,255,255,0.8)"
 		});
 		
 		superlativeListTable = $("<table />");
@@ -146,7 +144,6 @@ var screenSuperlatives = {
 
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
-			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 
 			padding: "30px"
 		});
@@ -218,7 +215,6 @@ var screenSuperlatives = {
 		studentListWrapper.attr("id", "studentListWrapper");
 		studentListWrapper.appendTo(superlativeChooseBox);
 		studentListWrapper.css({
-			border: "solid 3px rgba(0, 0, 0, 0.3)",
 			marginTop: "30px",
 			overflow: "auto",
 			width: "1020px",
@@ -289,9 +285,6 @@ function updateSuperlativeChoices(superlatives) {
 				padding: "40px",
 				textAlign: "center",
 				fontSize: "32px",
-				border: "solid 2px rgba(150, 150, 150, 1)",
-				boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-				boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 				backgroundColor: "rgba(253, 249, 207, 1)"
 			});
 			// button.addClass("buttonGrad");

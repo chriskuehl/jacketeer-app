@@ -31,9 +31,7 @@ var screenIntro = {
 			height: "725px",
 
 			marginLeft: "-680px",
-			marginTop: "-500px",
-
-			boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.3)"
+			marginTop: "-500px"
 		});
 
 		var title = $("<p />");
@@ -63,10 +61,7 @@ var screenIntro = {
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
 			backgroundColor: "rgba(253, 249, 207, .7)",
 			marginTop: "30px",
-			position: "relative",
-			border: "solid 2px rgba(150, 150, 150, 1)",
-			boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
+			position: "relative"
 		});
 
 		var table = $("<table />");
@@ -179,7 +174,6 @@ var screenIntro = {
 
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
-			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 
 			padding: "30px"
 		});
@@ -235,7 +229,6 @@ var screenIntro = {
 			borderRadius: "20px",
 			backgroundColor: "rgba(255, 255, 255, 0.4)",
 			fontSize: "96px",
-			border: "solid 1px rgba(0, 0, 0, 0.3)",
 			paddingTop: "50px",
 			textAlign: "center",
 			textDecoration: "none",

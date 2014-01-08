@@ -18,8 +18,7 @@ var screenVoice = {
 		superlativeIndex ++;
 		
 		container.css({
-            backgroundColor: "rgba(253, 249, 207, 0.2)",
-            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		var introText = $("<p />");
@@ -37,12 +36,9 @@ var screenVoice = {
 		superlativesBox.appendTo(container);
 		superlativesBox.css({
 			width: "1800px",
-			border: "solid 2px rgba(0, 0, 0, 0.3)",
 			padding: "40px",
 			borderRadius: "15px",
 			backgroundColor: "rgba(253, 249, 207, 1)",
-            boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-            boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			marginLeft: "auto",
 			marginRight: "auto",
 			overflow: "hidden"
@@ -110,9 +106,6 @@ var screenVoice = {
 				padding: "40px",
                 backgroundColor: "rgba(253, 249, 207, 1)",
 				borderRadius: "15px",
-                border: "solid 2px rgba(150, 150, 150, 1)",
-                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 				width: "838px"
             
 			});
