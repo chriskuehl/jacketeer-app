@@ -1,5 +1,6 @@
 body {
 	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+	margin-top: 40px;
 }
 
 em {
@@ -84,7 +85,7 @@ em {
 #screenContainerParent {
 	position: absolute;
 	
-	top: 87px;
+	top: 127px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
