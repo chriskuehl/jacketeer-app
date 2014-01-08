@@ -9,6 +9,11 @@ input, textarea {
 	border: none;
 }
 
+input[type=button] {
+	-webkit-appearance: none;
+	background-color: #EEE;
+}
+
 em {
 	font-style: italic;
 }

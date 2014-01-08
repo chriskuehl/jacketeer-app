@@ -100,7 +100,6 @@ var screenHailWoodford = {
 			autoCapitalize: "off"
 		});
 		inputName.css({
-			padding: "10px",
 			width: "1150px",
 			marginLeft: "30px",
 			marginRight: "10px",
@@ -114,8 +113,8 @@ var screenHailWoodford = {
 		submit.appendTo(nameLabel);
 		submit.css({
 			fontSize: "48px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)",
-			marginLeft: "20px"
+			marginLeft: "20px",
+			padding: "20px 60px"
 		});
 		submit.val("Submit");
 

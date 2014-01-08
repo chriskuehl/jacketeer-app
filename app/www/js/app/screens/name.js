@@ -56,7 +56,6 @@ var screenName = {
 		});
 		inputName.css({
 			fontSize: "72px",
-			padding: "10px",
 			width: "1350px",
 			marginRight: "10px",
 			padding: "20px"
@@ -70,8 +69,9 @@ var screenName = {
 		var submit = $("<input type=\"button\" />");
 		submit.appendTo(nameHolder);
 		submit.css({
-			fontSize: "68px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)"
+			fontSize: "72px",
+			marginLeft: "20px",
+			padding: "20px 60px"
 		});
 		submit.val("Confirm");
 

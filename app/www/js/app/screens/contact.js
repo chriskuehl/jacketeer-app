@@ -78,9 +78,9 @@ var screenContact = {
 		submit.appendTo(textAreaHolder);
 		submit.css({
 			fontSize: "44px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)",
 			textAlign: "center",
-			marginTop: "100px"
+			marginTop: "100px",
+			padding: "20px 60px"
 		});
 		submit.val("Submit Message");
 
