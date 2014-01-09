@@ -29,7 +29,7 @@ var screenHailWoodford = {
 	parent: "voice",
 
 	titleButton: {
-		text: "Back to My Voice",
+		text: "My Voice",
 		event: function () {
 			setScreen(screenVoice);
 		}

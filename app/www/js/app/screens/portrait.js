@@ -4,7 +4,7 @@ var screenPortrait = {
 	parent: "portal",
 
 	titleButton: {
-		text: "Back to Portal",
+		text: "Portal",
 		event: function () {
 			setScreen(screenPortal);
 		}

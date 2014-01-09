@@ -4,7 +4,7 @@ var screenContact = {
 	parent: "help",
 
 	titleButton: {
-		text: "Back to My Yearbook",
+		text: "My Yearbook",
 		event: function () {
 			setScreen(screenHelp);
 		}
