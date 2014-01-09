@@ -97,7 +97,6 @@ var screenIntro = {
 			padding: "10px",
 			width: "610px"
 		});
-		inputUser.val("13cbkuehl");
 
 		if (loginDetails) {
 			inputUser.val(loginDetails.user);
@@ -135,7 +134,6 @@ var screenIntro = {
 			padding: "10px",
 			width: "610px"
 		});
-		inputPassword.val("senior!");
 
 		if (loginDetails) {
 			inputPassword.val(loginDetails.password);
