@@ -71,6 +71,7 @@
         <param name="ios-package" value="CDVLocalStorage"/>
     </feature>
 	
+	<access origin="app.jacketeer.org" />
 	<access origin="jacketeer.org" />
 
 	<content src="index.html" />

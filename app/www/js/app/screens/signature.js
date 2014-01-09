@@ -137,7 +137,7 @@ var screenSignature = {
 			}, "Signature Confirmation", "Cancel,Use Signature");
 
 			//
-			//$.post("http://jacketeer.org/app/up.php", {img: img}, function() {
+			//$.post("https://app.jacketeer.org/app/up.php", {img: img}, function() {
 			//	alert("done!");
 			//});
 		});

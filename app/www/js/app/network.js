@@ -8,7 +8,7 @@ function actuallyUpdateInformation() {
 	globalLoadingText.text("Downloading data...");
 
 	var loginDetails = getLoginDetails();
-	var req = $.ajax("http://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+	var req = $.ajax("https://app.jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 		type: "POST",
 		data: {
 			user: loginDetails.user,
@@ -91,7 +91,7 @@ function updateInformation(reqToHandle) {
 		// 
 		// but first, wait a second to avoid GUI glitches
 		updateTimeout = setTimeout(function () {
-			req = $.ajax("http://jacketeer.org/app/" + reqToHandle.path + "?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			req = $.ajax("https://app.jacketeer.org/app/" + reqToHandle.path + "?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: reqToHandle.data,
 				cache: false

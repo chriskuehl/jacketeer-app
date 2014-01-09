@@ -424,7 +424,7 @@ function updateStudentFilter(query, isMale) {
 function saveSuperlative(superlative, isMale, student) {
 	var loginDetails = getLoginDetails();
 	
-	req = $.ajax("http://jacketeer.org/app/superlative.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+	req = $.ajax("https://app.jacketeer.org/app/superlative.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 		type: "POST",
 		data: {
 			superlative: superlative,
