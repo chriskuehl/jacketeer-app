@@ -88,7 +88,7 @@ var screenIntro = {
 		var inputUser = $("<input type=\"text\" />");
 		inputUser.attr({
 			name: "inputUser",
-			placeholder: "13jpdoe",
+			placeholder: "14jpdoe",
 			autoCorrect: "off",
 			autoCapitalize: "off"
 		});
@@ -259,7 +259,7 @@ var screenIntro = {
 
 			req.done(function (content) {
 				if (content.success) {
-					if (!inputUser.val().startsWith("13")) {
+					if (!inputUser.val().startsWith("14")) {
 						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by the iPad Help Desk (room 117) for assistance.", null, "You're Not a Senior!", "Sorry!");
 						loadingCover.stop(true).hide();
 						return;
@@ -310,7 +310,7 @@ var screenIntro = {
 		// username tip at bottom
 		var tipText = $("<p />");
 		tipText.appendTo(page);
-		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2014. It's the same thing you use to login to computers at WCHS.");
+		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"14jpdoe\" for \"John Price Doe\" graduating in 2014. It's the same thing you use to login to computers at WCHS.");
 		tipText.css({
 			fontSize: "24px",
 			marginTop: "40px",
