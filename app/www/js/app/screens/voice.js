@@ -170,6 +170,11 @@ function stepSuperlativeList(initial, j) {
 	});
 	newItem.text(getSuperlativeText());
 	newItem.appendTo(superlativesList);
+
+	// this line prevents a bug that appeared in iOS 7
+	// resulting in new elements sometimes not showing
+	newItem.css("-webkit-transform-style", "preserve-3d");
+
 	newItem.animate({
 		left: (-2500) + "px"
 	}, initial ? (((Math.random() * 4000) + 3000) * ((newItem.position().left + 2000) / 4000)) : ((Math.random() * 4000) + 3000), "linear", function() {
