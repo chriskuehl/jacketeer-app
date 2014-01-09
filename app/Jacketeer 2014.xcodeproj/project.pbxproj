@@ -33,14 +33,11 @@
 		30A0434914DC770100060A13 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30A0434614DC770100060A13 /* Localizable.strings */; };
 		30E1352710E2C1420031B30D /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* config.xml */; };
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		831B9CCC166935AC00944359 /* jacketeer-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CCB166935AC00944359 /* jacketeer-144.png */; };
-		831B9CCD166935F200944359 /* jacketeer-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CC9166934FE00944359 /* jacketeer-72.png */; };
-		831B9CCF1669374100944359 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CCE1669374100944359 /* Default-Landscape~ipad.png */; };
-		831B9CD11669374800944359 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B9CD01669374800944359 /* Default-Landscape@2x~ipad.png */; };
 		83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */; };
 		83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */; };
 		83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF800187BF1B500B7DADC /* ImageIO.framework */; };
 		83CEF806187BF84100B7DADC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF805187BF84100B7DADC /* CoreMotion.framework */; };
+		83EFF282187E91B200EDFD41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83EFF281187E91B200EDFD41 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,14 +89,11 @@
 		30E1352610E2C1420031B30D /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = ../config.xml; sourceTree = "<group>"; };
 		30E5649113A7FCAF007403D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Jacketeer 2014-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Jacketeer 2014-Prefix.pch"; sourceTree = "<group>"; };
-		831B9CC9166934FE00944359 /* jacketeer-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jacketeer-72.png"; sourceTree = "<group>"; };
-		831B9CCB166935AC00944359 /* jacketeer-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jacketeer-144.png"; sourceTree = "<group>"; };
-		831B9CCE1669374100944359 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		831B9CD01669374800944359 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		83CEF800187BF1B500B7DADC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		83CEF805187BF84100B7DADC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		83EFF281187E91B200EDFD41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Jacketeer 2014/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Jacketeer 2014-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Jacketeer 2014-Info.plist"; path = "../Jacketeer 2014-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,10 +167,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				831B9CD01669374800944359 /* Default-Landscape@2x~ipad.png */,
-				831B9CCE1669374100944359 /* Default-Landscape~ipad.png */,
-				831B9CCB166935AC00944359 /* jacketeer-144.png */,
-				831B9CC9166934FE00944359 /* jacketeer-72.png */,
 				301BF56E109A69640062928A /* www */,
 				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -203,6 +193,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				83EFF281187E91B200EDFD41 /* Images.xcassets */,
 				30A0434214DC770100060A13 /* de.lproj */,
 				30A0434514DC770100060A13 /* se.lproj */,
 				1F766FDB13BBADB100FB74C0 /* en.lproj */,
@@ -363,15 +354,12 @@
 				301BF570109A69640062928A /* www in Resources */,
 				30E1352710E2C1420031B30D /* config.xml in Resources */,
 				3072F99713A8081B00425683 /* Capture.bundle in Resources */,
+				83EFF282187E91B200EDFD41 /* Images.xcassets in Resources */,
 				1F766FE113BBADB100FB74C0 /* Localizable.strings in Resources */,
 				1F766FE213BBADB100FB74C0 /* Localizable.strings in Resources */,
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				30A0434814DC770100060A13 /* Localizable.strings in Resources */,
 				30A0434914DC770100060A13 /* Localizable.strings in Resources */,
-				831B9CCC166935AC00944359 /* jacketeer-144.png in Resources */,
-				831B9CCD166935F200944359 /* jacketeer-72.png in Resources */,
-				831B9CCF1669374100944359 /* Default-Landscape~ipad.png in Resources */,
-				831B9CD11669374800944359 /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +443,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -478,6 +468,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -547,6 +539,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
