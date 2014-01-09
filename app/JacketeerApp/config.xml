@@ -71,9 +71,7 @@
         <param name="ios-package" value="CDVLocalStorage"/>
     </feature>
 	
-	<access origin="jacketeer.org"/>
-	<access origin="www.yearbookordercenter.com"/>
-	<access origin="yearbookordercenter.com"/>
+	<access origin="jacketeer.org" />
 
 	<content src="index.html" />
 </widget>
