@@ -28,13 +28,6 @@ var screenHelp = {
 		
 		// sections to complete
 		var sections = [{
-			id: "order",
-			title: "Place an Order",
-			description: "Order your yearbook online, directly from this app.",
-			complete: (userInfo.PreferredName != null)
-		},
-		
-		{
 			id: "contact",
 			title: "Contact a Staff Member",
 			description: "Send an email to the yearbook staff team for assistance.",
