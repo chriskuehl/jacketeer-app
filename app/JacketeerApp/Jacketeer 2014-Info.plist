@@ -10,8 +10,8 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>jacketeer-144.png</string>
-		<string>jacketeer-72.png</string>
+		<string>icon-152.png</string>
+		<string>icon-76.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict/>
@@ -30,7 +30,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>

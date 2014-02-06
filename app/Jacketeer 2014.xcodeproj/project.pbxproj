@@ -30,6 +30,8 @@
 		3072F99713A8081B00425683 /* Capture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3072F99613A8081B00425683 /* Capture.bundle */; };
 		30E1352710E2C1420031B30D /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* config.xml */; };
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		834CE4D018A38320007B38F6 /* icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 834CE4CE18A38320007B38F6 /* icon-76.png */; };
+		834CE4D118A38320007B38F6 /* icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 834CE4CF18A38320007B38F6 /* icon-152.png */; };
 		83CEF7FD187BED5000B7DADC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */; };
 		83CEF7FF187BF1AB00B7DADC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */; };
 		83CEF801187BF1B500B7DADC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CEF800187BF1B500B7DADC /* ImageIO.framework */; };
@@ -83,6 +85,8 @@
 		30E1352610E2C1420031B30D /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = ../config.xml; sourceTree = "<group>"; };
 		30E5649113A7FCAF007403D8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Jacketeer 2014-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Jacketeer 2014-Prefix.pch"; sourceTree = "<group>"; };
+		834CE4CE18A38320007B38F6 /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-76.png"; path = "Jacketeer 2014/Images.xcassets/AppIcon.appiconset/icon-76.png"; sourceTree = "<group>"; };
+		834CE4CF18A38320007B38F6 /* icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-152.png"; path = "Jacketeer 2014/Images.xcassets/AppIcon.appiconset/icon-152.png"; sourceTree = "<group>"; };
 		83CEF7FC187BED5000B7DADC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		83CEF7FE187BF1AB00B7DADC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		83CEF800187BF1B500B7DADC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -153,6 +157,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				834CE4CE18A38320007B38F6 /* icon-76.png */,
+				834CE4CF18A38320007B38F6 /* icon-152.png */,
 				301BF56E109A69640062928A /* www */,
 				301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -315,7 +321,9 @@
 				3072F99713A8081B00425683 /* Capture.bundle in Resources */,
 				83EFF282187E91B200EDFD41 /* Images.xcassets in Resources */,
 				1F766FE113BBADB100FB74C0 /* Localizable.strings in Resources */,
+				834CE4D118A38320007B38F6 /* icon-152.png in Resources */,
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
+				834CE4D018A38320007B38F6 /* icon-76.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +465,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-force_load",
-					"${TARGET_BUILD_DIR}/libCordova.a",
+					"${BUILT_PRODUCTS_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -528,7 +536,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-force_load",
-					"${TARGET_BUILD_DIR}/libCordova.a",
+					"${BUILT_PRODUCTS_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				SDKROOT = iphoneos;
@@ -575,7 +583,7 @@
 					CoreMedia,
 					"-weak-lSystem",
 					"-force_load",
-					"${TARGET_BUILD_DIR}/libCordova.a",
+					"${BUILT_PRODUCTS_DIR}/libCordova.a",
 					"-ObjC",
 				);
 				SDKROOT = iphoneos;
