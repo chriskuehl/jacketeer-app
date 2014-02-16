@@ -8,7 +8,7 @@ function actuallyUpdateInformation() {
 	globalLoadingText.text("Downloading data...");
 
 	var loginDetails = getLoginDetails();
-	var req = $.ajax("http://jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+	var req = $.ajax("https://app.jacketeer.org/app/info.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 		type: "POST",
 		data: {
 			user: loginDetails.user,
@@ -51,7 +51,7 @@ function actuallyUpdateInformation() {
 			return;
 		}
 
-		navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
 			if (response == 1) {
 				updateInformation();
 			}
@@ -91,7 +91,7 @@ function updateInformation(reqToHandle) {
 		// 
 		// but first, wait a second to avoid GUI glitches
 		updateTimeout = setTimeout(function () {
-			req = $.ajax("http://jacketeer.org/app/" + reqToHandle.path + "?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			req = $.ajax("https://app.jacketeer.org/app/" + reqToHandle.path + "?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: reqToHandle.data,
 				cache: false
@@ -111,7 +111,7 @@ function updateInformation(reqToHandle) {
 					return;
 				}
 
-				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
 					if (response == 1) {
 						updateInformation(reqToHandle);
 					}

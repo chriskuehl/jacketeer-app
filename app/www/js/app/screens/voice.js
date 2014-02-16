@@ -7,7 +7,7 @@ var screenVoice = {
 	parent: "portal",
 
 	titleButton: {
-		text: "Back to Portal",
+		text: "Portal",
 		event: function () {
 			setScreen(screenPortal);
 				superlativeIndex ++;
@@ -18,8 +18,7 @@ var screenVoice = {
 		superlativeIndex ++;
 		
 		container.css({
-            backgroundColor: "rgba(253, 249, 207, 0.2)",
-            boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+            backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		var introText = $("<p />");
@@ -37,12 +36,9 @@ var screenVoice = {
 		superlativesBox.appendTo(container);
 		superlativesBox.css({
 			width: "1800px",
-			border: "solid 2px rgba(0, 0, 0, 0.3)",
 			padding: "40px",
 			borderRadius: "15px",
 			backgroundColor: "rgba(253, 249, 207, 1)",
-            boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-            boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			marginLeft: "auto",
 			marginRight: "auto",
 			overflow: "hidden"
@@ -110,9 +106,6 @@ var screenVoice = {
 				padding: "40px",
                 backgroundColor: "rgba(253, 249, 207, 1)",
 				borderRadius: "15px",
-                border: "solid 2px rgba(150, 150, 150, 1)",
-                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 				width: "838px"
             
 			});
@@ -177,6 +170,11 @@ function stepSuperlativeList(initial, j) {
 	});
 	newItem.text(getSuperlativeText());
 	newItem.appendTo(superlativesList);
+
+	// this line prevents a bug that appeared in iOS 7
+	// resulting in new elements sometimes not showing
+	newItem.css("-webkit-transform-style", "preserve-3d");
+
 	newItem.animate({
 		left: (-2500) + "px"
 	}, initial ? (((Math.random() * 4000) + 3000) * ((newItem.position().left + 2000) / 4000)) : ((Math.random() * 4000) + 3000), "linear", function() {

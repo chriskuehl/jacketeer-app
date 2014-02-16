@@ -1,12 +1,12 @@
 var screenPortal = {
 	id: "portal",
-	title: "Jacketeer 2013 Student Portal",
+	title: "Jacketeer 2014 Student Portal",
 	parent: "into",
 
 	titleButton: {
 		text: "Sign Out",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to sign out?", function (response) {
+			navigator.notification.confirm("Are you sure you want to sign out?", function (response) {
 				if (response == 2) {
 					localStorage.removeItem("loginDetails");
 					localStorage.removeItem("loginToken");
@@ -24,8 +24,7 @@ var screenPortal = {
 		}
 		
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+			backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		var loginDetails = getLoginDetails();
@@ -39,7 +38,7 @@ var screenPortal = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("Welcome to the Jacketeer 2013 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. This app is probably the best thing since sliced bread. Remember, though: with great power comes great responsibility.");
+		introText.html("Welcome to the Jacketeer 2014 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. This app is probably the best thing since sliced bread. Remember, though: with great power comes great responsibility.");
 		
 		var boxContainer = $("<div />");
 		boxContainer.appendTo(container);
@@ -97,10 +96,7 @@ var screenPortal = {
 				padding: "40px",
 				marginRight: "30px",
 				borderRadius: "15px",
-				"float": "left",
-                border: "solid 2px rgba(150, 150, 150, 1)",
-                boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-                boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
+				"float": "left"
 			});
 			
 			if (boxData.completable) {

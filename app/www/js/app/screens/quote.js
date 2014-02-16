@@ -6,7 +6,7 @@ var screenQuote = {
 	titleButton: {
 		text: "Cancel",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to go back? This will revert your quote to its previous state.", function (response) {
+			navigator.notification.confirm("Are you sure you want to go back? This will revert your quote to its previous state.", function (response) {
 				if (response == 2) {
 					setScreen(screenPortrait);
 				}
@@ -57,10 +57,10 @@ var screenQuote = {
 		var submit = $("<input type=\"button\" />");
 		submit.appendTo(textAreaHolder);
 		submit.css({
-			fontSize: "68px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)",
+			fontSize: "48px",
 			textAlign: "center",
-			marginTop: "100px"
+			marginTop: "100px",
+			padding: "20px 60px"
 		});
 		submit.val("Submit Quote");
 

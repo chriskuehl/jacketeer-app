@@ -5,7 +5,7 @@ var globalLoadingCancelEvent = null;
 
 var screenIntro = {
 	id: "intro",
-	title: "Jacketeer 2013",
+	title: "Jacketeer 2014",
 
 	setup: function (container) {
 		container.css({
@@ -31,14 +31,12 @@ var screenIntro = {
 			height: "725px",
 
 			marginLeft: "-680px",
-			marginTop: "-500px",
-
-			boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.3)"
+			marginTop: "-500px"
 		});
 
 		var title = $("<p />");
 		title.appendTo(page);
-		title.text("Jacketeer 2013 Student Portal");
+		title.text("Jacketeer 2014 Student Portal");
 		title.css({
 			textAlign: "center",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
@@ -63,10 +61,7 @@ var screenIntro = {
 			//backgroundColor: "rgba(255, 249, 90, 0.8)",
 			backgroundColor: "rgba(253, 249, 207, .7)",
 			marginTop: "30px",
-			position: "relative",
-			border: "solid 2px rgba(150, 150, 150, 1)",
-			boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)"
+			position: "relative"
 		});
 
 		var table = $("<table />");
@@ -93,7 +88,7 @@ var screenIntro = {
 		var inputUser = $("<input type=\"text\" />");
 		inputUser.attr({
 			name: "inputUser",
-			placeholder: "13jpdoe",
+			placeholder: "14jpdoe",
 			autoCorrect: "off",
 			autoCapitalize: "off"
 		});
@@ -102,7 +97,6 @@ var screenIntro = {
 			padding: "10px",
 			width: "610px"
 		});
-		inputUser.val("13cbkuehl");
 
 		if (loginDetails) {
 			inputUser.val(loginDetails.user);
@@ -140,7 +134,6 @@ var screenIntro = {
 			padding: "10px",
 			width: "610px"
 		});
-		inputPassword.val("senior!");
 
 		if (loginDetails) {
 			inputPassword.val(loginDetails.password);
@@ -179,7 +172,6 @@ var screenIntro = {
 
 			backgroundColor: "rgba(255, 255, 255, 1)",
 			borderRadius: "20px",
-			boxShadow: "0px 20px 20px rgba(0, 0, 0, 0.2)",
 
 			padding: "30px"
 		});
@@ -235,7 +227,6 @@ var screenIntro = {
 			borderRadius: "20px",
 			backgroundColor: "rgba(255, 255, 255, 0.4)",
 			fontSize: "96px",
-			border: "solid 1px rgba(0, 0, 0, 0.3)",
 			paddingTop: "50px",
 			textAlign: "center",
 			textDecoration: "none",
@@ -245,7 +236,7 @@ var screenIntro = {
 			loadingCover.stop(true).fadeIn(500);
 
 			// send the request
-			var req = $.ajax("http://jacketeer.org/app/login.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
+			var req = $.ajax("https://app.jacketeer.org/app/login.php?a=" + (Math.floor(Math.random() * 99999999) + 1), {
 				type: "POST",
 				data: {
 					user: inputUser.val(),
@@ -268,7 +259,7 @@ var screenIntro = {
 
 			req.done(function (content) {
 				if (content.success) {
-					if (!inputUser.val().startsWith("13")) {
+					if (!inputUser.val().startsWith("14")) {
 						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by the iPad Help Desk (room 117) for assistance.", null, "You're Not a Senior!", "Sorry!");
 						loadingCover.stop(true).hide();
 						return;
@@ -295,7 +286,7 @@ var screenIntro = {
 					return;
 				}
 
-				navigator.notification.alert("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
 					if (response == 1) {
 						loginButton.click();
 					}
@@ -319,7 +310,7 @@ var screenIntro = {
 		// username tip at bottom
 		var tipText = $("<p />");
 		tipText.appendTo(page);
-		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"13jpdoe\" for \"John Price Doe\" graduating in 2013. It's the same thing you use to login to computers at WCHS.");
+		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"14jpdoe\" for \"John Price Doe\" graduating in 2014. It's the same thing you use to login to computers at WCHS.");
 		tipText.css({
 			fontSize: "24px",
 			marginTop: "40px",

@@ -1,5 +1,17 @@
 body {
 	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+
+	margin-top: 40px;
+	background-color: #F6F6F7;
+}
+
+input, textarea {
+	border: none;
+}
+
+input[type=button] {
+	-webkit-appearance: none;
+	background-color: #EEE;
 }
 
 em {
@@ -7,7 +19,8 @@ em {
 }
 
 #titleBar {
-	background-image: url("assets/titleBar.png");
+	background-color: #F6F6F7;
+	border-bottom: solid 1px #A7A7AA;
 	
 	position: relative;
 	
@@ -15,7 +28,7 @@ em {
 	left: 0px;
 	right: 0px;
 	
-	height: 87px;
+	height: 86px;
 }
 
 #titleBarText {
@@ -24,67 +37,33 @@ em {
 	left: 0px;
 	right: 0px;
 	
-	color: #656872;
+	color: black;
 	
 	text-align: center;
-	text-shadow: 0px 2px 0px rgba(255, 255, 255, 0.55);
 	
-	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
-	font-size: 38px;
+	font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium";
+	font-size: 34px;
 }
 
 #titleBarButton {
 	position: absolute;
-	right: 1px;
-	top: -3px;
+	right: 24px;
+	top: 24px;
 	
 	display: block;
 	
-	padding: 17px;
-	
-	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
-	font-size: 24px;
+	font-family: "Helvetica Neue Medium", "HelveticaNeue-Medium";
+	font-size: 34px;
+
+	color: #2F90FA;
 	
 	display: none;
-}
-
-.titleBarLeft, .titleBarRight {
-	width: 11px;
-	height: 61px;
-	
-	float: left;
-}
-
-.titleBarMiddle {
-	height: 43px;
-	background-image: url("assets/titleButtonMid.png");
-	background-repeat: repeat-x;
-	
-	font-family: "Helvetica Neue Bold", "HelveticaNeue-Bold";
-	font-size: 24px;
-	text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
-	
-	color: white;
-	
-	padding-top: 18px;
-	padding-left: 15px;
-	padding-right: 15px;
-	
-	float: left;
-}
-
-.titleBarLeft {
-	background-image: url("assets/titleButtonLeft.png");
-}
-
-.titleBarRight {
-	background-image: url("assets/titleButtonRight.png");
 }
 
 #screenContainerParent {
 	position: absolute;
 	
-	top: 87px;
+	top: 127px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
@@ -126,10 +105,6 @@ em {
 	margin-bottom: 20px;
 	
 	padding: 108px 20px;
-	
-	border: solid 2px rgba(150, 150, 150, 1);
-    box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0px 0px 20px rgba(100, 100, 0, 0.1);
 }
 
 .disabled {

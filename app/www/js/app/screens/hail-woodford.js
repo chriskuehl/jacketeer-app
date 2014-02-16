@@ -1,29 +1,23 @@
 var exampleHails = [
-	"Mrs. Marks for helping me grow as an artist :).",
-	"Daniels, Cunliffe, and Pollock. Stealing shopping carts, running shirtless, and mumble.",
-	"Mrs. Porter, the best teacher I ever had.",
-	"the last day of school!",
-	"Mrs. Thacker; we miss you...",
-	"Ralph.",
-	"all the people in my class!",
-	"Mrs. Swinford, for all the help she gave me.",
-	"Coach Parrett...for making my four years as a baseball player here memorable.",
-	"Coach Carr Sr.",
-	"Mrs. Hamilton for helping me improve my writing.",
-	"the chaos crew.",
-	"the class of 2012, the greatest class anyone could have asked for.",
-	"the rides down country roads.",
-	"Mrs. Taylor.",
-	"everything and all things, especially the Shady Crew +1!",
-	"the haters.",
-	"the K-Mart parking lot!",
-	"all the hail I raised.",
-	"Mr. Mastin, Mrs. Turner, and Mrs. Hamilton; their combined efforts and time have made an enormous impact on my success.",
-	"nacho day.",
-	"my parents for everything they've done for me.",
-	"those who never stopped believing in me.",
-	"tech school, for making the rest of the day tolerable.",
-	"the band for being my family!"
+	"the class of 2013 for a great year.",
+	"Mrs. Basanta for being the best teacher ever.",
+	"Mr. Ruff, I guess...",
+	"the endless nights, longest days, and the best friends a person could ever have.",
+	"chicken patties.",
+	"my band family!",
+	"Mr. Noble and his dedication to the seniors.",
+	"the step team.",
+	"Mrs. Hamilton who lovingly destroyed my writing for the better.",
+	"the Mastindon for saving me in AP Calc.",
+	"the class of 2013! It's our time to shine!",
+	"swimming winning regionals 10 years in a row!",
+	"being a freak.",
+	"Fannin. Best academic team coach ever!",
+	"eating way too much junk in yearbook class.",
+	"the rest of our lives.",
+	"Gangnam Style.",
+	"being obsessed.",
+	"no-lecture Fridays for being totally useless."
 ];
 
 var exampleHailIndex = 0;
@@ -35,7 +29,7 @@ var screenHailWoodford = {
 	parent: "voice",
 
 	titleButton: {
-		text: "Back to My Voice",
+		text: "My Voice",
 		event: function () {
 			setScreen(screenVoice);
 		}
@@ -43,8 +37,7 @@ var screenHailWoodford = {
 
 	setup: function (container) {
 		container.css({
-			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
+			backgroundColor: "rgba(253, 249, 207, 0.2)"
 		});
 
 		var introText2 = $("<h2 />");
@@ -101,7 +94,6 @@ var screenHailWoodford = {
 			autoCapitalize: "off"
 		});
 		inputName.css({
-			padding: "10px",
 			width: "1150px",
 			marginLeft: "30px",
 			marginRight: "10px",
@@ -115,8 +107,8 @@ var screenHailWoodford = {
 		submit.appendTo(nameLabel);
 		submit.css({
 			fontSize: "48px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)",
-			marginLeft: "20px"
+			marginLeft: "20px",
+			padding: "20px 60px"
 		});
 		submit.val("Submit");
 
@@ -170,9 +162,6 @@ var screenHailWoodford = {
 			marginRight: "auto",
 			backgroundColor: "rgba(253, 249, 207, 1)",
 			// borderRadius: "15px",
-			border: "solid 2px rgba(150, 150, 150, 1)",
-			boxShadow: "0px 0px 15px 5px rgba(255, 255, 255, 0.5)",
-			boxShadow: "inset 0px 0px 20px rgba(100, 100, 0, 0.1)",
 			fontSize: "72px",
 			lineHeight: "1em",
 			color: "rgba(0, 0, 0, 0.65)",

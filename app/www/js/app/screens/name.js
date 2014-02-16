@@ -7,7 +7,7 @@ var screenName = {
 	titleButton: {
 		text: "Cancel",
 		event: function () {
-			navigator.notification.alert("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
+			navigator.notification.confirm("Are you sure you want to go back? Any changes you've made will not be saved.", function (response) {
 				if (response == 2) {
 					setScreen(screenPortrait);
 				}
@@ -56,7 +56,6 @@ var screenName = {
 		});
 		inputName.css({
 			fontSize: "72px",
-			padding: "10px",
 			width: "1350px",
 			marginRight: "10px",
 			padding: "20px"
@@ -70,8 +69,9 @@ var screenName = {
 		var submit = $("<input type=\"button\" />");
 		submit.appendTo(nameHolder);
 		submit.css({
-			fontSize: "68px",
-			backgroundColor: "rgba(100, 100, 0, 0.1)"
+			fontSize: "72px",
+			marginLeft: "20px",
+			padding: "20px 60px"
 		});
 		submit.val("Confirm");
 
