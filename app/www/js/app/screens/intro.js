@@ -88,7 +88,7 @@ var screenIntro = {
 		var inputUser = $("<input type=\"text\" />");
 		inputUser.attr({
 			name: "inputUser",
-			placeholder: "14jpdoe",
+			placeholder: "15jpdoe",
 			autoCorrect: "off",
 			autoCapitalize: "off"
 		});
@@ -259,8 +259,8 @@ var screenIntro = {
 
 			req.done(function (content) {
 				if (content.success) {
-					if (!inputUser.val().startsWith("14")) {
-						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by the iPad Help Desk (room 117) for assistance.", null, "You're Not a Senior!", "Sorry!");
+					if (!inputUser.val().startsWith("15")) {
+						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by Mr. Ruff's room for assistance.", null, "You're Not a Senior!", "Sorry!");
 						loadingCover.stop(true).hide();
 						return;
 					}
@@ -276,7 +276,7 @@ var screenIntro = {
 					// load the information we need for the portal
 					updateInformation();
 				} else {
-					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk (room 117) for assistance.", null, "Unsuccessful Login");
+					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the Mr. Ruff's room for assistance.", null, "Unsuccessful Login");
 					loadingCover.stop(true).hide();
 				}
 			});
@@ -286,7 +286,7 @@ var screenIntro = {
 					return;
 				}
 
-				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 					if (response == 1) {
 						loginButton.click();
 					}

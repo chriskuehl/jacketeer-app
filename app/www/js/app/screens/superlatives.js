@@ -443,14 +443,14 @@ function saveSuperlative(superlative, isMale, student) {
 			superlativeCategories = data.superlatives;
 			updateSuperlativeChoices(data.superlatives);
 		} else {
-			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+			navigator.notification.alert("Server error, please try again later or stop by Mr. Ruff's room for assistance.", null, "Server Error", "Uh oh!");
 		}
 		
 		superlativeChooseCover.fadeOut(200);
 	});
 
 	req.fail(function () {
-		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 			if (response == 1) {
 				saveSuperlative(superlative, isMale, student);
 			} else {

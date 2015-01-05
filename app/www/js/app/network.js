@@ -41,7 +41,7 @@ function actuallyUpdateInformation() {
 				return;
 			}
 			
-			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+			navigator.notification.alert("Server error, please try again later or stop by Mr. Ruff's room for assistance.", null, "Server Error", "Uh oh!");
 			globalLoadingCover.stop(true).hide();
 		}
 	});
@@ -51,7 +51,7 @@ function actuallyUpdateInformation() {
 			return;
 		}
 
-		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 			if (response == 1) {
 				updateInformation();
 			}
@@ -101,7 +101,7 @@ function updateInformation(reqToHandle) {
 				if (data.success) {
 					req = actuallyUpdateInformation();
 				} else {
-					navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+					navigator.notification.alert("Server error, please try again later or stop by Mr. Ruff's room for assistance.", null, "Server Error", "Uh oh!");
 					globalLoadingCover.stop(true).hide();
 				}
 			});
@@ -111,7 +111,7 @@ function updateInformation(reqToHandle) {
 					return;
 				}
 
-				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 					if (response == 1) {
 						updateInformation(reqToHandle);
 					}
