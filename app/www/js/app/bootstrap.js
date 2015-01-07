@@ -1,4 +1,4 @@
-var APP_VERSION = "1.2";
+var APP_VERSION = "2015.0";
 var userInfo;
 
 // bootstrap the app
