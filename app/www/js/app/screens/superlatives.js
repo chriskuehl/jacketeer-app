@@ -1,4 +1,5 @@
 var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected, superlativeSearchBox, superlativeLoadingCover, superlativeListTable;
+var lastClick = 0;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -234,6 +235,8 @@ var screenSuperlatives = {
 		});
 		cancelButton.val("Cancel");
 		cancelButton.click(function () {
+      if (new Date().getTime() - lastClick < 400)
+        return;
 			superlativeChooseCover.fadeOut(200);
 		});
 	}
@@ -301,6 +304,7 @@ function updateSuperlativeChoices(superlatives) {
 			button.data("isMale", (j == 1));
 		
 			button.click(function() {
+        lastClick = new Date().getTime();
 				var superlative = $(this).data("superlative");
 				var isMale = $(this).data("isMale");
 			
@@ -401,8 +405,15 @@ function updateStudentFilter(query, isMale) {
 			studentRow.text(student.LastName + ", " + student.FirstName);
 			
 			studentRow.click(function() {
+        if (new Date().getTime() - lastClick < 400)
+          return;
+        if (studentRow.data('waiting'))
+          return;
+        studentRow.data('waiting', true);
+
 				var student = $(this).data("student");
 				navigator.notification.confirm("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
+          studentRow.data('waiting', false);
 					if (response == 1) {
 						superlativeLoadingCover.fadeIn(300, function() {
 							// try to save
