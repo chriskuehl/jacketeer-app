@@ -5,12 +5,11 @@ var globalLoadingCancelEvent = null;
 
 var screenIntro = {
 	id: "intro",
-	title: "Jacketeer 2014",
+	title: "Jacketeer 2015",
 
 	setup: function (container) {
 		container.css({
 			backgroundColor: "rgba(253, 249, 207, 0.2)",
-			boxShadow: "inset 0px 0px 900px rgba(253, 249, 207, 0.8)"
 		});
 
 		var loginDetails = getLoginDetails();
@@ -36,7 +35,7 @@ var screenIntro = {
 
 		var title = $("<p />");
 		title.appendTo(page);
-		title.text("Jacketeer 2014 Student Portal");
+		title.text("Jacketeer 2015 Student Portal");
 		title.css({
 			textAlign: "center",
 			fontFamily: "\"Helvetica Neue Bold\", \"HelveticaNeue-Bold\"",
@@ -88,7 +87,7 @@ var screenIntro = {
 		var inputUser = $("<input type=\"text\" />");
 		inputUser.attr({
 			name: "inputUser",
-			placeholder: "14jpdoe",
+			placeholder: "15jpdoe",
 			autoCorrect: "off",
 			autoCapitalize: "off"
 		});
@@ -259,8 +258,8 @@ var screenIntro = {
 
 			req.done(function (content) {
 				if (content.success) {
-					if (!inputUser.val().startsWith("14")) {
-						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by the iPad Help Desk (room 117) for assistance.", null, "You're Not a Senior!", "Sorry!");
+					if (!inputUser.val().startsWith("15")) {
+						navigator.notification.alert("Only seniors need to fill in their information on this app. If you think you're seeing this message in error, please stop by Mr. Ruff's room for assistance.", null, "You're Not a Senior!", "Sorry!");
 						loadingCover.stop(true).hide();
 						return;
 					}
@@ -276,7 +275,7 @@ var screenIntro = {
 					// load the information we need for the portal
 					updateInformation();
 				} else {
-					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the iPad Help Desk (room 117) for assistance.", null, "Unsuccessful Login");
+					navigator.notification.alert("Your username or password was incorrect. Please try again, or visit the Mr. Ruff's room for assistance.", null, "Unsuccessful Login");
 					loadingCover.stop(true).hide();
 				}
 			});
@@ -286,7 +285,7 @@ var screenIntro = {
 					return;
 				}
 
-				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+				navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 					if (response == 1) {
 						loginButton.click();
 					}
@@ -310,7 +309,7 @@ var screenIntro = {
 		// username tip at bottom
 		var tipText = $("<p />");
 		tipText.appendTo(page);
-		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"14jpdoe\" for \"John Price Doe\" graduating in 2014. It's the same thing you use to login to computers at WCHS.");
+		tipText.html("Your username is the last two digits of your graduation year, followed by your first initial, your middle initial, and your full last name. For example, \"15jpdoe\" for \"John Price Doe\" graduating in 2015. It's the same thing you use to login to computers at WCHS.");
 		tipText.css({
 			fontSize: "24px",
 			marginTop: "40px",

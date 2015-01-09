@@ -1,4 +1,5 @@
 var superlativeChooseCover, superlativeTitleText, superlativeGenderText, superlativeStudentListScroll, studentListBlankElement, studentListContainer, superlativeIsMale, superlativeSelected, superlativeSearchBox, superlativeLoadingCover, superlativeListTable;
+var lastClick = 0;
 
 var screenSuperlatives = {
 	id: "superlatives",
@@ -234,6 +235,8 @@ var screenSuperlatives = {
 		});
 		cancelButton.val("Cancel");
 		cancelButton.click(function () {
+      if (new Date().getTime() - lastClick < 400)
+        return;
 			superlativeChooseCover.fadeOut(200);
 		});
 	}
@@ -301,6 +304,7 @@ function updateSuperlativeChoices(superlatives) {
 			button.data("isMale", (j == 1));
 		
 			button.click(function() {
+        lastClick = new Date().getTime();
 				var superlative = $(this).data("superlative");
 				var isMale = $(this).data("isMale");
 			
@@ -401,8 +405,15 @@ function updateStudentFilter(query, isMale) {
 			studentRow.text(student.LastName + ", " + student.FirstName);
 			
 			studentRow.click(function() {
+        if (new Date().getTime() - lastClick < 400)
+          return;
+        if (studentRow.data('waiting'))
+          return;
+        studentRow.data('waiting', true);
+
 				var student = $(this).data("student");
 				navigator.notification.confirm("Are you sure you want to nominate " + student.FirstName + " " + student.LastName + " for " + superlativeSelected + " (" + (superlativeIsMale ? "male" : "female") + ")?", function (response) {
+          studentRow.data('waiting', false);
 					if (response == 1) {
 						superlativeLoadingCover.fadeIn(300, function() {
 							// try to save
@@ -443,14 +454,14 @@ function saveSuperlative(superlative, isMale, student) {
 			superlativeCategories = data.superlatives;
 			updateSuperlativeChoices(data.superlatives);
 		} else {
-			navigator.notification.alert("Server error, please try again later or stop by the iPad Help Desk (room 117) for assistance.", null, "Server Error", "Uh oh!");
+			navigator.notification.alert("Server error, please try again later or stop by Mr. Ruff's room for assistance.", null, "Server Error", "Uh oh!");
 		}
 		
 		superlativeChooseCover.fadeOut(200);
 	});
 
 	req.fail(function () {
-		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by the iPad Help Desk (room 117) for assistance.", function (response) {
+		navigator.notification.confirm("Connection to the server failed. Please make sure you're connected to the internet or try again later. If you need help, you can stop by Mr. Ruff's room for assistance.", function (response) {
 			if (response == 1) {
 				saveSuperlative(superlative, isMale, student);
 			} else {

@@ -1,6 +1,6 @@
 var screenPortal = {
 	id: "portal",
-	title: "Jacketeer 2014 Student Portal",
+	title: "Jacketeer 2015 Student Portal",
 	parent: "into",
 
 	titleButton: {
@@ -38,7 +38,7 @@ var screenPortal = {
 			margin: "50px",
 			color: "rgba(0, 0, 0, 0.7)"
 		});
-		introText.html("Welcome to the Jacketeer 2014 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. This app is probably the best thing since sliced bread. Remember, though: with great power comes great responsibility.");
+		introText.html("Welcome to the Jacketeer 2015 student app. This app is a virtual artery from your mind directly to yearbook HQ. From here, you can share information, vote on superlatives, order a yearbook, and get assistance. This app is probably the best thing since sliced bread. Remember, though: with great power comes great responsibility.");
 		
 		var boxContainer = $("<div />");
 		boxContainer.appendTo(container);
@@ -189,6 +189,6 @@ var screenPortal = {
 			color: "rgba(0, 0, 0, 0.6)",
 			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
 		});
-		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
+		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by Mr. Ruff's room (room 138).</span>");
 	}
 };

@@ -143,7 +143,7 @@
     BOOL retVal = YES;
 
     // Find the proper selector to call.
-    NSString* methodName = [NSString stringWithFormat:@"%@:", command.methodName];
+/*    NSString* methodName = [NSString stringWithFormat:@"%@:", command.methodName];
     NSString* methodNameWithDict = [NSString stringWithFormat:@"%@:withDict:", command.methodName];
     SEL normalSelector = NSSelectorFromString(methodName);
     SEL legacySelector = NSSelectorFromString(methodNameWithDict);
@@ -161,8 +161,19 @@
         // There's no method to call, so throw an error.
         NSLog(@"ERROR: Method '%@' not defined in Plugin '%@'", methodName, command.className);
         retVal = NO;
-    }
+    }*/
 
+    // Find the proper selector to call.
+    NSString* methodName = [NSString stringWithFormat:@"%@:", command.methodName];
+    SEL normalSelector = NSSelectorFromString(methodName);
+    if ([obj respondsToSelector:normalSelector]) {
+        // [obj performSelector:normalSelector withObject:command];
+        ((void (*)(id, SEL, id))objc_msgSend)(obj, normalSelector, command);
+    } else {
+        // There's no method to call, so throw an error.
+        NSLog(@"ERROR: Method '%@' not defined in Plugin '%@'", methodName, command.className);
+        retVal = NO;
+    }
     return retVal;
 }
 

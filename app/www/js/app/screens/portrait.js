@@ -161,7 +161,7 @@ var screenPortrait = {
 			color: "rgba(0, 0, 0, 0.6)",
 			fontFamily: "\"Helvetica Neue\", \"HelveticaNeue\""
 		});
-		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by the iPad Help Desk (room 117) or Mr. Ruff's room (room 138).</span>");
+		helpText.html("<span style=\"color: rgba(0, 0, 0, 0.4);\">If you need help with this app, stop by Mr. Ruff's room (room 138).</span>");
 
 		// signature preview cover
 		signatureCover = $("<div />");
